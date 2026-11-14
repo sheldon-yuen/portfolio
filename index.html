@@ -531,7 +531,8 @@
             tagline: localStorage.getItem('sheldon_tagline') || 'Builder of small machines. Collector of moments.',
             description: localStorage.getItem('sheldon_desc') || 'This is where I keep the things I make and the things I notice — robots, bricks, photographs, and everything that refuses a label.',
             pin: localStorage.getItem('sheldon_pin') || '1234',
-            isStudioUnlocked: localStorage.getItem('sheldon_unlocked') === 'true',
+            // Default to false so it always locks on load or when closed
+            isStudioUnlocked: false,
             activeView: 'home',
             activeDetailCategory: 'robotics',
             photos: JSON.parse(localStorage.getItem('sheldon_photos') || JSON.stringify(DEFAULT_SEED_PHOTOS)),
@@ -550,13 +551,15 @@
             localStorage.setItem('sheldon_tagline', state.tagline);
             localStorage.setItem('sheldon_desc', state.description);
             localStorage.setItem('sheldon_pin', state.pin);
-            localStorage.setItem('sheldon_unlocked', state.isStudioUnlocked);
+            // Do not persistently store unlocked state across reloads/closures for security
+            localStorage.setItem('sheldon_unlocked', 'false');
             localStorage.setItem('sheldon_photos', JSON.stringify(state.photos));
             localStorage.setItem('sheldon_covers', JSON.stringify(state.covers));
             localStorage.setItem('sheldon_cat_desc', JSON.stringify(state.catDescriptions));
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            state.isStudioUnlocked = false; // Ensure locked on page load
             document.getElementById('footer-year').textContent = new Date().getFullYear();
             applyBranding();
             renderHomeArchive();
@@ -795,9 +798,19 @@
             lucide.createIcons();
         }
 
+        // Updated closeModal function: automatically locks Studio when studio-modal closes
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
             document.getElementById(modalId).classList.remove('flex');
+
+            if (modalId === 'studio-modal') {
+                state.isStudioUnlocked = false;
+                saveState();
+                updateStudioAuthUI();
+                if (state.activeView === 'detail') {
+                    renderCategoryDetailView();
+                }
+            }
         }
 
         function openStudioDrawer(defaultCat = 'robotics') {
