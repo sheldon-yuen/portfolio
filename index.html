@@ -367,70 +367,74 @@
         </div>
     </div>
 
-    <!-- MODAL 3: LIGHTBOX VIEWER WITH SPLIT LAYOUT & LIKE BUTTON -->
+    <!-- MODAL 3: TRUE FULL-SCREEN IMMERSIVE VIEWER -->
     <div id="lightbox-modal" onclick="if(event.target.id==='lightbox-modal') closeModal('lightbox-modal')"
-        class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-md">
-        <div class="max-w-4xl w-full bg-[#F7FBFE] border border-slate-400 shadow-2xl flex flex-col overflow-hidden max-h-[90vh]">
-            <!-- Top bar -->
-            <div class="px-6 py-3.5 bg-slate-900 text-white flex items-center justify-between shrink-0">
-                <div class="flex items-center gap-3">
-                    <span id="lb-num" class="text-xs tracking-[0.25em] text-sky-400 font-semibold">01</span>
-                    <span id="lb-cat" class="text-xs tracking-[0.25em] text-slate-300 uppercase">ROBOTICS</span>
+        class="fixed inset-0 z-50 hidden flex-col bg-slate-950/96 backdrop-blur-lg w-full h-full">
+        <!-- Top Immersive Bar -->
+        <div class="w-full px-6 py-4 bg-slate-900 border-b border-white/10 flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-4">
+                <span id="lb-num" class="text-xs tracking-[0.25em] text-sky-400 font-semibold">01</span>
+                <span class="w-px h-4 bg-white/20"></span>
+                <span id="lb-cat" class="text-xs tracking-[0.25em] text-slate-300 uppercase">ROBOTICS</span>
+            </div>
+            <button onclick="closeModal('lightbox-modal')" class="px-3 py-1.5 border border-white/20 hover:border-white text-white text-xs tracking-[0.2em] uppercase flex items-center gap-2 transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+                <span>CLOSE</span>
+            </button>
+        </div>
+
+        <!-- Full-Screen Split Layout Container -->
+        <div class="flex-grow w-full h-full grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+            <!-- Left Column: Full-Sized Photo & Like Button (8 cols) -->
+            <div class="lg:col-span-8 bg-black flex flex-col items-center justify-between p-6 sm:p-10 h-full overflow-hidden">
+                <div class="flex-grow w-full h-full flex items-center justify-center overflow-hidden my-auto">
+                    <img id="lb-image" src="" alt="Full-Sized Archive Photo" class="max-h-[78vh] max-w-full object-contain shadow-2xl">
                 </div>
-                <button onclick="closeModal('lightbox-modal')" class="p-1.5 text-slate-300 hover:text-white">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
+                <!-- Like Button Strip -->
+                <div class="w-full pt-4 border-t border-white/10 flex items-center justify-between text-white shrink-0">
+                    <span id="lb-date" class="text-xs tracking-[0.2em] text-slate-400 uppercase">CAPTURED: 2026-10-12</span>
+                    <button onclick="handleLikePhoto()" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 border border-white/20 text-white text-xs tracking-[0.18em] uppercase flex items-center gap-2.5 transition-all active:scale-95 shadow-lg">
+                        <i data-lucide="heart" class="w-4 h-4 text-rose-500 fill-rose-500"></i>
+                        <span>LIKE PHOTO</span>
+                        <span id="lb-like-count" class="bg-white/20 px-2.5 py-0.5 text-xs font-bold">0</span>
+                    </button>
+                </div>
             </div>
 
-            <!-- Split Layout: Left Image + Like Button, Right Description & Studio Editor -->
-            <div class="grid grid-cols-1 md:grid-cols-2 flex-grow overflow-y-auto">
-                <!-- Left: Photo View & Like Button -->
-                <div class="bg-slate-950 flex flex-col items-center justify-between p-6 min-h-[320px]">
-                    <div class="flex-grow flex items-center justify-center w-full my-auto">
-                        <img id="lb-image" src="" alt="Enlarged Archive Photo" class="max-h-[58vh] max-w-full object-contain">
+            <!-- Right Column: Description & Studio Quick Editor (4 cols) -->
+            <div class="lg:col-span-4 bg-[#F7FBFE] border-t lg:border-t-0 lg:border-l border-blueprint-border p-6 sm:p-10 flex flex-col justify-between overflow-y-auto h-full">
+                <div class="space-y-6">
+                    <div>
+                        <span id="lb-photo-id-hint" class="text-[10px] tracking-[0.25em] text-sky-700 uppercase font-bold block mb-2">ID: photo_01</span>
+                        <div class="w-8 h-[2px] bg-sky-600"></div>
                     </div>
-                    <!-- Like Button Row at Bottom of Left Column -->
-                    <div class="w-full pt-4 border-t border-white/10 flex items-center justify-between">
-                        <span id="lb-date" class="text-[10px] tracking-[0.2em] text-slate-400 uppercase">CAPTURED: 2026-10-12</span>
-                        <button onclick="handleLikePhoto()" class="px-4 py-2 bg-slate-900 hover:bg-sky-700 border border-white/20 text-white text-xs tracking-[0.16em] uppercase flex items-center gap-2 transition-all active:scale-95 shadow-md">
-                            <i data-lucide="heart" class="w-4 h-4 text-rose-500 fill-rose-500"></i>
-                            <span>LIKE</span>
-                            <span id="lb-like-count" class="bg-white/20 px-2 py-0.5 text-[11px] font-bold">0</span>
-                        </button>
+
+                    <!-- Public Display Description View -->
+                    <div id="lightbox-display-mode" class="space-y-4">
+                        <h3 id="lb-title" class="font-display font-bold text-xl sm:text-2xl tracking-[0.08em] text-slate-900 uppercase leading-snug"></h3>
+                        <p id="lb-caption" class="text-sm sm:text-base text-slate-700 font-mono leading-[1.8]"></p>
+                    </div>
+
+                    <!-- Studio Edit Mode (Only when unlocked) -->
+                    <div id="lightbox-edit-mode" class="hidden space-y-5 pt-4 border-t border-blueprint-border">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] tracking-[0.22em] text-sky-700 uppercase font-bold">// QUICK STUDIO EDIT</span>
+                            <span class="text-[10px] text-emerald-600 tracking-wider">AUTO-SAVES</span>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] tracking-[0.2em] text-slate-600 uppercase mb-1.5">EDIT TITLE</label>
+                            <input type="text" id="lb-edit-title" oninput="saveLightboxEdits()" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs font-bold uppercase tracking-[0.08em] focus:border-sky-600 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] tracking-[0.2em] text-slate-600 uppercase mb-1.5">EDIT TECHNICAL CAPTION</label>
+                            <textarea id="lb-edit-caption" rows="5" oninput="saveLightboxEdits()" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs leading-relaxed focus:border-sky-600 focus:outline-none"></textarea>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Right: Metadata & Editable Studio View -->
-                <div class="p-6 sm:p-8 flex flex-col justify-between space-y-5 bg-[#F7FBFE]">
-                    <div class="space-y-4">
-                        <span class="text-[10px] tracking-[0.22em] text-slate-500 uppercase block" id="lb-photo-id-hint">ID: photo_01</span>
-
-                        <!-- Public or Editable View -->
-                        <div id="lightbox-display-mode" class="space-y-3">
-                            <h3 id="lb-title" class="font-display font-bold text-lg tracking-[0.08em] text-slate-900 uppercase"></h3>
-                            <p id="lb-caption" class="text-xs sm:text-sm text-slate-700 font-mono leading-relaxed"></p>
-                        </div>
-
-                        <!-- Studio Edit Mode (Only visible if Studio is unlocked) -->
-                        <div id="lightbox-edit-mode" class="hidden space-y-4 pt-4 border-t border-blueprint-border">
-                            <div class="flex items-center justify-between">
-                                <span class="text-[10px] tracking-[0.22em] text-sky-700 uppercase font-bold">// QUICK STUDIO EDIT</span>
-                                <span class="text-[10px] text-emerald-600 tracking-wider">AUTO-SAVES</span>
-                            </div>
-                            <div>
-                                <label class="block text-[10px] tracking-[0.2em] text-slate-600 uppercase mb-1">EDIT TITLE</label>
-                                <input type="text" id="lb-edit-title" oninput="saveLightboxEdits()" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs font-bold uppercase tracking-[0.08em] focus:border-sky-600 focus:outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] tracking-[0.2em] text-slate-600 uppercase mb-1">EDIT TECHNICAL CAPTION</label>
-                                <textarea id="lb-edit-caption" rows="3" oninput="saveLightboxEdits()" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs leading-relaxed focus:border-sky-600 focus:outline-none"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pt-4 border-t border-blueprint-border flex items-center justify-end">
-                        <button onclick="closeModal('lightbox-modal')" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.2em] uppercase transition-colors">DONE</button>
-                    </div>
+                <div class="pt-6 border-t border-blueprint-border mt-6 flex items-center justify-between">
+                    <span class="text-[10px] tracking-[0.2em] text-slate-500 uppercase">FULL-SCREEN VIEW</span>
+                    <button onclick="closeModal('lightbox-modal')" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.2em] uppercase transition-colors">DONE</button>
                 </div>
             </div>
         </div>
@@ -642,7 +646,7 @@
                             </div>
                             <div class="pt-3 border-t border-blueprint-border/60 flex items-center justify-between text-[10px] text-slate-500 tracking-[0.18em] uppercase">
                                 <span>${photo.date}</span>
-                                <button onclick="openLightbox('${photo.id}')" class="text-sky-700 hover:underline">VIEW &amp; EDIT</button>
+                                <button onclick="openLightbox('${photo.id}')" class="text-sky-700 hover:underline">VIEW FULL-SCREEN</button>
                             </div>
                         </div>
                     `;
@@ -652,7 +656,7 @@
             lucide.createIcons();
         }
 
-        // Open Lightbox with split view & like counter
+        // Open Full-Screen Immersive Viewer
         function openLightbox(photoId) {
             const photo = state.photos.find(p => p.id === photoId);
             if (!photo) return;
@@ -669,7 +673,6 @@
             document.getElementById('lb-photo-id-hint').textContent = `ID: ${photo.id}`;
             document.getElementById('lb-like-count').textContent = photo.likes || 0;
 
-            // Populate quick edit inputs
             document.getElementById('lb-edit-title').value = photo.title;
             document.getElementById('lb-edit-caption').value = photo.caption || '';
 
@@ -689,7 +692,6 @@
             lucide.createIcons();
         }
 
-        // Like Button Handler
         function handleLikePhoto() {
             if (!state.activeLightboxId) return;
             const photo = state.photos.find(p => p.id === state.activeLightboxId);
@@ -705,7 +707,6 @@
             }
         }
 
-        // Live auto-save for lightbox edits
         function saveLightboxEdits() {
             if (!state.activeLightboxId || !state.isStudioUnlocked) return;
             const photo = state.photos.find(p => p.id === state.activeLightboxId);
