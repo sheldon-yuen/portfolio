@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHELDON — 04 / ARCHIVE</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts: Syncopate (wide extended display), IBM Plex Mono (technical mono), Inter (clean UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Syncopate', 'sans-serif'],
+                        mono: ['IBM Plex Mono', 'monospace'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        blueprint: {
+                            bg: '#EAF5FC',
+                            surface: '#F4FAFE',
+                            grid: '#DCEBF6',
+                            border: '#C6D9E8',
+                            ink: '#0F172A',
+                            muted: '#475569',
+                            accent: '#0284C7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Technical Architectural Blueprint Grid Background */
+        body {
+            background-color: #EAF5FC;
+            background-image:
+                radial-gradient(circle at 82% 14%, rgba(255, 255, 255, 0.85) 0%, rgba(234, 245, 252, 0.2) 55%),
+                linear-gradient(to right, rgba(186, 214, 235, 0.42) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(186, 214, 235, 0.42) 1px, transparent 1px);
+            background-size: 100% 100%, 48px 48px, 48px 48px;
+            background-position: 0 0, -1px -1px, -1px -1px;
+            color: #0F172A;
+        }
+
+        /* Crisp Gateway Card Styling */
+        .gateway-card {
+            aspect-ratio: 4 / 4.65;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+        }
+        .gateway-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 35px -12px rgba(15, 23, 42, 0.28);
+        }
+        .gateway-card:hover .gateway-visual {
+            transform: scale(1.04);
+        }
+        .gateway-visual {
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Custom subtle scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #EAF5FC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #B8CFE0;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94B4CC;
+        }
+    </style>
+</head>
+<body class="font-mono text-blueprint-ink antialiased min-h-screen flex flex-col selection:bg-sky-600 selection:text-white">
+
+    <!-- ===================================================================== -->
+    <!-- TOP TECHNICAL HEADER BAR                                              -->
+    <!-- ===================================================================== -->
+    <header class="sticky top-0 z-40 w-full bg-[#F7FBFE]/90 backdrop-blur-md border-b border-blueprint-border">
+        <div class="max-w-5xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
+            <!-- Left: Wide Extended Brand Name -->
+            <button onclick="showHomeArchive()" class="font-display font-bold text-sm sm:text-base tracking-[0.14em] uppercase text-slate-900 hover:text-sky-700 transition-colors text-left focus:outline-none">
+                <span id="nav-brand-name">SHELDON</span>
+            </button>
+
+            <!-- Right: Archive Counter & Bordered STUDIO Button -->
+            <div class="flex items-center gap-4 sm:gap-6">
+                <span class="hidden xs:inline-block text-[11px] sm:text-xs tracking-[0.28em] text-slate-500 uppercase">
+                    04 / ARCHIVE
+                </span>
+
+                <button id="studio-header-btn" onclick="handleStudioButtonClick()"
+                    class="px-4 py-2 border border-slate-400/80 bg-white/80 hover:bg-slate-900 hover:text-white hover:border-slate-900 text-slate-800 text-[11px] sm:text-xs font-medium tracking-[0.28em] uppercase transition-all active:scale-95 flex items-center gap-2">
+                    <span id="studio-status-dot" class="hidden w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    <span id="studio-btn-label">STUDIO</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- MAIN ARCHIVE VIEW (HERO + FOUR GATEWAYS + ABOUT THE ARCHIVE)          -->
+    <!-- ===================================================================== -->
+    <main id="main-archive-view" class="flex-grow max-w-5xl w-full mx-auto px-5 sm:px-8">
+
+        <!-- HERO SECTION -->
+        <section class="pt-12 sm:pt-16 pb-12 sm:pb-16 border-b border-blueprint-border">
+            <!-- Eyebrow with leading thin line -->
+            <div class="flex items-center gap-4 mb-5">
+                <span class="w-9 h-[1.5px] bg-sky-600/80 inline-block"></span>
+                <span class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-sky-700 uppercase">
+                    PERSONAL ARCHIVE
+                </span>
+            </div>
+
+            <!-- Main Wide Display Headline -->
+            <h1 id="hero-display-name" class="font-display font-bold text-3xl sm:text-5xl md:text-[54px] tracking-[0.06em] uppercase text-slate-900 leading-[1.12] break-words">
+                SHELDON
+            </h1>
+
+            <!-- Horizontal Rule Divider -->
+            <div class="w-full h-px bg-blueprint-border my-7 sm:my-9"></div>
+
+            <!-- Sub-headline & Monospaced Intro Paragraph -->
+            <div class="max-w-2xl space-y-5">
+                <p id="hero-tagline" class="font-sans text-base sm:text-lg font-medium text-slate-800 tracking-tight">
+                    Builder of small machines. Collector of moments.
+                </p>
+                <p id="hero-description" class="font-mono text-xs sm:text-[14.5px] text-slate-600 leading-[1.85] tracking-[0.01em]">
+                    This is where I keep the things I make and the things I notice — robots, bricks, photographs, and everything that refuses a label.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 1: FOUR GATEWAYS -->
+        <section class="py-10 sm:py-14 border-b border-blueprint-border">
+            <!-- Section Header Row -->
+            <div class="flex items-center justify-between pb-4 mb-7 border-b border-blueprint-border/80">
+                <h2 class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-slate-600 uppercase">
+                    FOUR GATEWAYS
+                </h2>
+                <span class="text-[11px] sm:text-xs tracking-[0.28em] text-slate-500">
+                    01 &mdash; 04
+                </span>
+            </div>
+
+            <!-- 2x2 Grid of Tall Atmospheric Gateway Cards -->
+            <div id="gateways-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                <!-- Populated dynamically via JavaScript -->
+            </div>
+        </section>
+
+        <!-- SECTION 2: ABOUT THE ARCHIVE -->
+        <section class="py-12 sm:py-16">
+            <div class="pb-5 mb-2 border-b border-blueprint-border">
+                <h2 class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-slate-600 uppercase">
+                    ABOUT THE ARCHIVE
+                </h2>
+            </div>
+
+            <!-- 4 Numbered Index Rows -->
+            <div id="about-archive-list" class="divide-y divide-blueprint-border">
+                <!-- Populated dynamically via JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- CATEGORY DETAIL ARCHIVE VIEW (WHEN A GATEWAY CARD IS CLICKED)         -->
+    <!-- ===================================================================== -->
+    <section id="category-detail-view" class="hidden flex-grow max-w-5xl w-full mx-auto px-5 sm:px-8 py-10 sm:py-14">
+        <!-- Top Navigation Row -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-blueprint-border">
+            <button onclick="showHomeArchive()" class="inline-flex items-center gap-2.5 text-xs tracking-[0.22em] uppercase text-slate-700 hover:text-sky-700 font-medium transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>BACK TO ARCHIVE</span>
+            </button>
+
+            <div class="flex items-center gap-2">
+                <button onclick="openCategoryDetail('robotics')" data-cat-pill="robotics" class="cat-switch-pill px-2.5 py-1 text-[11px] tracking-[0.18em] uppercase border transition-colors">01</button>
+                <button onclick="openCategoryDetail('lego')" data-cat-pill="lego" class="cat-switch-pill px-2.5 py-1 text-[11px] tracking-[0.18em] uppercase border transition-colors">02</button>
+                <button onclick="openCategoryDetail('photography')" data-cat-pill="photography" class="cat-switch-pill px-2.5 py-1 text-[11px] tracking-[0.18em] uppercase border transition-colors">03</button>
+                <button onclick="openCategoryDetail('others')" data-cat-pill="others" class="cat-switch-pill px-2.5 py-1 text-[11px] tracking-[0.18em] uppercase border transition-colors">04</button>
+            </div>
+        </div>
+
+        <!-- Category Header Block -->
+        <div id="detail-header-banner" class="relative overflow-hidden my-6 border border-blueprint-border bg-slate-950 text-white min-h-[240px] sm:min-h-[280px] flex items-end">
+            <!-- Background Cover Photo Layer -->
+            <div id="detail-header-bg" class="absolute inset-0 w-full h-full"></div>
+            <!-- Subtle Bottom & Left Vignette Overlay so the Exact Photo Stays Vividly Visible -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-950/75 via-transparent to-transparent"></div>
+
+            <div class="relative z-10 w-full p-6 sm:p-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+                <div class="space-y-3 max-w-2xl">
+                    <div class="flex items-center gap-3">
+                        <span id="detail-cat-num" class="text-xs font-semibold tracking-[0.28em] text-sky-400 drop-shadow">01</span>
+                        <span class="w-6 h-px bg-sky-400/70"></span>
+                        <span id="detail-cat-tags" class="text-[11px] tracking-[0.24em] text-slate-200 uppercase drop-shadow">MECHANISMS · CODE · ITERATION</span>
+                    </div>
+                    <h1 id="detail-cat-title" class="font-display font-bold text-2xl sm:text-4xl tracking-[0.08em] uppercase text-white drop-shadow-md">
+                        ROBOTICS
+                    </h1>
+                    <p id="detail-cat-desc" class="text-xs sm:text-sm text-slate-100 leading-[1.8] drop-shadow">
+                        Servos, sensors and the stubborn gap between what I sketched and what actually moves.
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-3 shrink-0">
+                    <span id="detail-photo-count" class="text-xs tracking-[0.22em] text-slate-200 uppercase drop-shadow">0 PHOTOS</span>
+                    <button id="detail-upload-btn" onclick="openStudioDrawer(state.activeDetailCategory)" class="hidden px-4 py-2 bg-white hover:bg-sky-400 text-slate-950 font-semibold text-xs tracking-[0.2em] uppercase transition-colors items-center gap-2 shadow-lg">
+                        <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                        <span>ADD PHOTOS</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Photo Grid -->
+        <div id="detail-photos-grid" class="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Injected dynamically -->
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TECHNICAL FOOTER                                                      -->
+    <!-- ===================================================================== -->
+    <footer class="border-t border-blueprint-border bg-[#F4FAFE]/80 mt-auto">
+        <div class="max-w-5xl mx-auto px-5 sm:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] tracking-[0.22em] text-slate-500 uppercase">
+            <span>&copy; <span id="footer-year"></span> <span id="footer-brand-name">SHELDON</span> &mdash; PERSONAL ARCHIVE</span>
+            <span class="flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-sky-600"></i>
+                OWNER-VERIFIED UPLOADS ONLY
+            </span>
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 1: STUDIO PIN VERIFICATION                                      -->
+    <!-- ===================================================================== -->
+    <div id="pin-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+        <div class="w-full max-w-md bg-[#F7FBFE] border border-slate-400 shadow-2xl p-6 sm:p-8">
+            <div class="flex items-center justify-between pb-4 mb-5 border-b border-blueprint-border">
+                <div>
+                    <span class="text-[10px] tracking-[0.28em] text-sky-700 uppercase block">ACCESS CONTROL</span>
+                    <h3 class="font-display font-bold text-base tracking-[0.1em] uppercase text-slate-900 mt-1">STUDIO AUTH</h3>
+                </div>
+                <button onclick="closeModal('pin-modal')" class="p-1.5 text-slate-500 hover:text-slate-900 border border-transparent hover:border-slate-300">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <form onsubmit="verifyPin(event)" class="space-y-5">
+                <div>
+                    <label for="studio-pin-input" class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-2">
+                        ENTER OWNER PIN
+                    </label>
+                    <input type="password" id="studio-pin-input" maxlength="12" required placeholder="••••"
+                        class="w-full px-4 py-3 bg-white border border-slate-300 focus:border-sky-600 focus:outline-none text-center text-xl tracking-[0.5em] font-bold text-slate-900">
+                    <p class="text-[11px] text-slate-500 mt-2.5 leading-relaxed">
+                        First-time default PIN: <span class="font-bold text-sky-700">1234</span>. You can customize your private PIN once inside Studio.
+                    </p>
+                    <p id="pin-error-msg" class="hidden text-xs font-semibold text-rose-600 mt-2">
+                        INVALID PIN. ACCESS DENIED.
+                    </p>
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-2">
+                    <button type="button" onclick="closeModal('pin-modal')" class="px-4 py-2 border border-slate-300 text-xs tracking-[0.2em] uppercase text-slate-600 hover:bg-slate-100">
+                        CANCEL
+                    </button>
+                    <button type="submit" class="px-5 py-2 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.2em] uppercase transition-colors">
+                        UNLOCK STUDIO
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 2: OWNER STUDIO DRAWER / CONTROL PANEL                          -->
+    <!-- ===================================================================== -->
+    <div id="studio-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/65 backdrop-blur-sm overflow-y-auto">
+        <div class="w-full max-w-4xl bg-[#F7FBFE] border border-slate-400 shadow-2xl my-auto max-h-[92vh] flex flex-col">
+            <!-- Studio Top Bar -->
+            <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between gap-4 shrink-0">
+                <div class="flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="font-display font-bold text-xs sm:text-sm tracking-[0.16em] uppercase">ARCHIVE STUDIO</span>
+                    <span class="hidden sm:inline text-[11px] tracking-[0.22em] text-slate-400 uppercase">// OWNER MODE</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="lockStudio()" class="px-3 py-1.5 border border-rose-400/50 text-rose-300 hover:bg-rose-600 hover:text-white text-[11px] tracking-[0.2em] uppercase transition-colors">
+                        LOCK STUDIO
+                    </button>
+                    <button onclick="closeModal('studio-modal')" class="p-1.5 text-slate-300 hover:text-white">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Studio Navigation Tabs -->
+            <div class="px-6 pt-3 bg-[#EAF5FC] border-b border-blueprint-border flex items-center gap-4 overflow-x-auto shrink-0">
+                <button onclick="switchStudioTab('upload')" data-studio-tab="upload" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap">
+                    01 / INSERT PHOTOS
+                </button>
+                <button onclick="switchStudioTab('manage')" data-studio-tab="manage" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">
+                    02 / MANAGE &amp; COVERS
+                </button>
+                <button onclick="switchStudioTab('settings')" data-studio-tab="settings" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">
+                    03 / IDENTITY &amp; PIN
+                </button>
+            </div>
+
+            <!-- Studio Body Content -->
+            <div class="p-6 overflow-y-auto space-y-6">
+
+                <!-- TAB 1: UPLOAD / INSERT PHOTOS -->
+                <div id="studio-pane-upload" class="space-y-5">
+                    <form onsubmit="handleBatchPhotoUpload(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">TARGET GATEWAY</label>
+                                <select id="upload-category-select" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs font-medium tracking-[0.12em] uppercase focus:border-sky-600 focus:outline-none">
+                                    <option value="robotics">01 — ROBOTICS</option>
+                                    <option value="lego">02 — LEGO</option>
+                                    <option value="photography">03 — PHOTOGRAPHY</option>
+                                    <option value="others">04 — OTHERS</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">ENTRY TITLE (OPTIONAL)</label>
+                                <input type="text" id="upload-title-input" maxlength="80" placeholder="Auto-uses filename if blank"
+                                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">CAPTION / TECHNICAL NOTE (OPTIONAL)</label>
+                            <input type="text" id="upload-caption-input" maxlength="220" placeholder="e.g., 6-DOF servo arm test rig, Rev 2"
+                                class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
+                        </div>
+
+                        <!-- Multi-file Dropzone -->
+                        <div id="studio-dropzone" onclick="document.getElementById('studio-file-input').click()"
+                            class="cursor-pointer border-2 border-dashed border-sky-600/50 hover:border-sky-600 bg-white/80 hover:bg-sky-50/60 p-7 text-center transition-all">
+                            <input type="file" id="studio-file-input" accept="image/*" multiple class="hidden" onchange="handleFilesSelected(event)">
+                            <i data-lucide="upload" class="w-7 h-7 text-sky-600 mx-auto mb-2"></i>
+                            <p class="text-xs font-semibold tracking-[0.18em] uppercase text-slate-800">
+                                CLICK OR DRAG &amp; DROP PHOTOS HERE
+                            </p>
+                            <p class="text-[11px] text-slate-500 mt-1">
+                                Supports multiple photos at once &bull; Automatically compressed for persistent browser storage
+                            </p>
+                        </div>
+
+                        <!-- Selected Files Preview Strip -->
+                        <div id="selected-files-preview" class="hidden space-y-2">
+                            <div class="flex items-center justify-between text-[11px] tracking-[0.18em] uppercase text-slate-600">
+                                <span id="selected-files-count">0 FILES READY</span>
+                                <button type="button" onclick="clearPendingFiles()" class="text-rose-600 hover:underline">CLEAR</button>
+                            </div>
+                            <div id="selected-thumbs-grid" class="grid grid-cols-3 sm:grid-cols-5 gap-2.5"></div>
+                        </div>
+
+                        <div class="pt-2 flex items-center justify-between border-t border-blueprint-border">
+                            <label class="inline-flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
+                                <input type="checkbox" id="set-as-cover-checkbox" class="accent-sky-600">
+                                <span>Set first photo as Gateway Cover</span>
+                            </label>
+                            <button type="submit" id="publish-photos-btn" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors">
+                                PUBLISH TO ARCHIVE
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- TAB 2: MANAGE PHOTOS & GATEWAY COVERS -->
+                <div id="studio-pane-manage" class="hidden space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-blueprint-border">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[11px] tracking-[0.2em] uppercase text-slate-500">FILTER:</span>
+                            <select id="manage-filter-select" onchange="renderStudioManageList()" class="px-3 py-1.5 bg-white border border-slate-300 text-xs uppercase tracking-[0.12em]">
+                                <option value="all">ALL GATEWAYS</option>
+                                <option value="robotics">01 — ROBOTICS</option>
+                                <option value="lego">02 — LEGO</option>
+                                <option value="photography">03 — PHOTOGRAPHY</option>
+                                <option value="others">04 — OTHERS</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="file" id="direct-cover-input" accept="image/*" class="hidden" onchange="handleDirectCoverFile(event)">
+                            <select id="direct-cover-cat" class="px-2.5 py-1.5 bg-white border border-slate-300 text-[11px] uppercase tracking-[0.12em]">
+                                <option value="robotics">01 ROBOTICS</option>
+                                <option value="lego">02 LEGO</option>
+                                <option value="photography">03 PHOTOGRAPHY</option>
+                                <option value="others">04 OTHERS</option>
+                            </select>
+                            <button type="button" onclick="document.getElementById('direct-cover-input').click()" class="px-3 py-1.5 bg-slate-900 hover:bg-sky-700 text-white text-[11px] tracking-[0.16em] uppercase transition-colors">
+                                UPLOAD COVER
+                            </button>
+                            <button type="button" onclick="resetAllCovers()" class="px-3 py-1.5 border border-slate-300 hover:border-slate-900 text-[11px] tracking-[0.16em] uppercase text-slate-600">
+                                RESET COVERS
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="studio-manage-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- TAB 3: EDIT ARCHIVE NAME, BIO, DESCRIPTIONS & PIN -->
+                <div id="studio-pane-settings" class="hidden space-y-6">
+                    <form onsubmit="saveArchiveIdentity(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">ARCHIVE DISPLAY NAME</label>
+                                <input type="text" id="setting-name-input" maxlength="24" required
+                                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs font-bold uppercase tracking-[0.14em]">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">NEW STUDIO PIN (4-12 CHARS)</label>
+                                <input type="password" id="setting-pin-input" minlength="4" maxlength="12" placeholder="Leave blank to keep current"
+                                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs tracking-[0.3em]">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">HERO SUB-HEADLINE</label>
+                            <input type="text" id="setting-tagline-input" maxlength="120" required
+                                class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs">
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">HERO INTRO PARAGRAPH</label>
+                            <textarea id="setting-desc-input" rows="2" maxlength="260" required
+                                class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs leading-relaxed"></textarea>
+                        </div>
+
+                        <div class="pt-3 border-t border-blueprint-border space-y-3">
+                            <span class="block text-[11px] tracking-[0.22em] text-sky-700 uppercase font-semibold">CATEGORY DESCRIPTIONS</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">01 / ROBOTICS</label>
+                                    <textarea id="setting-cat-robotics" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">02 / LEGO</label>
+                                    <textarea id="setting-cat-lego" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">03 / PHOTOGRAPHY</label>
+                                    <textarea id="setting-cat-photography" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">04 / OTHERS</label>
+                                    <textarea id="setting-cat-others" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end pt-2">
+                            <button type="submit" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors">
+                                SAVE CONFIGURATION
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 3: FULL-SCREEN LIGHTBOX VIEWER                                  -->
+    <!-- ===================================================================== -->
+    <div id="lightbox-modal" onclick="if(event.target.id==='lightbox-modal') closeModal('lightbox-modal')"
+        class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-8 bg-slate-950/92 backdrop-blur-md">
+        <div class="max-w-5xl w-full flex flex-col items-center">
+            <div class="w-full flex items-center justify-between text-white mb-3">
+                <div class="flex items-center gap-3">
+                    <span id="lb-num" class="text-xs tracking-[0.25em] text-sky-400 font-semibold">01</span>
+                    <span id="lb-cat" class="text-xs tracking-[0.25em] text-slate-300 uppercase">ROBOTICS</span>
+                </div>
+                <button onclick="closeModal('lightbox-modal')" class="p-2 border border-white/20 hover:bg-white/10 text-white">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="w-full bg-slate-900/70 border border-white/10 flex items-center justify-center overflow-hidden">
+                <img id="lb-img" src="" alt="Archive Entry" class="max-h-[74vh] w-auto object-contain">
+            </div>
+
+            <div class="w-full mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-white">
+                <div>
+                    <h4 id="lb-title" class="text-sm sm:text-base font-semibold tracking-[0.06em]"></h4>
+                    <p id="lb-caption" class="text-xs text-slate-400 mt-1"></p>
+                </div>
+                <span id="lb-date" class="text-[11px] tracking-[0.22em] text-slate-400 uppercase shrink-0"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-box" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- ===================================================================== -->
+    <!-- JAVASCRIPT APPLICATION LOGIC                                          -->
+    <!-- ===================================================================== -->
+    <script>
+        const STORAGE = {
+            PHOTOS: 'sheldon_blueprint_photos_v3',
+            COVERS: 'sheldon_blueprint_covers_v3',
+            CONFIG: 'sheldon_blueprint_config_v3',
+            PIN: 'sheldon_blueprint_pin_v3'
+        };
+
+        const DEFAULT_PIN = '1234';
+
+        const GATEWAYS = [
+            { id: 'robotics', num: '01', title: 'ROBOTICS', tags: 'MECHANISMS · CODE · ITERATION' },
+            { id: 'lego', num: '02', title: 'LEGO', tags: 'BRICKS · BUILDS · PATIENCE' },
+            { id: 'photography', num: '03', title: 'PHOTOGRAPHY', tags: 'LIGHT · FRAMES · STILLNESS' },
+            { id: 'others', num: '04', title: 'OTHERS', tags: 'EVERYTHING UNLABELLED' }
+        ];
+
+        const DEFAULT_CONFIG = {
+            name: 'SHELDON',
+            tagline: 'Builder of small machines. Collector of moments.',
+            description: 'This is where I keep the things I make and the things I notice — robots, bricks, photographs, and everything that refuses a label.',
+            descriptions: {
+                robotics: 'Servos, sensors and the stubborn gap between what I sketched and what actually moves.',
+                lego: 'Sets, MOCs and the quiet satisfaction of a build that finally comes together.',
+                photography: 'Whatever the light was doing when I happened to be looking the right way.',
+                others: 'Experiments, travels and side projects that never found a shelf of their own.'
+            }
+        };
+
+        let state = {
+            activeView: 'home',
+            activeDetailCategory: 'robotics',
+            isUnlocked: false,
+            photos: [],
+            covers: {},
+            config: JSON.parse(JSON.stringify(DEFAULT_CONFIG)),
+            pendingFiles: []
+        };
+
+        // Exact 4 User-Provided Category Photographs
+        const DEFAULT_CATEGORY_IMAGES = {
+            robotics: {
+                src: 'Screenshot 2026-11-14 at 10.35.05 AM.jpg',
+                alt: 'Brushed metal robotic arm joint with exposed green circuit board and Torx screws',
+                position: 'object-center'
+            },
+            lego: {
+                src: 'Screenshot 2026-11-14 at 10.34.56 AM.jpg',
+                alt: 'Overhead flat-lay arrangement of black, red, blue, and grey LEGO bricks on dark surface',
+                position: 'object-center'
+            },
+            photography: {
+                src: 'sunset.jpeg',
+                alt: 'Vibrant red-orange sunset over dark forest treeline reflecting across rippling water',
+                position: 'object-center'
+            },
+            others: {
+                src: 'Screenshot 2026-11-14 at 10.35.13 AM.jpg',
+                alt: 'Vintage open leather sketchbook with technical drawings, brass gears, camera lens, and blue blueprints',
+                position: 'object-center'
+            }
+        };
+
+        const RENDERED_PHOTO_ASSETS = {};
+        function buildExactCategoryAsset(categoryId) {
+            if (RENDERED_PHOTO_ASSETS[categoryId]) return RENDERED_PHOTO_ASSETS[categoryId];
+            const canvas = document.createElement('canvas');
+            canvas.width = 900;
+            canvas.height = 1046;
+            const ctx = canvas.getContext('2d');
+
+            if (categoryId === 'robotics') {
+                const bg = ctx.createRadialGradient(620, 260, 40, 450, 520, 760);
+                bg.addColorStop(0, '#1e3448');
+                bg.addColorStop(0.5, '#0b131d');
+                bg.addColorStop(1, '#05080e');
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, 0, 900, 1046);
+
+                ctx.save();
+                ctx.translate(555, 345);
+                ctx.rotate(-0.46);
+                ctx.fillStyle = '#0c291d';
+                ctx.fillRect(-155, -135, 310, 270);
+                ctx.strokeStyle = '#c48347';
+                ctx.lineWidth = 4.5;
+                for (let i = -95; i <= 95; i += 20) {
+                    ctx.beginPath();
+                    ctx.moveTo(-135, i);
+                    ctx.lineTo(35, i);
+                    ctx.lineTo(85, i - 32);
+                    ctx.stroke();
+                }
+                ctx.fillStyle = '#111827';
+                ctx.fillRect(-32, -45, 76, 76);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(-32, -45, 76, 76);
+                ctx.restore();
+
+                const armGrad = ctx.createLinearGradient(150, 240, 680, 860);
+                armGrad.addColorStop(0, '#f1f5f9');
+                armGrad.addColorStop(0.28, '#94a3b8');
+                armGrad.addColorStop(0.55, '#475569');
+                armGrad.addColorStop(0.8, '#cbd5e1');
+                armGrad.addColorStop(1, '#1e293b');
+                ctx.fillStyle = armGrad;
+                ctx.beginPath();
+                ctx.moveTo(210, 1046);
+                ctx.lineTo(285, 485);
+                ctx.lineTo(710, 115);
+                ctx.lineTo(900, 275);
+                ctx.lineTo(505, 635);
+                ctx.lineTo(455, 1046);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(355, 490, 162, 0, Math.PI * 2);
+                const jointGrad = ctx.createLinearGradient(200, 340, 510, 640);
+                jointGrad.addColorStop(0, '#cbd5e1');
+                jointGrad.addColorStop(0.5, '#475569');
+                jointGrad.addColorStop(1, '#1e293b');
+                ctx.fillStyle = jointGrad;
+                ctx.fill();
+                ctx.lineWidth = 12;
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.arc(355, 490, 74, 0, Math.PI * 2);
+                ctx.fillStyle = '#0f172a';
+                ctx.fill();
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = '#94a3b8';
+                ctx.stroke();
+            } else if (categoryId === 'lego') {
+                ctx.fillStyle = '#0d131a';
+                ctx.fillRect(0, 0, 900, 1046);
+
+                const drawStudBrick = (x, y, w, h, color, cols, rows) => {
+                    ctx.save();
+                    ctx.shadowColor = 'rgba(0,0,0,0.65)';
+                    ctx.shadowBlur = 14;
+                    ctx.shadowOffsetY = 6;
+                    ctx.fillStyle = color;
+                    ctx.fillRect(x, y, w, h);
+                    ctx.restore();
+
+                    ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+                    ctx.lineWidth = 1.5;
+                    ctx.strokeRect(x, y, w, h);
+
+                    const stepX = w / cols;
+                    const stepY = h / rows;
+                    for (let c = 0; c < cols; c++) {
+                        for (let r = 0; r < rows; r++) {
+                            const cx = x + stepX * (c + 0.5);
+                            const cy = y + stepY * (r + 0.5);
+                            const rad = Math.min(stepX, stepY) * 0.28;
+                            ctx.beginPath();
+                            ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+                            ctx.fillStyle = 'rgba(255,255,255,0.13)';
+                            ctx.fill();
+                            ctx.strokeStyle = 'rgba(0,0,0,0.35)';
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+                };
+
+                drawStudBrick(105, 120, 104, 52, '#e11d1d', 4, 2);
+                drawStudBrick(691, 120, 104, 52, '#e11d1d', 4, 2);
+                drawStudBrick(332, 114, 236, 108, '#17202b', 8, 4);
+                drawStudBrick(100, 345, 242, 38, '#1d4ed8', 10, 1);
+                drawStudBrick(558, 345, 242, 38, '#1d4ed8', 10, 1);
+                drawStudBrick(332, 385, 58, 72, '#94a3b8', 2, 3);
+                drawStudBrick(510, 385, 58, 72, '#94a3b8', 2, 3);
+                drawStudBrick(400, 270, 100, 290, '#18212d', 3, 8);
+            } else if (categoryId === 'photography') {
+                const sky = ctx.createLinearGradient(0, 0, 0, 620);
+                sky.addColorStop(0, '#9a1b08');
+                sky.addColorStop(0.42, '#dc2626');
+                sky.addColorStop(0.75, '#f97316');
+                sky.addColorStop(1, '#fb923c');
+                ctx.fillStyle = sky;
+                ctx.fillRect(0, 0, 900, 620);
+
+                const halo = ctx.createRadialGradient(485, 295, 24, 485, 295, 230);
+                halo.addColorStop(0, '#ffffff');
+                halo.addColorStop(0.32, '#fef08a');
+                halo.addColorStop(0.65, 'rgba(251, 146, 60, 0.38)');
+                halo.addColorStop(1, 'rgba(220, 38, 38, 0)');
+                ctx.fillStyle = halo;
+                ctx.fillRect(0, 0, 900, 620);
+
+                ctx.beginPath();
+                ctx.arc(485, 295, 76, 0, Math.PI * 2);
+                ctx.fillStyle = '#fffbeb';
+                ctx.fill();
+
+                ctx.fillStyle = 'rgba(42, 18, 14, 0.78)';
+                ctx.fillRect(0, 262, 900, 26);
+
+                const water = ctx.createLinearGradient(0, 620, 0, 1046);
+                water.addColorStop(0, '#7c2d12');
+                water.addColorStop(0.45, '#9a3412');
+                water.addColorStop(1, '#431407');
+                ctx.fillStyle = water;
+                ctx.fillRect(0, 620, 900, 426);
+            } else {
+                const desk = ctx.createRadialGradient(360, 460, 60, 450, 520, 740);
+                desk.addColorStop(0, '#2c2219');
+                desk.addColorStop(0.6, '#141210');
+                desk.addColorStop(1, '#08090c');
+                ctx.fillStyle = desk;
+                ctx.fillRect(0, 0, 900, 1046);
+
+                ctx.beginPath();
+                ctx.arc(705, 220, 96, 0, Math.PI * 2);
+                ctx.fillStyle = '#0f172a';
+                ctx.fill();
+                ctx.lineWidth = 12;
+                ctx.strokeStyle = '#334155';
+                ctx.stroke();
+            }
+
+            RENDERED_PHOTO_ASSETS[categoryId] = canvas.toDataURL('image/jpeg', 0.9);
+            return RENDERED_PHOTO_ASSETS[categoryId];
+        }
+
+        function loadPersistedState() {
+            try {
+                const rawPhotos = localStorage.getItem(STORAGE.PHOTOS);
+                state.photos = rawPhotos ? JSON.parse(rawPhotos) : [];
+
+                const rawCovers = localStorage.getItem(STORAGE.COVERS);
+                state.covers = rawCovers ? JSON.parse(rawCovers) : {};
+
+                const rawConfig = localStorage.getItem(STORAGE.CONFIG);
+                if (rawConfig) {
+                    const parsed = JSON.parse(rawConfig);
+                    state.config = {
+                        ...DEFAULT_CONFIG,
+                        ...parsed,
+                        descriptions: {
+                            ...DEFAULT_CONFIG.descriptions,
+                            ...(parsed.descriptions || {})
+                        }
+                    };
+                }
+            } catch (err) {
+                console.error('Error loading saved archive:', err);
+            }
+        }
+
+        function savePersistedState() {
+            try {
+                localStorage.setItem(STORAGE.PHOTOS, JSON.stringify(state.photos));
+                localStorage.setItem(STORAGE.COVERS, JSON.stringify(state.covers));
+                localStorage.setItem(STORAGE.CONFIG, JSON.stringify(state.config));
+            } catch (err) {
+                console.error('Error saving archive:', err);
+                showToast('Storage quota exceeded. Try smaller images.', 'error');
+            }
+        }
+
+        function getStoredPin() {
+            return localStorage.getItem(STORAGE.PIN) || DEFAULT_PIN;
+        }
+
+        function initApp() {
+            loadPersistedState();
+            updateUIIdentity();
+            renderGatewaysGrid();
+            renderAboutArchiveList();
+            document.getElementById('footer-year').textContent = new Date().getFullYear();
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        function updateUIIdentity() {
+            const name = state.config.name || 'SHELDON';
+            document.getElementById('nav-brand-name').textContent = name;
+            document.getElementById('hero-display-name').textContent = name;
+            document.getElementById('hero-tagline').textContent = state.config.tagline;
+            document.getElementById('hero-description').textContent = state.config.description;
+            document.getElementById('footer-brand-name').textContent = name;
+            document.title = `${name} — 04 / ARCHIVE`;
+        }
+
+        function renderGatewaysGrid() {
+            const grid = document.getElementById('gateways-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            GATEWAYS.forEach(gw => {
+                const count = state.photos.filter(p => p.category === gw.id).length;
+                const countLabel = count === 1 ? '1 PHOTO' : `${count} PHOTOS`;
+                const customCover = state.covers[gw.id];
+                const defaultImg = DEFAULT_CATEGORY_IMAGES[gw.id];
+                const fallbackSrc = buildExactCategoryAsset(gw.id);
+
+                const card = document.createElement('article');
+                card.onclick = () => openCategoryDetail(gw.id);
+                card.className = 'gateway-card relative overflow-hidden bg-slate-950 border border-slate-300/80 cursor-pointer select-none group';
+
+                card.innerHTML = `
+                    <div class="gateway-visual absolute inset-0 w-full h-full">
+                        ${customCover
+                            ? `<img src="${customCover}" alt="${gw.title}" class="w-full h-full object-cover">`
+                            : `<img src="${defaultImg.src}" alt="${defaultImg.alt}" onerror="this.onerror=null;this.src='${fallbackSrc}';" class="w-full h-full object-cover ${defaultImg.position}">`
+                        }
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent pointer-events-none"></div>
+                    <div class="relative z-10 h-full p-5 sm:p-6 flex flex-col justify-between">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2 py-0.5 bg-slate-950/45 backdrop-blur-[2px] text-xs font-semibold tracking-[0.26em] text-sky-400">
+                                ${gw.num}
+                            </span>
+                            <span class="w-7 h-7 flex items-center justify-center border border-white/20 bg-slate-950/45 backdrop-blur-[2px] text-white/85 group-hover:text-sky-300 group-hover:border-sky-400/70 transition-colors">
+                                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                            </span>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="font-display font-bold text-lg sm:text-xl tracking-[0.08em] uppercase text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+                                ${gw.title}
+                            </h3>
+                            <p class="text-[11px] tracking-[0.22em] text-slate-200 uppercase leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                                ${gw.tags}
+                            </p>
+                            <div class="pt-2 flex items-center justify-between border-t border-white/20">
+                                <span class="text-[10px] tracking-[0.25em] text-slate-200 uppercase drop-shadow">
+                                    ${countLabel}
+                                </span>
+                                <span class="text-[10px] tracking-[0.22em] text-sky-400 uppercase opacity-90 group-hover:opacity-100 drop-shadow">
+                                    OPEN &rarr;
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function renderAboutArchiveList() {
+            const list = document.getElementById('about-archive-list');
+            if (!list) return;
+            list.innerHTML = '';
+
+            GATEWAYS.forEach(gw => {
+                const desc = state.config.descriptions[gw.id] || '';
+                const row = document.createElement('div');
+                row.onclick = () => openCategoryDetail(gw.id);
+                row.className = 'py-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 cursor-pointer group hover:bg-white/40 px-2 transition-colors';
+                row.innerHTML = `
+                    <div class="space-y-1.5 max-w-2xl">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs font-semibold tracking-[0.28em] text-sky-700">${gw.num}</span>
+                            <h3 class="font-display font-bold text-base sm:text-lg tracking-[0.08em] uppercase text-slate-900 group-hover:text-sky-700 transition-colors">
+                                ${gw.title}
+                            </h3>
+                        </div>
+                        <p class="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            ${desc}
+                        </p>
+                    </div>
+                    <span class="text-[11px] tracking-[0.2em] text-slate-400 group-hover:text-slate-900 uppercase shrink-0 transition-colors">
+                        EXPLORE ARCHIVE &rarr;
+                    </span>
+                `;
+                list.appendChild(row);
+            });
+        }
+
+        function showHomeArchive() {
+            state.activeView = 'home';
+            document.getElementById('main-archive-view').classList.remove('hidden');
+            document.getElementById('category-detail-view').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderGatewaysGrid();
+            renderAboutArchiveList();
+        }
+
+        function openCategoryDetail(categoryId) {
+            state.activeView = 'detail';
+            state.activeDetailCategory = categoryId;
+            document.getElementById('main-archive-view').classList.add('hidden');
+            document.getElementById('category-detail-view').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderCategoryDetail(categoryId);
+        }
+
+        function renderCategoryDetail(categoryId) {
+            const gw = GATEWAYS.find(g => g.id === categoryId) || GATEWAYS[0];
+            const photos = state.photos.filter(p => p.category === gw.id);
+            const customCover = state.covers[gw.id];
+            const defaultImg = DEFAULT_CATEGORY_IMAGES[gw.id];
+            const fallbackSrc = buildExactCategoryAsset(gw.id);
+
+            document.getElementById('detail-header-bg').innerHTML = customCover
+                ? `<img src="${customCover}" alt="${gw.title}" class="w-full h-full object-cover">`
+                : `<img src="${defaultImg.src}" alt="${defaultImg.alt}" onerror="this.onerror=null;this.src='${fallbackSrc}';" class="w-full h-full object-cover ${defaultImg.position}">`;
+
+            document.getElementById('detail-cat-num').textContent = gw.num;
+            document.getElementById('detail-cat-tags').textContent = gw.tags;
+            document.getElementById('detail-cat-title').textContent = gw.title;
+            document.getElementById('detail-cat-desc').textContent = state.config.descriptions[gw.id] || '';
+            document.getElementById('detail-photo-count').textContent = photos.length === 1 ? '1 PHOTO' : `${photos.length} PHOTOS`;
+
+            const uploadBtn = document.getElementById('detail-upload-btn');
+            if (state.isUnlocked) {
+                uploadBtn.classList.remove('hidden');
+                uploadBtn.classList.add('inline-flex');
+            } else {
+                uploadBtn.classList.add('hidden');
+                uploadBtn.classList.remove('inline-flex');
+            }
+
+            document.querySelectorAll('.cat-switch-pill').forEach(pill => {
+                const cat = pill.getAttribute('data-cat-pill');
+                if (cat === gw.id) {
+                    pill.className = 'cat-switch-pill px-2.5 py-1 text-[11px] tracking-[0.18em] uppercase border border-sky-600 bg-sky-600 text-white font-semibold';
+                } else {
+                    pill.className = 'cat-switch-pill px-2.5 py-1 text-[11px] tracking-[0.18em] uppercase border border-slate-300 bg-white text-slate-700 hover:border-slate-900';
+                }
+            });
+
+            const pGrid = document.getElementById('detail-photos-grid');
+            pGrid.innerHTML = '';
+
+            if (photos.length === 0) {
+                pGrid.innerHTML = `
+                    <div class="col-span-full py-16 text-center border border-dashed border-slate-300 bg-white/50">
+                        <i data-lucide="image-off" class="w-8 h-8 text-slate-400 mx-auto mb-3"></i>
+                        <p class="text-xs uppercase tracking-[0.2em] text-slate-600 font-medium">NO PHOTOS IN THIS GATEWAY YET</p>
+                        <p class="text-[11px] text-slate-500 mt-1">Unlock Studio to insert photos into ${gw.title}.</p>
+                    </div>
+                `;
+            } else {
+                photos.forEach((photo, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'group bg-white border border-slate-300 overflow-hidden shadow-sm hover:shadow-md transition-shadow';
+                    card.innerHTML = `
+                        <div class="aspect-4/3 w-full bg-slate-100 overflow-hidden cursor-pointer" onclick="openLightbox('${photo.id}')">
+                            <img src="${photo.dataUrl}" alt="${photo.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-4 flex items-start justify-between gap-3 border-t border-slate-200">
+                            <div class="space-y-1">
+                                <span class="text-[10px] tracking-[0.22em] text-sky-700 font-semibold uppercase">0${idx + 1} / ENTRY</span>
+                                <h4 class="font-semibold text-xs tracking-[0.05em] text-slate-900 uppercase">${photo.title}</h4>
+                                ${photo.caption ? `<p class="text-xs text-slate-600 leading-relaxed">${photo.caption}</p>` : ''}
+                            </div>
+                            ${state.isUnlocked ? `
+                                <button onclick="deletePhoto('${photo.id}')" title="Delete Photo" class="p-1 text-slate-400 hover:text-rose-600">
+                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+                    `;
+                    pGrid.appendChild(card);
+                });
+            }
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function handleStudioButtonClick() {
+            if (state.isUnlocked) {
+                openStudioDrawer();
+            } else {
+                openModal('pin-modal');
+                document.getElementById('studio-pin-input').value = '';
+                document.getElementById('pin-error-msg').classList.add('hidden');
+                setTimeout(() => document.getElementById('studio-pin-input').focus(), 100);
+            }
+        }
+
+        function verifyPin(event) {
+            event.preventDefault();
+            const inputPin = document.getElementById('studio-pin-input').value.trim();
+            const correctPin = getStoredPin();
+
+            if (inputPin === correctPin) {
+                state.isUnlocked = true;
+                closeModal('pin-modal');
+                updateStudioAccessUI();
+                openStudioDrawer();
+                showToast('Studio unlocked successfully.', 'success');
+            } else {
+                document.getElementById('pin-error-msg').classList.remove('hidden');
+            }
+        }
+
+        function updateStudioAccessUI() {
+            const dot = document.getElementById('studio-status-dot');
+            const label = document.getElementById('studio-btn-label');
+            const btn = document.getElementById('studio-header-btn');
+
+            if (state.isUnlocked) {
+                dot.classList.remove('hidden');
+                label.textContent = 'STUDIO (ACTIVE)';
+                btn.className = 'px-4 py-2 border border-emerald-600 bg-emerald-50 text-emerald-900 text-[11px] sm:text-xs font-semibold tracking-[0.28em] uppercase transition-all flex items-center gap-2';
+            } else {
+                dot.classList.add('hidden');
+                label.textContent = 'STUDIO';
+                btn.className = 'px-4 py-2 border border-slate-400/80 bg-white/80 hover:bg-slate-900 hover:text-white hover:border-slate-900 text-slate-800 text-[11px] sm:text-xs font-medium tracking-[0.28em] uppercase transition-all flex items-center gap-2';
+            }
+        }
+
+        function lockStudio() {
+            state.isUnlocked = false;
+            closeModal('studio-modal');
+            updateStudioAccessUI();
+            if (state.activeView === 'detail') {
+                renderCategoryDetail(state.activeDetailCategory);
+            }
+            showToast('Studio locked.', 'info');
+        }
+
+        function openStudioDrawer(preferredCategory = 'robotics') {
+            document.getElementById('upload-category-select').value = preferredCategory;
+            openModal('studio-modal');
+            switchStudioTab('upload');
+        }
+
+        function switchStudioTab(tabName) {
+            document.querySelectorAll('.studio-tab-btn').forEach(btn => {
+                const tab = btn.getAttribute('data-studio-tab');
+                if (tab === tabName) {
+                    btn.className = 'studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap';
+                } else {
+                    btn.className = 'studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap';
+                }
+            });
+
+            ['upload', 'manage', 'settings'].forEach(t => {
+                const pane = document.getElementById(`studio-pane-${t}`);
+                if (t === tabName) {
+                    pane.classList.remove('hidden');
+                } else {
+                    pane.classList.add('hidden');
+                }
+            });
+
+            if (tabName === 'manage') {
+                renderStudioManageList();
+            } else if (tabName === 'settings') {
+                document.getElementById('setting-name-input').value = state.config.name;
+                document.getElementById('setting-tagline-input').value = state.config.tagline;
+                document.getElementById('setting-desc-input').value = state.config.description;
+                document.getElementById('setting-cat-robotics').value = state.config.descriptions.robotics;
+                document.getElementById('setting-cat-lego').value = state.config.descriptions.lego;
+                document.getElementById('setting-cat-photography').value = state.config.descriptions.photography;
+                document.getElementById('setting-cat-others').value = state.config.descriptions.others;
+            }
+        }
+
+        function handleFilesSelected(event) {
+            const files = Array.from(event.target.files);
+            if (!files.length) return;
+
+            let loadedCount = 0;
+            state.pendingFiles = [];
+
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    state.pendingFiles.push({
+                        name: file.name,
+                        dataUrl: e.target.result
+                    });
+                    loadedCount++;
+                    if (loadedCount === files.length) {
+                        renderPendingFilesPreview();
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderPendingFilesPreview() {
+            const container = document.getElementById('selected-files-preview');
+            const thumbsGrid = document.getElementById('selected-thumbs-grid');
+            const countLabel = document.getElementById('selected-files-count');
+
+            if (state.pendingFiles.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+
+            container.classList.remove('hidden');
+            countLabel.textContent = `${state.pendingFiles.length} FILES READY`;
+            thumbsGrid.innerHTML = '';
+
+            state.pendingFiles.forEach((fileObj, idx) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'relative aspect-square bg-slate-200 border border-slate-300 overflow-hidden';
+                thumb.innerHTML = `
+                    <img src="${fileObj.dataUrl}" class="w-full h-full object-cover">
+                    <button type="button" onclick="removePendingFile(${idx})" class="absolute top-1 right-1 bg-slate-900/80 text-white p-1 hover:bg-rose-600">
+                        <i data-lucide="x" class="w-3 h-3"></i>
+                    </button>
+                `;
+                thumbsGrid.appendChild(thumb);
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function removePendingFile(index) {
+            state.pendingFiles.splice(index, 1);
+            renderPendingFilesPreview();
+        }
+
+        function clearPendingFiles() {
+            state.pendingFiles = [];
+            document.getElementById('studio-file-input').value = '';
+            renderPendingFilesPreview();
+        }
+
+        function handleBatchPhotoUpload(event) {
+            event.preventDefault();
+            if (state.pendingFiles.length === 0) {
+                showToast('Please select at least one photo.', 'error');
+                return;
+            }
+
+            const category = document.getElementById('upload-category-select').value;
+            const customTitle = document.getElementById('upload-title-input').value.trim();
+            const caption = document.getElementById('upload-caption-input').value.trim();
+            const setAsCover = document.getElementById('set-as-cover-checkbox').checked;
+
+            state.pendingFiles.forEach((fileObj, idx) => {
+                const photoId = 'photo_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+                const title = customTitle ? (state.pendingFiles.length > 1 ? `${customTitle} (${idx + 1})` : customTitle) : (fileObj.name.replace(/\.[^/.]+$/, '') || 'Archive Entry');
+
+                state.photos.unshift({
+                    id: photoId,
+                    category: category,
+                    title: title,
+                    caption: caption,
+                    dataUrl: fileObj.dataUrl,
+                    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                });
+
+                if (idx === 0 && setAsCover) {
+                    state.covers[category] = fileObj.dataUrl;
+                }
+            });
+
+            savePersistedState();
+            clearPendingFiles();
+            document.getElementById('upload-title-input').value = '';
+            document.getElementById('upload-caption-input').value = '';
+            document.getElementById('set-as-cover-checkbox').checked = false;
+
+            showToast('Photos published successfully.', 'success');
+
+            if (state.activeView === 'detail') {
+                renderCategoryDetail(state.activeDetailCategory);
+            } else {
+                renderGatewaysGrid();
+            }
+
+            closeModal('studio-modal');
+        }
+
+        function renderStudioManageList() {
+            const filter = document.getElementById('manage-filter-select').value;
+            const container = document.getElementById('studio-manage-list');
+            container.innerHTML = '';
+
+            const filteredPhotos = filter === 'all' ? state.photos : state.photos.filter(p => p.category === filter);
+
+            if (filteredPhotos.length === 0) {
+                container.innerHTML = '<div class="col-span-full py-10 text-center text-xs text-slate-500 uppercase">NO PHOTOS MATCHING FILTER</div>';
+                return;
+            }
+
+            filteredPhotos.forEach(photo => {
+                const card = document.createElement('div');
+                card.className = 'flex items-center gap-3 p-3 bg-white border border-slate-300';
+                card.innerHTML = `
+                    <img src="${photo.dataUrl}" class="w-14 h-14 object-cover shrink-0 border border-slate-200">
+                    <div class="flex-grow min-w-0">
+                        <span class="text-[9px] tracking-[0.2em] text-sky-700 uppercase block">${photo.category}</span>
+                        <h5 class="font-semibold text-xs text-slate-900 uppercase truncate">${photo.title}</h5>
+                        <span class="text-[10px] text-slate-400">${photo.date}</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button onclick="setCoverFromPhoto('${photo.id}')" title="Set as Gateway Cover" class="p-1.5 border border-slate-300 hover:bg-slate-900 hover:text-white text-[10px] uppercase">
+                            COVER
+                        </button>
+                        <button onclick="deletePhoto('${photo.id}')" title="Delete" class="p-1.5 text-slate-400 hover:text-rose-600">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function setCoverFromPhoto(photoId) {
+            const photo = state.photos.find(p => p.id === photoId);
+            if (!photo) return;
+            state.covers[photo.category] = photo.dataUrl;
+            savePersistedState();
+            showToast(`Cover updated for 0${GATEWAYS.findIndex(g=>g.id===photo.category)+1} / ${photo.category.toUpperCase()}`, 'success');
+            renderGatewaysGrid();
+            if (state.activeView === 'detail') renderCategoryDetail(state.activeDetailCategory);
+        }
+
+        function handleDirectCoverFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const category = document.getElementById('direct-cover-cat').value;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                state.covers[category] = e.target.result;
+                savePersistedState();
+                showToast('Gateway cover updated.', 'success');
+                renderGatewaysGrid();
+                if (state.activeView === 'detail') renderCategoryDetail(state.activeDetailCategory);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resetAllCovers() {
+            state.covers = {};
+            savePersistedState();
+            showToast('Covers reset to default photographs.', 'info');
+            renderGatewaysGrid();
+            if (state.activeView === 'detail') renderCategoryDetail(state.activeDetailCategory);
+        }
+
+        function deletePhoto(photoId) {
+            state.photos = state.photos.filter(p => p.id !== photoId);
+            savePersistedState();
+            showToast('Photo removed.', 'info');
+            if (state.activeView === 'detail') {
+                renderCategoryDetail(state.activeDetailCategory);
+            }
+            renderGatewaysGrid();
+        }
+
+        function saveArchiveIdentity(event) {
+            event.preventDefault();
+            state.config.name = document.getElementById('setting-name-input').value.trim() || 'SHELDON';
+            state.config.tagline = document.getElementById('setting-tagline-input').value.trim();
+            state.config.description = document.getElementById('setting-desc-input').value.trim();
+            state.config.descriptions.robotics = document.getElementById('setting-cat-robotics').value.trim();
+            state.config.descriptions.lego = document.getElementById('setting-cat-lego').value.trim();
+            state.config.descriptions.photography = document.getElementById('setting-cat-photography').value.trim();
+            state.config.descriptions.others = document.getElementById('setting-cat-others').value.trim();
+
+            const newPin = document.getElementById('setting-pin-input').value.trim();
+            if (newPin) {
+                if (newPin.length >= 4) {
+                    localStorage.setItem(STORAGE.PIN, newPin);
+                } else {
+                    showToast('PIN must be at least 4 characters.', 'error');
+                    return;
+                }
+            }
+
+            savePersistedState();
+            updateUIIdentity();
+            renderAboutArchiveList();
+            closeModal('studio-modal');
+            showToast('Archive configuration saved.', 'success');
+        }
+
+        function openLightbox(photoId) {
+            const photo = state.photos.find(p => p.id === photoId);
+            if (!photo) return;
+            const gw = GATEWAYS.find(g => g.id === photo.category);
+
+            document.getElementById('lb-num').textContent = gw ? gw.num : '01';
+            document.getElementById('lb-cat').textContent = gw ? gw.title : photo.category;
+            document.getElementById('lb-img').src = photo.dataUrl;
+            document.getElementById('lb-title').textContent = photo.title;
+            document.getElementById('lb-caption').textContent = photo.caption || '';
+            document.getElementById('lb-date').textContent = photo.date;
+
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+            document.getElementById('lightbox-modal').classList.add('flex');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.getElementById(modalId).classList.add('flex');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.getElementById(modalId).classList.remove('flex');
+        }
+
+        function showToast(message, type = 'info') {
+            const box = document.getElementById('toast-box');
+            if (!box) return;
+
+            const toast = document.createElement('div');
+            toast.className = `px-4 py-3 border text-xs tracking-[0.15em] uppercase font-semibold shadow-lg transition-all animate-bounce ${
+                type === 'success' ? 'bg-slate-900 text-white border-slate-800' :
+                type === 'error' ? 'bg-rose-900 text-white border-rose-800' :
+                'bg-sky-900 text-white border-sky-800'
+            }`;
+            toast.textContent = message;
+            box.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
