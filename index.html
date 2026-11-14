@@ -209,168 +209,208 @@
         </div>
     </div>
 
-    <!-- MODAL 2: STUDIO DRAWER -->
-    <div id="studio-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/65 backdrop-blur-sm overflow-y-auto">
-        <div class="w-full max-w-4xl bg-[#F7FBFE] border border-slate-400 shadow-2xl my-auto max-h-[92vh] flex flex-col">
-            <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between gap-4 shrink-0">
-                <div class="flex items-center gap-3">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span class="font-display font-bold text-xs sm:text-sm tracking-[0.16em] uppercase">ARCHIVE STUDIO</span>
-                    <span class="hidden sm:inline text-[11px] tracking-[0.22em] text-slate-400 uppercase">// OWNER MODE</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="lockStudio()" class="px-3 py-1.5 border border-rose-400/50 text-rose-300 hover:bg-rose-600 hover:text-white text-[11px] tracking-[0.2em] uppercase transition-colors">LOCK STUDIO</button>
-                    <button onclick="closeModal('studio-modal')" class="p-1.5 text-slate-300 hover:text-white">
-                        <i data-lucide="x" class="w-5 h-5"></i>
-                    </button>
-                </div>
+    <!-- MODAL 2: TRUE FULL-SCREEN STUDIO DRAWER WITH 04 / EDIT PHOTOS TAB -->
+    <div id="studio-modal" class="fixed inset-0 z-50 hidden flex-col bg-slate-950/96 backdrop-blur-lg w-full h-full">
+        <!-- Studio Top Bar -->
+        <div class="w-full px-6 py-4 bg-slate-900 border-b border-white/10 flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-4">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="font-display font-bold text-sm tracking-[0.16em] uppercase text-white">ARCHIVE STUDIO</span>
+                <span class="hidden sm:inline text-xs tracking-[0.22em] text-slate-400 uppercase">// OWNER WORKSPACE</span>
             </div>
-
-            <div class="px-6 pt-3 bg-[#EAF5FC] border-b border-blueprint-border flex items-center gap-4 overflow-x-auto shrink-0">
-                <button onclick="switchStudioTab('upload')" data-studio-tab="upload" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap">01 / INSERT PHOTOS</button>
-                <button onclick="switchStudioTab('manage')" data-studio-tab="manage" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">02 / MANAGE &amp; COVERS</button>
-                <button onclick="switchStudioTab('settings')" data-studio-tab="settings" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">03 / IDENTITY &amp; PIN</button>
+            <div class="flex items-center gap-3">
+                <button onclick="lockStudio()" class="px-3.5 py-1.5 border border-rose-400/50 text-rose-300 hover:bg-rose-600 hover:text-white text-xs tracking-[0.2em] uppercase transition-colors">LOCK STUDIO</button>
+                <button onclick="closeModal('studio-modal')" class="px-3.5 py-1.5 border border-white/20 hover:border-white text-white text-xs tracking-[0.2em] uppercase flex items-center gap-2 transition-colors">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                    <span>CLOSE</span>
+                </button>
             </div>
+        </div>
 
-            <div class="p-6 overflow-y-auto space-y-6">
-                <!-- TAB 1 -->
-                <div id="studio-pane-upload" class="space-y-5">
-                    <form onsubmit="handleBatchPhotoUpload(event)" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">TARGET GATEWAY</label>
-                                <select id="upload-category-select" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs font-medium tracking-[0.12em] uppercase focus:border-sky-600 focus:outline-none">
-                                    <option value="robotics">01 — ROBOTICS</option>
-                                    <option value="lego">02 — LEGO</option>
-                                    <option value="photography">03 — PHOTOGRAPHY</option>
-                                    <option value="others">04 — OTHERS</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">ENTRY TITLE (OPTIONAL)</label>
-                                <input type="text" id="upload-title-input" maxlength="80" placeholder="Auto-uses filename if blank"
-                                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
-                            </div>
-                        </div>
+        <!-- Studio Navigation Tabs -->
+        <div class="w-full px-8 py-3 bg-[#EAF5FC] border-b border-blueprint-border flex items-center gap-6 overflow-x-auto shrink-0">
+            <button onclick="switchStudioTab('upload')" data-studio-tab="upload" class="studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap">01 / INSERT PHOTOS</button>
+            <button onclick="switchStudioTab('manage')" data-studio-tab="manage" class="studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">02 / MANAGE &amp; COVERS</button>
+            <button onclick="switchStudioTab('editphoto')" data-studio-tab="editphoto" class="studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">04 / EDIT PHOTOS</button>
+            <button onclick="switchStudioTab('settings')" data-studio-tab="settings" class="studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">03 / IDENTITY &amp; PIN</button>
+        </div>
+
+        <!-- Studio Full-Screen Content Area -->
+        <div class="flex-grow w-full max-w-5xl mx-auto px-6 py-8 overflow-y-auto">
+
+            <!-- TAB 1: INSERT PHOTOS -->
+            <div id="studio-pane-upload" class="space-y-6">
+                <form onsubmit="handleBatchPhotoUpload(event)" class="space-y-5 bg-[#F7FBFE] p-6 sm:p-8 border border-slate-300 shadow-xl">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
-                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">CAPTION / TECHNICAL NOTE (OPTIONAL)</label>
-                            <input type="text" id="upload-caption-input" maxlength="220" placeholder="e.g., 6-DOF servo arm test rig, Rev 2"
-                                class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
-                        </div>
-                        <div id="studio-dropzone" onclick="document.getElementById('studio-file-input').click()"
-                            class="cursor-pointer border-2 border-dashed border-sky-600/50 hover:border-sky-600 bg-white/80 hover:bg-sky-50/60 p-7 text-center transition-all">
-                            <input type="file" id="studio-file-input" accept="image/*" multiple class="hidden" onchange="handleFilesSelected(event)">
-                            <i data-lucide="upload" class="w-7 h-7 text-sky-600 mx-auto mb-2"></i>
-                            <p class="text-xs font-semibold tracking-[0.18em] uppercase text-slate-800">CLICK OR DRAG &amp; DROP PHOTOS HERE</p>
-                            <p class="text-[11px] text-slate-500 mt-1">Supports multiple photos at once &bull; Automatically compressed for persistent browser storage</p>
-                        </div>
-                        <div id="selected-files-preview" class="hidden space-y-2">
-                            <div class="flex items-center justify-between text-[11px] tracking-[0.18em] uppercase text-slate-600">
-                                <span id="selected-files-count">0 FILES READY</span>
-                                <button type="button" onclick="clearPendingFiles()" class="text-rose-600 hover:underline">CLEAR</button>
-                            </div>
-                            <div id="selected-thumbs-grid" class="grid grid-cols-3 sm:grid-cols-5 gap-2.5"></div>
-                        </div>
-                        <div class="pt-2 flex items-center justify-between border-t border-blueprint-border">
-                            <label class="inline-flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
-                                <input type="checkbox" id="set-as-cover-checkbox" class="accent-sky-600">
-                                <span>Set first photo as Gateway Cover</span>
-                            </label>
-                            <button type="submit" id="publish-photos-btn" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors">PUBLISH TO ARCHIVE</button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- TAB 2: MANAGE & DELETE -->
-                <div id="studio-pane-manage" class="hidden space-y-5">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-blueprint-border">
-                        <div class="flex items-center gap-2">
-                            <span class="text-[11px] tracking-[0.2em] uppercase text-slate-500">FILTER:</span>
-                            <select id="manage-filter-select" onchange="renderStudioManageList()" class="px-3 py-1.5 bg-white border border-slate-300 text-xs uppercase tracking-[0.12em]">
-                                <option value="all">ALL GATEWAYS</option>
+                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-2">TARGET GATEWAY</label>
+                            <select id="upload-category-select" class="w-full px-4 py-3 bg-white border border-slate-300 text-xs font-medium tracking-[0.12em] uppercase focus:border-sky-600 focus:outline-none">
                                 <option value="robotics">01 — ROBOTICS</option>
                                 <option value="lego">02 — LEGO</option>
                                 <option value="photography">03 — PHOTOGRAPHY</option>
                                 <option value="others">04 — OTHERS</option>
                             </select>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <button type="button" onclick="deleteSelectedPhotos()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-[11px] tracking-[0.16em] uppercase transition-colors flex items-center gap-1.5">
-                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                                <span>DELETE SELECTED</span>
-                            </button>
-                            <input type="file" id="direct-cover-input" accept="image/*" class="hidden" onchange="handleDirectCoverFile(event)">
-                            <select id="direct-cover-cat" class="px-2.5 py-1.5 bg-white border border-slate-300 text-[11px] uppercase tracking-[0.12em]">
-                                <option value="robotics">01 ROBOTICS</option>
-                                <option value="lego">02 LEGO</option>
-                                <option value="photography">03 PHOTOGRAPHY</option>
-                                <option value="others">04 OTHERS</option>
-                            </select>
-                            <button type="button" onclick="document.getElementById('direct-cover-input').click()" class="px-3 py-1.5 bg-slate-900 hover:bg-sky-700 text-white text-[11px] tracking-[0.16em] uppercase transition-colors">UPLOAD COVER</button>
-                            <button type="button" onclick="resetAllCovers()" class="px-3 py-1.5 border border-slate-300 hover:border-slate-900 text-[11px] tracking-[0.16em] uppercase text-slate-600">RESET COVERS</button>
+                        <div>
+                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-2">ENTRY TITLE (OPTIONAL)</label>
+                            <input type="text" id="upload-title-input" maxlength="80" placeholder="Auto-uses filename if blank"
+                                class="w-full px-4 py-3 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
                         </div>
                     </div>
+                    <div>
+                        <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-2">CAPTION / TECHNICAL NOTE (OPTIONAL)</label>
+                        <input type="text" id="upload-caption-input" maxlength="220" placeholder="e.g., 6-DOF servo arm test rig, Rev 2"
+                            class="w-full px-4 py-3 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
+                    </div>
+                    <div id="studio-dropzone" onclick="document.getElementById('studio-file-input').click()"
+                        class="cursor-pointer border-2 border-dashed border-sky-600/50 hover:border-sky-600 bg-white p-10 text-center transition-all">
+                        <input type="file" id="studio-file-input" accept="image/*" multiple class="hidden" onchange="handleFilesSelected(event)">
+                        <i data-lucide="upload" class="w-9 h-9 text-sky-600 mx-auto mb-3"></i>
+                        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-slate-800">CLICK OR DRAG &amp; DROP PHOTOS HERE</p>
+                        <p class="text-[11px] text-slate-500 mt-1">Supports multiple photos at once &bull; Automatically compressed for persistent browser storage</p>
+                    </div>
+                    <div id="selected-files-preview" class="hidden space-y-3">
+                        <div class="flex items-center justify-between text-xs tracking-[0.18em] uppercase text-slate-600">
+                            <span id="selected-files-count">0 FILES READY</span>
+                            <button type="button" onclick="clearPendingFiles()" class="text-rose-600 hover:underline">CLEAR</button>
+                        </div>
+                        <div id="selected-thumbs-grid" class="grid grid-cols-4 sm:grid-cols-6 gap-3"></div>
+                    </div>
+                    <div class="pt-4 flex items-center justify-between border-t border-blueprint-border">
+                        <label class="inline-flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
+                            <input type="checkbox" id="set-as-cover-checkbox" class="accent-sky-600 w-4 h-4">
+                            <span>Set first photo as Gateway Cover</span>
+                        </label>
+                        <button type="submit" id="publish-photos-btn" class="px-6 py-3 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors shadow-md">PUBLISH TO ARCHIVE</button>
+                    </div>
+                </form>
+            </div>
 
-                    <div id="studio-manage-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+            <!-- TAB 2: MANAGE & DELETE -->
+            <div id="studio-pane-manage" class="hidden space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-blueprint-border bg-[#F7FBFE] p-4 border border-slate-300">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs tracking-[0.2em] uppercase text-slate-600 font-semibold">FILTER:</span>
+                        <select id="manage-filter-select" onchange="renderStudioManageList()" class="px-3.5 py-2 bg-white border border-slate-300 text-xs uppercase tracking-[0.12em]">
+                            <option value="all">ALL GATEWAYS</option>
+                            <option value="robotics">01 — ROBOTICS</option>
+                            <option value="lego">02 — LEGO</option>
+                            <option value="photography">03 — PHOTOGRAPHY</option>
+                            <option value="others">04 — OTHERS</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button type="button" onclick="deleteSelectedPhotos()" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs tracking-[0.16em] uppercase transition-colors flex items-center gap-2 shadow">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            <span>DELETE SELECTED</span>
+                        </button>
+                        <input type="file" id="direct-cover-input" accept="image/*" class="hidden" onchange="handleDirectCoverFile(event)">
+                        <select id="direct-cover-cat" class="px-3 py-2 bg-white border border-slate-300 text-xs uppercase tracking-[0.12em]">
+                            <option value="robotics">01 ROBOTICS</option>
+                            <option value="lego">02 LEGO</option>
+                            <option value="photography">03 PHOTOGRAPHY</option>
+                            <option value="others">04 OTHERS</option>
+                        </select>
+                        <button type="button" onclick="document.getElementById('direct-cover-input').click()" class="px-3.5 py-2 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.16em] uppercase transition-colors shadow">UPLOAD COVER</button>
+                        <button type="button" onclick="resetAllCovers()" class="px-3.5 py-2 border border-slate-300 hover:border-slate-900 text-xs tracking-[0.16em] uppercase text-slate-700 bg-white">RESET COVERS</button>
+                    </div>
                 </div>
+                <div id="studio-manage-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+            </div>
 
-                <!-- TAB 3 -->
-                <div id="studio-pane-settings" class="hidden space-y-6">
-                    <form onsubmit="saveArchiveIdentity(event)" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">ARCHIVE DISPLAY NAME</label>
-                                <input type="text" id="setting-name-input" maxlength="24" required
-                                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs font-bold uppercase tracking-[0.14em]">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">NEW STUDIO PIN (4-12 CHARS)</label>
-                                <input type="password" id="setting-pin-input" minlength="4" maxlength="12" placeholder="Leave blank to keep current"
-                                    class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs tracking-[0.3em]">
-                            </div>
-                        </div>
+            <!-- TAB 3: 04 / EDIT PHOTOS (FULL-SCREEN EDITOR) -->
+            <div id="studio-pane-editphoto" class="hidden space-y-6">
+                <div class="bg-[#F7FBFE] border border-slate-300 p-6 sm:p-8 shadow-xl space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-blueprint-border">
                         <div>
-                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">HERO SUB-HEADLINE</label>
-                            <input type="text" id="setting-tagline-input" maxlength="120" required class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs">
+                            <span class="text-[10px] tracking-[0.28em] text-sky-700 uppercase font-bold block mb-1">04 / EDIT PHOTOS</span>
+                            <h4 class="font-display font-bold text-sm uppercase tracking-[0.15em] text-slate-900">SELECT PHOTO TO EDIT</h4>
                         </div>
-                        <div>
-                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">HERO INTRO PARAGRAPH</label>
-                            <textarea id="setting-desc-input" rows="2" maxlength="260" required class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs leading-relaxed"></textarea>
+                        <select id="studio-edit-select" onchange="loadPhotoIntoStudioEditor()" class="px-4 py-2.5 bg-white border border-slate-300 text-xs font-bold uppercase tracking-[0.12em] focus:border-sky-600 focus:outline-none min-w-[265px]">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+
+                    <div id="studio-edit-form-wrap" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <!-- Left: Thumbnail Preview -->
+                        <div class="lg:col-span-5 bg-slate-950 p-4 border border-slate-800 flex items-center justify-center min-h-[340px]">
+                            <img id="studio-edit-thumb" src="" alt="Photo Preview" class="max-h-[380px] max-w-full object-contain">
                         </div>
-                        <div class="pt-3 border-t border-blueprint-border space-y-3">
-                            <span class="block text-[11px] tracking-[0.22em] text-sky-700 uppercase font-semibold">CATEGORY DESCRIPTIONS</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">01 / ROBOTICS</label>
-                                    <textarea id="setting-cat-robotics" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">02 / LEGO</label>
-                                    <textarea id="setting-cat-lego" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">03 / PHOTOGRAPHY</label>
-                                    <textarea id="setting-cat-photography" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">04 / OTHERS</label>
-                                    <textarea id="setting-cat-others" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
-                                </div>
+                        <!-- Right: Editor Inputs -->
+                        <div class="lg:col-span-7 space-y-5 bg-white p-6 border border-blueprint-border">
+                            <div>
+                                <label class="block text-[11px] tracking-[0.2em] text-slate-600 uppercase mb-2">PHOTO TITLE</label>
+                                <input type="text" id="studio-input-title" oninput="saveStudioPhotoEdits()" class="w-full px-4 py-3 bg-white border border-slate-300 text-sm font-bold uppercase tracking-[0.08em] focus:border-sky-600 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] tracking-[0.2em] text-slate-600 uppercase mb-2">TECHNICAL CAPTION / DESCRIPTION</label>
+                                <textarea id="studio-input-caption" rows="6" oninput="saveStudioPhotoEdits()" class="w-full px-4 py-3 bg-white border border-slate-300 text-sm leading-relaxed focus:border-sky-600 focus:outline-none"></textarea>
+                            </div>
+                            <div class="flex items-center justify-between pt-2">
+                                <span class="text-xs text-slate-500 font-mono" id="studio-edit-meta-info">Category: Robotics</span>
+                                <span class="text-xs text-emerald-600 tracking-wider font-semibold">✓ CHANGES SAVE AUTOMATICALLY</span>
                             </div>
                         </div>
-                        <div class="flex justify-end pt-2">
-                            <button type="submit" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors">SAVE CONFIGURATION</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
+
+            <!-- TAB 4: IDENTITY & PIN -->
+            <div id="studio-pane-settings" class="hidden space-y-6">
+                <form onsubmit="saveArchiveIdentity(event)" class="space-y-5 bg-[#F7FBFE] p-6 sm:p-8 border border-slate-300 shadow-xl">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-2">ARCHIVE DISPLAY NAME</label>
+                            <input type="text" id="setting-name-input" maxlength="24" required
+                                class="w-full px-4 py-3 bg-white border border-slate-300 text-xs font-bold uppercase tracking-[0.14em]">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-2">NEW STUDIO PIN (4-12 CHARS)</label>
+                            <input type="password" id="setting-pin-input" minlength="4" maxlength="12" placeholder="Leave blank to keep current"
+                                class="w-full px-4 py-3 bg-white border border-slate-300 text-xs tracking-[0.3em]">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-2">HERO SUB-HEADLINE</label>
+                        <input type="text" id="setting-tagline-input" maxlength="120" required class="w-full px-4 py-3 bg-white border border-slate-300 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-2">HERO INTRO PARAGRAPH</label>
+                        <textarea id="setting-desc-input" rows="3" maxlength="260" required class="w-full px-4 py-3 bg-white border border-slate-300 text-xs leading-relaxed"></textarea>
+                    </div>
+                    <div class="pt-4 border-t border-blueprint-border space-y-3">
+                        <span class="block text-[11px] tracking-[0.22em] text-sky-700 uppercase font-semibold">CATEGORY DESCRIPTIONS</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">01 / ROBOTICS</label>
+                                <textarea id="setting-cat-robotics" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">02 / LEGO</label>
+                                <textarea id="setting-cat-lego" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">03 / PHOTOGRAPHY</label>
+                                <textarea id="setting-cat-photography" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">04 / OTHERS</label>
+                                <textarea id="setting-cat-others" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end pt-3">
+                        <button type="submit" class="px-6 py-3 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors shadow">SAVE CONFIGURATION</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 
-    <!-- MODAL 3: TRUE FULL-SCREEN IMMERSIVE VIEWER -->
+    <!-- MODAL 3: FULL-SCREEN IMMERSIVE VIEWER -->
     <div id="lightbox-modal" onclick="if(event.target.id==='lightbox-modal') closeModal('lightbox-modal')"
         class="fixed inset-0 z-50 hidden flex-col bg-slate-950/96 backdrop-blur-lg w-full h-full">
-        <!-- Top Immersive Bar -->
         <div class="w-full px-6 py-4 bg-slate-900 border-b border-white/10 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-4">
                 <span id="lb-num" class="text-xs tracking-[0.25em] text-sky-400 font-semibold">01</span>
@@ -383,14 +423,11 @@
             </button>
         </div>
 
-        <!-- Full-Screen Split Layout Container -->
         <div class="flex-grow w-full h-full grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
-            <!-- Left Column: Full-Sized Photo & Like Button (8 cols) -->
             <div class="lg:col-span-8 bg-black flex flex-col items-center justify-between p-6 sm:p-10 h-full overflow-hidden">
                 <div class="flex-grow w-full h-full flex items-center justify-center overflow-hidden my-auto">
                     <img id="lb-image" src="" alt="Full-Sized Archive Photo" class="max-h-[78vh] max-w-full object-contain shadow-2xl">
                 </div>
-                <!-- Like Button Strip -->
                 <div class="w-full pt-4 border-t border-white/10 flex items-center justify-between text-white shrink-0">
                     <span id="lb-date" class="text-xs tracking-[0.2em] text-slate-400 uppercase">CAPTURED: 2026-10-12</span>
                     <button onclick="handleLikePhoto()" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 border border-white/20 text-white text-xs tracking-[0.18em] uppercase flex items-center gap-2.5 transition-all active:scale-95 shadow-lg">
@@ -401,7 +438,6 @@
                 </div>
             </div>
 
-            <!-- Right Column: Description & Studio Quick Editor (4 cols) -->
             <div class="lg:col-span-4 bg-[#F7FBFE] border-t lg:border-t-0 lg:border-l border-blueprint-border p-6 sm:p-10 flex flex-col justify-between overflow-y-auto h-full">
                 <div class="space-y-6">
                     <div>
@@ -409,26 +445,9 @@
                         <div class="w-8 h-[2px] bg-sky-600"></div>
                     </div>
 
-                    <!-- Public Display Description View -->
                     <div id="lightbox-display-mode" class="space-y-4">
                         <h3 id="lb-title" class="font-display font-bold text-xl sm:text-2xl tracking-[0.08em] text-slate-900 uppercase leading-snug"></h3>
                         <p id="lb-caption" class="text-sm sm:text-base text-slate-700 font-mono leading-[1.8]"></p>
-                    </div>
-
-                    <!-- Studio Edit Mode (Only when unlocked) -->
-                    <div id="lightbox-edit-mode" class="hidden space-y-5 pt-4 border-t border-blueprint-border">
-                        <div class="flex items-center justify-between">
-                            <span class="text-[11px] tracking-[0.22em] text-sky-700 uppercase font-bold">// QUICK STUDIO EDIT</span>
-                            <span class="text-[10px] text-emerald-600 tracking-wider">AUTO-SAVES</span>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] tracking-[0.2em] text-slate-600 uppercase mb-1.5">EDIT TITLE</label>
-                            <input type="text" id="lb-edit-title" oninput="saveLightboxEdits()" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs font-bold uppercase tracking-[0.08em] focus:border-sky-600 focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] tracking-[0.2em] text-slate-600 uppercase mb-1.5">EDIT TECHNICAL CAPTION</label>
-                            <textarea id="lb-edit-caption" rows="5" oninput="saveLightboxEdits()" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs leading-relaxed focus:border-sky-600 focus:outline-none"></textarea>
-                        </div>
                     </div>
                 </div>
 
@@ -656,7 +675,6 @@
             lucide.createIcons();
         }
 
-        // Open Full-Screen Immersive Viewer
         function openLightbox(photoId) {
             const photo = state.photos.find(p => p.id === photoId);
             if (!photo) return;
@@ -673,20 +691,6 @@
             document.getElementById('lb-photo-id-hint').textContent = `ID: ${photo.id}`;
             document.getElementById('lb-like-count').textContent = photo.likes || 0;
 
-            document.getElementById('lb-edit-title').value = photo.title;
-            document.getElementById('lb-edit-caption').value = photo.caption || '';
-
-            const displayMode = document.getElementById('lightbox-display-mode');
-            const editMode = document.getElementById('lightbox-edit-mode');
-
-            if (state.isStudioUnlocked) {
-                displayMode.classList.add('hidden');
-                editMode.classList.remove('hidden');
-            } else {
-                displayMode.classList.remove('hidden');
-                editMode.classList.add('hidden');
-            }
-
             document.getElementById('lightbox-modal').classList.remove('hidden');
             document.getElementById('lightbox-modal').classList.add('flex');
             lucide.createIcons();
@@ -701,24 +705,6 @@
             saveState();
 
             document.getElementById('lb-like-count').textContent = photo.likes;
-
-            if (state.activeView === 'detail') {
-                renderCategoryDetailView();
-            }
-        }
-
-        function saveLightboxEdits() {
-            if (!state.activeLightboxId || !state.isStudioUnlocked) return;
-            const photo = state.photos.find(p => p.id === state.activeLightboxId);
-            if (!photo) return;
-
-            photo.title = document.getElementById('lb-edit-title').value.trim() || 'UNTITLED';
-            photo.caption = document.getElementById('lb-edit-caption').value.trim();
-
-            saveState();
-            
-            document.getElementById('lb-title').textContent = photo.title;
-            document.getElementById('lb-caption').textContent = photo.caption;
 
             if (state.activeView === 'detail') {
                 renderCategoryDetailView();
@@ -811,25 +797,82 @@
             document.getElementById('setting-cat-photography').value = state.catDescriptions.photography;
             document.getElementById('setting-cat-others').value = state.catDescriptions.others;
 
-            switchStudioTab('upload');
+            switchStudioTab('editphoto');
             openModal('studio-modal');
         }
 
         function switchStudioTab(tabName) {
-            ['upload', 'manage', 'settings'].forEach(t => {
+            ['upload', 'manage', 'editphoto', 'settings'].forEach(t => {
                 const btn = document.querySelector(`[data-studio-tab="${t}"]`);
                 const pane = document.getElementById(`studio-pane-${t}`);
                 if (t === tabName) {
-                    btn.className = 'studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap';
+                    btn.className = 'studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap';
                     pane.classList.remove('hidden');
                 } else {
-                    btn.className = 'studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap';
+                    btn.className = 'studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap';
                     pane.classList.add('hidden');
                 }
             });
 
             if (tabName === 'manage') {
                 renderStudioManageList();
+            }
+            if (tabName === 'editphoto') {
+                populateStudioEditDropdown();
+            }
+        }
+
+        function populateStudioEditDropdown() {
+            const select = document.getElementById('studio-edit-select');
+            select.innerHTML = '';
+
+            if (state.photos.length === 0) {
+                select.innerHTML = '<option value="">NO PHOTOS IN ARCHIVE</option>';
+                document.getElementById('studio-edit-form-wrap').classList.add('hidden');
+                return;
+            }
+
+            document.getElementById('studio-edit-form-wrap').classList.remove('hidden');
+
+            state.photos.forEach(photo => {
+                const opt = document.createElement('option');
+                opt.value = photo.id;
+                opt.textContent = `[${photo.category.toUpperCase()}] ${photo.title}`;
+                select.appendChild(opt);
+            });
+
+            loadPhotoIntoStudioEditor();
+        }
+
+        function loadPhotoIntoStudioEditor() {
+            const selectId = document.getElementById('studio-edit-select').value;
+            const photo = state.photos.find(p => p.id === selectId);
+            if (!photo) return;
+
+            document.getElementById('studio-edit-thumb').src = photo.dataUrl;
+            document.getElementById('studio-input-title').value = photo.title;
+            document.getElementById('studio-input-caption').value = photo.caption || '';
+            document.getElementById('studio-edit-meta-info').textContent = `Category: ${photo.category.toUpperCase()} • ID: ${photo.id}`;
+        }
+
+        function saveStudioPhotoEdits() {
+            const selectId = document.getElementById('studio-edit-select').value;
+            const photo = state.photos.find(p => p.id === selectId);
+            if (!photo) return;
+
+            photo.title = document.getElementById('studio-input-title').value.trim() || 'UNTITLED';
+            photo.caption = document.getElementById('studio-input-caption').value.trim();
+
+            saveState();
+
+            // Update dropdown label live
+            const select = document.getElementById('studio-edit-select');
+            if (select.selectedOptions.length > 0) {
+                select.selectedOptions[0].textContent = `[${photo.category.toUpperCase()}] ${photo.title}`;
+            }
+
+            if (state.activeView === 'detail') {
+                renderCategoryDetailView();
             }
         }
 
