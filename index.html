@@ -6,7 +6,7 @@
     <title>SHELDON — 04 / ARCHIVE</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Google Fonts: Syncopate (wide extended display), IBM Plex Mono (technical mono), Inter (clean UI) -->
+    <!-- Load Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
@@ -39,7 +39,6 @@
     </script>
 
     <style>
-        /* Technical Architectural Blueprint Grid Background */
         body {
             background-color: #EAF5FC;
             background-image:
@@ -50,8 +49,6 @@
             background-position: 0 0, -1px -1px, -1px -1px;
             color: #0F172A;
         }
-
-        /* Crisp Gateway Card Styling */
         .gateway-card {
             aspect-ratio: 4 / 4.65;
             transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
@@ -66,41 +63,24 @@
         .gateway-visual {
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
-        /* Custom subtle scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #EAF5FC;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #B8CFE0;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94B4CC;
-        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #EAF5FC; }
+        ::-webkit-scrollbar-thumb { background: #B8CFE0; }
+        ::-webkit-scrollbar-thumb:hover { background: #94B4CC; }
     </style>
 </head>
 <body class="font-mono text-blueprint-ink antialiased min-h-screen flex flex-col selection:bg-sky-600 selection:text-white">
 
-    <!-- ===================================================================== -->
-    <!-- TOP TECHNICAL HEADER BAR                                              -->
-    <!-- ===================================================================== -->
+    <!-- TOP TECHNICAL HEADER BAR -->
     <header class="sticky top-0 z-40 w-full bg-[#F7FBFE]/90 backdrop-blur-md border-b border-blueprint-border">
         <div class="max-w-5xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
-            <!-- Left: Wide Extended Brand Name -->
             <button onclick="showHomeArchive()" class="font-display font-bold text-sm sm:text-base tracking-[0.14em] uppercase text-slate-900 hover:text-sky-700 transition-colors text-left focus:outline-none">
                 <span id="nav-brand-name">SHELDON</span>
             </button>
-
-            <!-- Right: Archive Counter & Bordered STUDIO Button -->
             <div class="flex items-center gap-4 sm:gap-6">
                 <span class="hidden xs:inline-block text-[11px] sm:text-xs tracking-[0.28em] text-slate-500 uppercase">
                     04 / ARCHIVE
                 </span>
-
                 <button id="studio-header-btn" onclick="handleStudioButtonClick()"
                     class="px-4 py-2 border border-slate-400/80 bg-white/80 hover:bg-slate-900 hover:text-white hover:border-slate-900 text-slate-800 text-[11px] sm:text-xs font-medium tracking-[0.28em] uppercase transition-all active:scale-95 flex items-center gap-2">
                     <span id="studio-status-dot" class="hidden w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
@@ -110,30 +90,17 @@
         </div>
     </header>
 
-    <!-- ===================================================================== -->
-    <!-- MAIN ARCHIVE VIEW (HERO + FOUR GATEWAYS + ABOUT THE ARCHIVE)          -->
-    <!-- ===================================================================== -->
+    <!-- MAIN ARCHIVE VIEW -->
     <main id="main-archive-view" class="flex-grow max-w-5xl w-full mx-auto px-5 sm:px-8">
-
-        <!-- HERO SECTION -->
         <section class="pt-12 sm:pt-16 pb-12 sm:pb-16 border-b border-blueprint-border">
-            <!-- Eyebrow with leading thin line -->
             <div class="flex items-center gap-4 mb-5">
                 <span class="w-9 h-[1.5px] bg-sky-600/80 inline-block"></span>
-                <span class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-sky-700 uppercase">
-                    PERSONAL ARCHIVE
-                </span>
+                <span class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-sky-700 uppercase">PERSONAL ARCHIVE</span>
             </div>
-
-            <!-- Main Wide Display Headline -->
             <h1 id="hero-display-name" class="font-display font-bold text-3xl sm:text-5xl md:text-[54px] tracking-[0.06em] uppercase text-slate-900 leading-[1.12] break-words">
                 SHELDON
             </h1>
-
-            <!-- Horizontal Rule Divider -->
             <div class="w-full h-px bg-blueprint-border my-7 sm:my-9"></div>
-
-            <!-- Sub-headline & Monospaced Intro Paragraph -->
             <div class="max-w-2xl space-y-5">
                 <p id="hero-tagline" class="font-sans text-base sm:text-lg font-medium text-slate-800 tracking-tight">
                     Builder of small machines. Collector of moments.
@@ -146,49 +113,29 @@
 
         <!-- SECTION 1: FOUR GATEWAYS -->
         <section class="py-10 sm:py-14 border-b border-blueprint-border">
-            <!-- Section Header Row -->
             <div class="flex items-center justify-between pb-4 mb-7 border-b border-blueprint-border/80">
-                <h2 class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-slate-600 uppercase">
-                    FOUR GATEWAYS
-                </h2>
-                <span class="text-[11px] sm:text-xs tracking-[0.28em] text-slate-500">
-                    01 &mdash; 04
-                </span>
+                <h2 class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-slate-600 uppercase">FOUR GATEWAYS</h2>
+                <span class="text-[11px] sm:text-xs tracking-[0.28em] text-slate-500">01 &mdash; 04</span>
             </div>
-
-            <!-- 2x2 Grid of Tall Atmospheric Gateway Cards -->
-            <div id="gateways-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-                <!-- Populated dynamically via JavaScript -->
-            </div>
+            <div id="gateways-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6"></div>
         </section>
 
         <!-- SECTION 2: ABOUT THE ARCHIVE -->
         <section class="py-12 sm:py-16">
             <div class="pb-5 mb-2 border-b border-blueprint-border">
-                <h2 class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-slate-600 uppercase">
-                    ABOUT THE ARCHIVE
-                </h2>
+                <h2 class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-slate-600 uppercase">ABOUT THE ARCHIVE</h2>
             </div>
-
-            <!-- 4 Numbered Index Rows -->
-            <div id="about-archive-list" class="divide-y divide-blueprint-border">
-                <!-- Populated dynamically via JavaScript -->
-            </div>
+            <div id="about-archive-list" class="divide-y divide-blueprint-border"></div>
         </section>
-
     </main>
 
-    <!-- ===================================================================== -->
-    <!-- CATEGORY DETAIL ARCHIVE VIEW (WHEN A GATEWAY CARD IS CLICKED)         -->
-    <!-- ===================================================================== -->
+    <!-- CATEGORY DETAIL ARCHIVE VIEW -->
     <section id="category-detail-view" class="hidden flex-grow max-w-5xl w-full mx-auto px-5 sm:px-8 py-10 sm:py-14">
-        <!-- Top Navigation Row -->
         <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-blueprint-border">
             <button onclick="showHomeArchive()" class="inline-flex items-center gap-2.5 text-xs tracking-[0.22em] uppercase text-slate-700 hover:text-sky-700 font-medium transition-colors">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
                 <span>BACK TO ARCHIVE</span>
             </button>
-
             <div class="flex items-center gap-2">
                 <button onclick="openCategoryDetail('robotics')" data-cat-pill="robotics" class="cat-switch-pill px-2.5 py-1 text-[11px] tracking-[0.18em] uppercase border transition-colors">01</button>
                 <button onclick="openCategoryDetail('lego')" data-cat-pill="lego" class="cat-switch-pill px-2.5 py-1 text-[11px] tracking-[0.18em] uppercase border transition-colors">02</button>
@@ -197,14 +144,10 @@
             </div>
         </div>
 
-        <!-- Category Header Block -->
         <div id="detail-header-banner" class="relative overflow-hidden my-6 border border-blueprint-border bg-slate-950 text-white min-h-[240px] sm:min-h-[280px] flex items-end">
-            <!-- Background Cover Photo Layer -->
             <div id="detail-header-bg" class="absolute inset-0 w-full h-full"></div>
-            <!-- Subtle Bottom & Left Vignette Overlay so the Exact Photo Stays Vividly Visible -->
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-slate-950/75 via-transparent to-transparent"></div>
-
             <div class="relative z-10 w-full p-6 sm:p-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
                 <div class="space-y-3 max-w-2xl">
                     <div class="flex items-center gap-3">
@@ -212,14 +155,9 @@
                         <span class="w-6 h-px bg-sky-400/70"></span>
                         <span id="detail-cat-tags" class="text-[11px] tracking-[0.24em] text-slate-200 uppercase drop-shadow">MECHANISMS &middot; CODE &middot; ITERATION</span>
                     </div>
-                    <h1 id="detail-cat-title" class="font-display font-bold text-2xl sm:text-4xl tracking-[0.08em] uppercase text-white drop-shadow-md">
-                        ROBOTICS
-                    </h1>
-                    <p id="detail-cat-desc" class="text-xs sm:text-sm text-slate-100 leading-[1.8] drop-shadow">
-                        Servos, sensors and the stubborn gap between what I sketched and what actually moves.
-                    </p>
+                    <h1 id="detail-cat-title" class="font-display font-bold text-2xl sm:text-4xl tracking-[0.08em] uppercase text-white drop-shadow-md">ROBOTICS</h1>
+                    <p id="detail-cat-desc" class="text-xs sm:text-sm text-slate-100 leading-[1.8] drop-shadow">Servos, sensors and the stubborn gap between what I sketched and what actually moves.</p>
                 </div>
-
                 <div class="flex items-center gap-3 shrink-0">
                     <span id="detail-photo-count" class="text-xs tracking-[0.22em] text-slate-200 uppercase drop-shadow">0 PHOTOS</span>
                     <button id="detail-upload-btn" onclick="openStudioDrawer(state.activeDetailCategory)" class="hidden px-4 py-2 bg-white hover:bg-sky-400 text-slate-950 font-semibold text-xs tracking-[0.2em] uppercase transition-colors items-center gap-2 shadow-lg">
@@ -230,15 +168,10 @@
             </div>
         </div>
 
-        <!-- Category Photo Grid -->
-        <div id="detail-photos-grid" class="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Injected dynamically -->
-        </div>
+        <div id="detail-photos-grid" class="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </section>
 
-    <!-- ===================================================================== -->
-    <!-- TECHNICAL FOOTER                                                      -->
-    <!-- ===================================================================== -->
+    <!-- TECHNICAL FOOTER -->
     <footer class="border-t border-blueprint-border bg-[#F4FAFE]/80 mt-auto">
         <div class="max-w-5xl mx-auto px-5 sm:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] tracking-[0.22em] text-slate-500 uppercase">
             <span>&copy; <span id="footer-year"></span> <span id="footer-brand-name">SHELDON</span> &mdash; PERSONAL ARCHIVE</span>
@@ -249,9 +182,7 @@
         </div>
     </footer>
 
-    <!-- ===================================================================== -->
-    <!-- MODAL 1: STUDIO PIN VERIFICATION                                      -->
-    <!-- ===================================================================== -->
+    <!-- MODAL 1: PIN -->
     <div id="pin-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
         <div class="w-full max-w-md bg-[#F7FBFE] border border-slate-400 shadow-2xl p-6 sm:p-8">
             <div class="flex items-center justify-between pb-4 mb-5 border-b border-blueprint-border">
@@ -263,37 +194,24 @@
                     <i data-lucide="x" class="w-4 h-4"></i>
                 </button>
             </div>
-
             <form onsubmit="verifyPin(event)" class="space-y-5">
                 <div>
-                    <label for="studio-pin-input" class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-2">
-                        ENTER OWNER PIN
-                    </label>
+                    <label for="studio-pin-input" class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-2">ENTER OWNER PIN</label>
                     <input type="password" id="studio-pin-input" maxlength="12" required placeholder="••••"
                         class="w-full px-4 py-3 bg-white border border-slate-300 focus:border-sky-600 focus:outline-none text-center text-xl tracking-[0.5em] font-bold text-slate-900">
-                    <p id="pin-error-msg" class="hidden text-xs font-semibold text-rose-600 mt-2">
-                        INVALID PIN. ACCESS DENIED.
-                    </p>
+                    <p id="pin-error-msg" class="hidden text-xs font-semibold text-rose-600 mt-2">INVALID PIN. ACCESS DENIED.</p>
                 </div>
-
                 <div class="flex items-center justify-end gap-3 pt-2">
-                    <button type="button" onclick="closeModal('pin-modal')" class="px-4 py-2 border border-slate-300 text-xs tracking-[0.2em] uppercase text-slate-600 hover:bg-slate-100">
-                        CANCEL
-                    </button>
-                    <button type="submit" class="px-5 py-2 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.2em] uppercase transition-colors">
-                        UNLOCK STUDIO
-                    </button>
+                    <button type="button" onclick="closeModal('pin-modal')" class="px-4 py-2 border border-slate-300 text-xs tracking-[0.2em] uppercase text-slate-600 hover:bg-slate-100">CANCEL</button>
+                    <button type="submit" class="px-5 py-2 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.2em] uppercase transition-colors">UNLOCK STUDIO</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- MODAL 2: OWNER STUDIO DRAWER / CONTROL PANEL                          -->
-    <!-- ===================================================================== -->
+    <!-- MODAL 2: STUDIO DRAWER -->
     <div id="studio-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/65 backdrop-blur-sm overflow-y-auto">
         <div class="w-full max-w-4xl bg-[#F7FBFE] border border-slate-400 shadow-2xl my-auto max-h-[92vh] flex flex-col">
-            <!-- Studio Top Bar -->
             <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between gap-4 shrink-0">
                 <div class="flex items-center gap-3">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -301,32 +219,21 @@
                     <span class="hidden sm:inline text-[11px] tracking-[0.22em] text-slate-400 uppercase">// OWNER MODE</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="lockStudio()" class="px-3 py-1.5 border border-rose-400/50 text-rose-300 hover:bg-rose-600 hover:text-white text-[11px] tracking-[0.2em] uppercase transition-colors">
-                        LOCK STUDIO
-                    </button>
+                    <button onclick="lockStudio()" class="px-3 py-1.5 border border-rose-400/50 text-rose-300 hover:bg-rose-600 hover:text-white text-[11px] tracking-[0.2em] uppercase transition-colors">LOCK STUDIO</button>
                     <button onclick="closeModal('studio-modal')" class="p-1.5 text-slate-300 hover:text-white">
                         <i data-lucide="x" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Studio Navigation Tabs -->
             <div class="px-6 pt-3 bg-[#EAF5FC] border-b border-blueprint-border flex items-center gap-4 overflow-x-auto shrink-0">
-                <button onclick="switchStudioTab('upload')" data-studio-tab="upload" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap">
-                    01 / INSERT PHOTOS
-                </button>
-                <button onclick="switchStudioTab('manage')" data-studio-tab="manage" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">
-                    02 / MANAGE &amp; COVERS
-                </button>
-                <button onclick="switchStudioTab('settings')" data-studio-tab="settings" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">
-                    03 / IDENTITY &amp; PIN
-                </button>
+                <button onclick="switchStudioTab('upload')" data-studio-tab="upload" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap">01 / INSERT PHOTOS</button>
+                <button onclick="switchStudioTab('manage')" data-studio-tab="manage" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">02 / MANAGE &amp; COVERS</button>
+                <button onclick="switchStudioTab('settings')" data-studio-tab="settings" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">03 / IDENTITY &amp; PIN</button>
             </div>
 
-            <!-- Studio Body Content -->
             <div class="p-6 overflow-y-auto space-y-6">
-
-                <!-- TAB 1: UPLOAD / INSERT PHOTOS -->
+                <!-- TAB 1 -->
                 <div id="studio-pane-upload" class="space-y-5">
                     <form onsubmit="handleBatchPhotoUpload(event)" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -345,27 +252,18 @@
                                     class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
                             </div>
                         </div>
-
                         <div>
                             <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">CAPTION / TECHNICAL NOTE (OPTIONAL)</label>
                             <input type="text" id="upload-caption-input" maxlength="220" placeholder="e.g., 6-DOF servo arm test rig, Rev 2"
                                 class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
                         </div>
-
-                        <!-- Multi-file Dropzone -->
                         <div id="studio-dropzone" onclick="document.getElementById('studio-file-input').click()"
                             class="cursor-pointer border-2 border-dashed border-sky-600/50 hover:border-sky-600 bg-white/80 hover:bg-sky-50/60 p-7 text-center transition-all">
                             <input type="file" id="studio-file-input" accept="image/*" multiple class="hidden" onchange="handleFilesSelected(event)">
                             <i data-lucide="upload" class="w-7 h-7 text-sky-600 mx-auto mb-2"></i>
-                            <p class="text-xs font-semibold tracking-[0.18em] uppercase text-slate-800">
-                                CLICK OR DRAG &amp; DROP PHOTOS HERE
-                            </p>
-                            <p class="text-[11px] text-slate-500 mt-1">
-                                Supports multiple photos at once &bull; Automatically compressed for persistent browser storage
-                            </p>
+                            <p class="text-xs font-semibold tracking-[0.18em] uppercase text-slate-800">CLICK OR DRAG &amp; DROP PHOTOS HERE</p>
+                            <p class="text-[11px] text-slate-500 mt-1">Supports multiple photos at once &bull; Automatically compressed for persistent browser storage</p>
                         </div>
-
-                        <!-- Selected Files Preview Strip -->
                         <div id="selected-files-preview" class="hidden space-y-2">
                             <div class="flex items-center justify-between text-[11px] tracking-[0.18em] uppercase text-slate-600">
                                 <span id="selected-files-count">0 FILES READY</span>
@@ -373,20 +271,17 @@
                             </div>
                             <div id="selected-thumbs-grid" class="grid grid-cols-3 sm:grid-cols-5 gap-2.5"></div>
                         </div>
-
                         <div class="pt-2 flex items-center justify-between border-t border-blueprint-border">
                             <label class="inline-flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
                                 <input type="checkbox" id="set-as-cover-checkbox" class="accent-sky-600">
                                 <span>Set first photo as Gateway Cover</span>
                             </label>
-                            <button type="submit" id="publish-photos-btn" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors">
-                                PUBLISH TO ARCHIVE
-                            </button>
+                            <button type="submit" id="publish-photos-btn" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors">PUBLISH TO ARCHIVE</button>
                         </div>
                     </form>
                 </div>
 
-                <!-- TAB 2: MANAGE PHOTOS & GATEWAY COVERS -->
+                <!-- TAB 2: MANAGE & DELETE -->
                 <div id="studio-pane-manage" class="hidden space-y-5">
                     <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-blueprint-border">
                         <div class="flex items-center gap-2">
@@ -400,6 +295,10 @@
                             </select>
                         </div>
                         <div class="flex items-center gap-2">
+                            <button type="button" onclick="deleteSelectedPhotos()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-[11px] tracking-[0.16em] uppercase transition-colors flex items-center gap-1.5">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                <span>DELETE SELECTED</span>
+                            </button>
                             <input type="file" id="direct-cover-input" accept="image/*" class="hidden" onchange="handleDirectCoverFile(event)">
                             <select id="direct-cover-cat" class="px-2.5 py-1.5 bg-white border border-slate-300 text-[11px] uppercase tracking-[0.12em]">
                                 <option value="robotics">01 ROBOTICS</option>
@@ -407,21 +306,15 @@
                                 <option value="photography">03 PHOTOGRAPHY</option>
                                 <option value="others">04 OTHERS</option>
                             </select>
-                            <button type="button" onclick="document.getElementById('direct-cover-input').click()" class="px-3 py-1.5 bg-slate-900 hover:bg-sky-700 text-white text-[11px] tracking-[0.16em] uppercase transition-colors">
-                                UPLOAD COVER
-                            </button>
-                            <button type="button" onclick="resetAllCovers()" class="px-3 py-1.5 border border-slate-300 hover:border-slate-900 text-[11px] tracking-[0.16em] uppercase text-slate-600">
-                                RESET COVERS
-                            </button>
+                            <button type="button" onclick="document.getElementById('direct-cover-input').click()" class="px-3 py-1.5 bg-slate-900 hover:bg-sky-700 text-white text-[11px] tracking-[0.16em] uppercase transition-colors">UPLOAD COVER</button>
+                            <button type="button" onclick="resetAllCovers()" class="px-3 py-1.5 border border-slate-300 hover:border-slate-900 text-[11px] tracking-[0.16em] uppercase text-slate-600">RESET COVERS</button>
                         </div>
                     </div>
 
-                    <div id="studio-manage-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- Populated dynamically -->
-                    </div>
+                    <div id="studio-manage-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
                 </div>
 
-                <!-- TAB 3: EDIT ARCHIVE NAME, BIO, DESCRIPTIONS & PIN -->
+                <!-- TAB 3 -->
                 <div id="studio-pane-settings" class="hidden space-y-6">
                     <form onsubmit="saveArchiveIdentity(event)" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -436,19 +329,14 @@
                                     class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs tracking-[0.3em]">
                             </div>
                         </div>
-
                         <div>
                             <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">HERO SUB-HEADLINE</label>
-                            <input type="text" id="setting-tagline-input" maxlength="120" required
-                                class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs">
+                            <input type="text" id="setting-tagline-input" maxlength="120" required class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs">
                         </div>
-
                         <div>
                             <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">HERO INTRO PARAGRAPH</label>
-                            <textarea id="setting-desc-input" rows="2" maxlength="260" required
-                                class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs leading-relaxed"></textarea>
+                            <textarea id="setting-desc-input" rows="2" maxlength="260" required class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs leading-relaxed"></textarea>
                         </div>
-
                         <div class="pt-3 border-t border-blueprint-border space-y-3">
                             <span class="block text-[11px] tracking-[0.22em] text-sky-700 uppercase font-semibold">CATEGORY DESCRIPTIONS</span>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -470,41 +358,80 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="flex justify-end pt-2">
-                            <button type="submit" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors">
-                                SAVE CONFIGURATION
-                            </button>
+                            <button type="submit" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors">SAVE CONFIGURATION</button>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- MODAL 3: FULL-SCREEN LIGHTBOX VIEWER                                  -->
-    <!-- ===================================================================== -->
+    <!-- MODAL 3: LIGHTBOX VIEWER WITH SPLIT LAYOUT & LIKE BUTTON -->
     <div id="lightbox-modal" onclick="if(event.target.id==='lightbox-modal') closeModal('lightbox-modal')"
-        class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-8 bg-slate-950/92 backdrop-blur-md">
-        <div class="max-w-5xl w-full flex flex-col items-center">
-            <div class="w-full flex items-center justify-between text-white mb-3">
+        class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-md">
+        <div class="max-w-4xl w-full bg-[#F7FBFE] border border-slate-400 shadow-2xl flex flex-col overflow-hidden max-h-[90vh]">
+            <!-- Top bar -->
+            <div class="px-6 py-3.5 bg-slate-900 text-white flex items-center justify-between shrink-0">
                 <div class="flex items-center gap-3">
                     <span id="lb-num" class="text-xs tracking-[0.25em] text-sky-400 font-semibold">01</span>
                     <span id="lb-cat" class="text-xs tracking-[0.25em] text-slate-300 uppercase">ROBOTICS</span>
                 </div>
-                <button onclick="closeModal('lightbox-modal')" class="p-2 border border-white/20 hover:border-white text-white transition-colors">
+                <button onclick="closeModal('lightbox-modal')" class="p-1.5 text-slate-300 hover:text-white">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
-            <div class="relative max-h-[75vh] w-full flex items-center justify-center bg-slate-900/50 border border-white/10 p-2">
-                <img id="lb-image" src="" alt="Enlarged Archive Photo" class="max-h-[72vh] max-w-full object-contain">
-            </div>
-            <div class="w-full mt-4 text-center space-y-1.5">
-                <h3 id="lb-title" class="font-display font-bold text-base tracking-[0.1em] text-white uppercase">ENTRY TITLE</h3>
-                <p id="lb-caption" class="text-xs text-slate-300 font-mono tracking-wide max-w-xl mx-auto"></p>
-                <p id="lb-date" class="text-[10px] text-slate-500 tracking-[0.2em] uppercase"></p>
+
+            <!-- Split Layout: Left Image + Like Button, Right Description & Studio Editor -->
+            <div class="grid grid-cols-1 md:grid-cols-2 flex-grow overflow-y-auto">
+                <!-- Left: Photo View & Like Button -->
+                <div class="bg-slate-950 flex flex-col items-center justify-between p-6 min-h-[320px]">
+                    <div class="flex-grow flex items-center justify-center w-full my-auto">
+                        <img id="lb-image" src="" alt="Enlarged Archive Photo" class="max-h-[58vh] max-w-full object-contain">
+                    </div>
+                    <!-- Like Button Row at Bottom of Left Column -->
+                    <div class="w-full pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span id="lb-date" class="text-[10px] tracking-[0.2em] text-slate-400 uppercase">CAPTURED: 2026-10-12</span>
+                        <button onclick="handleLikePhoto()" class="px-4 py-2 bg-slate-900 hover:bg-sky-700 border border-white/20 text-white text-xs tracking-[0.16em] uppercase flex items-center gap-2 transition-all active:scale-95 shadow-md">
+                            <i data-lucide="heart" class="w-4 h-4 text-rose-500 fill-rose-500"></i>
+                            <span>LIKE</span>
+                            <span id="lb-like-count" class="bg-white/20 px-2 py-0.5 text-[11px] font-bold">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Metadata & Editable Studio View -->
+                <div class="p-6 sm:p-8 flex flex-col justify-between space-y-5 bg-[#F7FBFE]">
+                    <div class="space-y-4">
+                        <span class="text-[10px] tracking-[0.22em] text-slate-500 uppercase block" id="lb-photo-id-hint">ID: photo_01</span>
+
+                        <!-- Public or Editable View -->
+                        <div id="lightbox-display-mode" class="space-y-3">
+                            <h3 id="lb-title" class="font-display font-bold text-lg tracking-[0.08em] text-slate-900 uppercase"></h3>
+                            <p id="lb-caption" class="text-xs sm:text-sm text-slate-700 font-mono leading-relaxed"></p>
+                        </div>
+
+                        <!-- Studio Edit Mode (Only visible if Studio is unlocked) -->
+                        <div id="lightbox-edit-mode" class="hidden space-y-4 pt-4 border-t border-blueprint-border">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] tracking-[0.22em] text-sky-700 uppercase font-bold">// QUICK STUDIO EDIT</span>
+                                <span class="text-[10px] text-emerald-600 tracking-wider">AUTO-SAVES</span>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] tracking-[0.2em] text-slate-600 uppercase mb-1">EDIT TITLE</label>
+                                <input type="text" id="lb-edit-title" oninput="saveLightboxEdits()" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs font-bold uppercase tracking-[0.08em] focus:border-sky-600 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] tracking-[0.2em] text-slate-600 uppercase mb-1">EDIT TECHNICAL CAPTION</label>
+                                <textarea id="lb-edit-caption" rows="3" oninput="saveLightboxEdits()" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs leading-relaxed focus:border-sky-600 focus:outline-none"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-blueprint-border flex items-center justify-end">
+                        <button onclick="closeModal('lightbox-modal')" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.2em] uppercase transition-colors">DONE</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -512,11 +439,11 @@
     <!-- MAIN SCRIPT LOGIC -->
     <script>
         const DEFAULT_SEED_PHOTOS = [
-            { id: 'seed_1', category: 'robotics', title: '6-DOF Servo Arm Rig', caption: 'Initial kinematic calibration test using custom brackets.', dataUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80', date: '2026-10-12' },
-            { id: 'seed_2', category: 'robotics', title: 'PCB Sensor Mount', caption: 'Soldering proximity sensors and test wiring.', dataUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80', date: '2026-10-18' },
-            { id: 'seed_3', category: 'lego', title: 'Custom Gearbox Assembly', caption: 'Testing torque reduction ratios with Technic gears.', dataUrl: 'https://images.unsplash.com/photo-1581557991964-125469da3b8a?auto=format&fit=crop&w=1200&q=80', date: '2026-09-24' },
-            { id: 'seed_4', category: 'photography', title: 'Golden Hour Shadows', caption: 'Chasing natural evening light through vertical blinds.', dataUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80', date: '2026-10-05' },
-            { id: 'seed_5', category: 'others', title: 'MakerLab MDF Name Tag', caption: 'Custom 3-component interlocking slot assembly.', dataUrl: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80', date: '2026-10-20' }
+            { id: 'seed_1', category: 'robotics', title: '6-DOF Servo Arm Rig', caption: 'Initial kinematic calibration test using custom brackets.', dataUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80', date: '2026-10-12', likes: 12 },
+            { id: 'seed_2', category: 'robotics', title: 'PCB Sensor Mount', caption: 'Soldering proximity sensors and test wiring.', dataUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80', date: '2026-10-18', likes: 8 },
+            { id: 'seed_3', category: 'lego', title: 'Custom Gearbox Assembly', caption: 'Testing torque reduction ratios with Technic gears.', dataUrl: 'https://images.unsplash.com/photo-1581557991964-125469da3b8a?auto=format&fit=crop&w=1200&q=80', date: '2026-09-24', likes: 15 },
+            { id: 'seed_4', category: 'photography', title: 'Golden Hour Shadows', caption: 'Chasing natural evening light through vertical blinds.', dataUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80', date: '2026-10-05', likes: 24 },
+            { id: 'seed_5', category: 'others', title: 'MakerLab MDF Name Tag', caption: 'Custom 3-component interlocking slot assembly.', dataUrl: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80', date: '2026-10-20', likes: 9 }
         ];
 
         const CATEGORIES_META = {
@@ -531,10 +458,10 @@
             tagline: localStorage.getItem('sheldon_tagline') || 'Builder of small machines. Collector of moments.',
             description: localStorage.getItem('sheldon_desc') || 'This is where I keep the things I make and the things I notice — robots, bricks, photographs, and everything that refuses a label.',
             pin: localStorage.getItem('sheldon_pin') || '1234',
-            // Default to false so it always locks on load or when closed
             isStudioUnlocked: false,
             activeView: 'home',
             activeDetailCategory: 'robotics',
+            activeLightboxId: null,
             photos: JSON.parse(localStorage.getItem('sheldon_photos') || JSON.stringify(DEFAULT_SEED_PHOTOS)),
             covers: JSON.parse(localStorage.getItem('sheldon_covers') || '{}'),
             catDescriptions: JSON.parse(localStorage.getItem('sheldon_cat_desc') || JSON.stringify({
@@ -551,7 +478,6 @@
             localStorage.setItem('sheldon_tagline', state.tagline);
             localStorage.setItem('sheldon_desc', state.description);
             localStorage.setItem('sheldon_pin', state.pin);
-            // Do not persistently store unlocked state across reloads/closures for security
             localStorage.setItem('sheldon_unlocked', 'false');
             localStorage.setItem('sheldon_photos', JSON.stringify(state.photos));
             localStorage.setItem('sheldon_covers', JSON.stringify(state.covers));
@@ -559,7 +485,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            state.isStudioUnlocked = false; // Ensure locked on page load
+            state.isStudioUnlocked = false;
             document.getElementById('footer-year').textContent = new Date().getFullYear();
             applyBranding();
             renderHomeArchive();
@@ -704,6 +630,10 @@
                             <div class="absolute top-2.5 right-2.5 bg-slate-950/70 text-white text-[10px] tracking-[0.2em] px-2 py-0.5 border border-white/10">
                                 #0${idx + 1}
                             </div>
+                            <div class="absolute bottom-2.5 left-2.5 bg-slate-950/70 text-white text-[10px] tracking-[0.15em] px-2 py-0.5 border border-white/10 flex items-center gap-1">
+                                <i data-lucide="heart" class="w-3 h-3 text-rose-500 fill-rose-500"></i>
+                                <span>${photo.likes || 0}</span>
+                            </div>
                         </div>
                         <div class="p-4 flex flex-col justify-between flex-grow space-y-2">
                             <div>
@@ -712,7 +642,7 @@
                             </div>
                             <div class="pt-3 border-t border-blueprint-border/60 flex items-center justify-between text-[10px] text-slate-500 tracking-[0.18em] uppercase">
                                 <span>${photo.date}</span>
-                                <button onclick="openLightbox('${photo.id}')" class="text-sky-700 hover:underline">VIEW FULL</button>
+                                <button onclick="openLightbox('${photo.id}')" class="text-sky-700 hover:underline">VIEW &amp; EDIT</button>
                             </div>
                         </div>
                     `;
@@ -722,9 +652,11 @@
             lucide.createIcons();
         }
 
+        // Open Lightbox with split view & like counter
         function openLightbox(photoId) {
             const photo = state.photos.find(p => p.id === photoId);
             if (!photo) return;
+            state.activeLightboxId = photoId;
             const meta = CATEGORIES_META[photo.category];
             const idx = state.photos.filter(p => p.category === photo.category).findIndex(p => p.id === photoId);
 
@@ -734,9 +666,62 @@
             document.getElementById('lb-title').textContent = photo.title;
             document.getElementById('lb-caption').textContent = photo.caption || '';
             document.getElementById('lb-date').textContent = `CAPTURED: ${photo.date}`;
+            document.getElementById('lb-photo-id-hint').textContent = `ID: ${photo.id}`;
+            document.getElementById('lb-like-count').textContent = photo.likes || 0;
+
+            // Populate quick edit inputs
+            document.getElementById('lb-edit-title').value = photo.title;
+            document.getElementById('lb-edit-caption').value = photo.caption || '';
+
+            const displayMode = document.getElementById('lightbox-display-mode');
+            const editMode = document.getElementById('lightbox-edit-mode');
+
+            if (state.isStudioUnlocked) {
+                displayMode.classList.add('hidden');
+                editMode.classList.remove('hidden');
+            } else {
+                displayMode.classList.remove('hidden');
+                editMode.classList.add('hidden');
+            }
 
             document.getElementById('lightbox-modal').classList.remove('hidden');
             document.getElementById('lightbox-modal').classList.add('flex');
+            lucide.createIcons();
+        }
+
+        // Like Button Handler
+        function handleLikePhoto() {
+            if (!state.activeLightboxId) return;
+            const photo = state.photos.find(p => p.id === state.activeLightboxId);
+            if (!photo) return;
+
+            photo.likes = (photo.likes || 0) + 1;
+            saveState();
+
+            document.getElementById('lb-like-count').textContent = photo.likes;
+
+            if (state.activeView === 'detail') {
+                renderCategoryDetailView();
+            }
+        }
+
+        // Live auto-save for lightbox edits
+        function saveLightboxEdits() {
+            if (!state.activeLightboxId || !state.isStudioUnlocked) return;
+            const photo = state.photos.find(p => p.id === state.activeLightboxId);
+            if (!photo) return;
+
+            photo.title = document.getElementById('lb-edit-title').value.trim() || 'UNTITLED';
+            photo.caption = document.getElementById('lb-edit-caption').value.trim();
+
+            saveState();
+            
+            document.getElementById('lb-title').textContent = photo.title;
+            document.getElementById('lb-caption').textContent = photo.caption;
+
+            if (state.activeView === 'detail') {
+                renderCategoryDetailView();
+            }
         }
 
         function handleStudioButtonClick() {
@@ -798,7 +783,6 @@
             lucide.createIcons();
         }
 
-        // Updated closeModal function: automatically locks Studio when studio-modal closes
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
             document.getElementById(modalId).classList.remove('flex');
@@ -810,6 +794,9 @@
                 if (state.activeView === 'detail') {
                     renderCategoryDetailView();
                 }
+            }
+            if (modalId === 'lightbox-modal') {
+                state.activeLightboxId = null;
             }
         }
 
@@ -946,7 +933,8 @@
                     title: title,
                     caption: caption,
                     dataUrl: pf.dataUrl,
-                    date: todayStr
+                    date: todayStr,
+                    likes: 0
                 };
                 state.photos.unshift(newPhoto);
 
@@ -985,19 +973,49 @@
                 const card = document.createElement('div');
                 card.className = 'p-3 bg-white border border-slate-300 flex items-center gap-3';
                 card.innerHTML = `
-                    <img src="${photo.dataUrl}" class="w-16 h-16 object-cover border border-slate-200 shrink-0">
+                    <input type="checkbox" data-photo-id="${photo.id}" class="manage-photo-chk accent-sky-600 w-4 h-4 shrink-0">
+                    <img src="${photo.dataUrl}" class="w-14 h-14 object-cover border border-slate-200 shrink-0">
                     <div class="flex-grow min-w-0">
-                        <span class="text-[9px] tracking-[0.2em] text-sky-700 uppercase font-bold block">${photo.category}</span>
+                        <span class="text-[9px] tracking-[0.2em] text-sky-700 uppercase font-bold block">${photo.category} &bull; ❤️ ${photo.likes || 0}</span>
                         <h5 class="font-display font-bold text-xs uppercase truncate text-slate-900">${photo.title}</h5>
                         <p class="text-[11px] text-slate-500 truncate">${photo.caption || 'No caption'}</p>
                     </div>
                     <div class="flex flex-col gap-1.5 shrink-0">
-                        <button type="button" onclick="setAsGatewayCover('${photo.category}', '${photo.dataUrl}')" class="px-2 py-1 bg-slate-100 hover:bg-sky-600 hover:text-white text-[10px] tracking-[0.14em] uppercase border border-slate-300 transition-colors">SET COVER</button>
-                        <button type="button" onclick="deletePhoto('${photo.id}')" class="px-2 py-1 bg-rose-50 hover:bg-rose-600 hover:text-white text-[10px] tracking-[0.14em] uppercase text-rose-700 border border-rose-300 transition-colors">DELETE</button>
+                        <button type="button" onclick="setAsGatewayCover('${photo.category}', '${photo.dataUrl}')" class="px-2 py-1 bg-slate-100 hover:bg-sky-600 hover:text-white text-[10px] tracking-[0.14em] uppercase border border-slate-300 transition-colors">COVER</button>
+                        <button type="button" onclick="deleteSinglePhoto('${photo.id}')" class="px-2 py-1 bg-rose-50 hover:bg-rose-600 hover:text-white text-[10px] tracking-[0.14em] uppercase text-rose-700 border border-rose-300 transition-colors">DELETE</button>
                     </div>
                 `;
                 container.appendChild(card);
             });
+            lucide.createIcons();
+        }
+
+        function deleteSinglePhoto(photoId) {
+            if (!confirm('Permanently delete this photo from the archive?')) return;
+            state.photos = state.photos.filter(p => p.id !== photoId);
+            saveState();
+            renderStudioManageList();
+            renderHomeArchive();
+            if (state.activeView === 'detail') renderCategoryDetailView();
+        }
+
+        function deleteSelectedPhotos() {
+            const checkboxes = document.querySelectorAll('.manage-photo-chk:checked');
+            if (checkboxes.length === 0) {
+                alert('Please select at least one photo using the checkboxes to delete.');
+                return;
+            }
+
+            if (!confirm(`Are you sure you want to delete ${checkboxes.length} selected photo(s)?`)) return;
+
+            const idsToDelete = Array.from(checkboxes).map(chk => chk.getAttribute('data-photo-id'));
+            state.photos = state.photos.filter(p => !idsToDelete.includes(p.id));
+
+            saveState();
+            renderStudioManageList();
+            renderHomeArchive();
+            if (state.activeView === 'detail') renderCategoryDetailView();
+            alert('Selected photos successfully deleted!');
         }
 
         function setAsGatewayCover(catKey, url) {
@@ -1031,15 +1049,6 @@
                 });
             };
             reader.readAsDataURL(file);
-        }
-
-        function deletePhoto(photoId) {
-            if (!confirm('Are you sure you want to permanently delete this photo from the archive?')) return;
-            state.photos = state.photos.filter(p => p.id !== photoId);
-            saveState();
-            renderStudioManageList();
-            renderHomeArchive();
-            if (state.activeView === 'detail') renderCategoryDetailView();
         }
 
         function saveArchiveIdentity(e) {
