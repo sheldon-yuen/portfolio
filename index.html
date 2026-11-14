@@ -209,7 +209,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: TRUE FULL-SCREEN STUDIO DRAWER WITH 04 / EDIT PHOTOS TAB -->
+    <!-- MODAL 2: TRUE FULL-SCREEN STUDIO DRAWER WITH CORRECTED TABS -->
     <div id="studio-modal" class="fixed inset-0 z-50 hidden flex-col bg-slate-950/96 backdrop-blur-lg w-full h-full">
         <!-- Studio Top Bar -->
         <div class="w-full px-6 py-4 bg-slate-900 border-b border-white/10 flex items-center justify-between shrink-0">
@@ -227,12 +227,12 @@
             </div>
         </div>
 
-        <!-- Studio Navigation Tabs -->
+        <!-- Studio Navigation Tabs (03 = EDIT PHOTOS, 04 = IDENTITY & PIN) -->
         <div class="w-full px-8 py-3 bg-[#EAF5FC] border-b border-blueprint-border flex items-center gap-6 overflow-x-auto shrink-0">
             <button onclick="switchStudioTab('upload')" data-studio-tab="upload" class="studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap">01 / INSERT PHOTOS</button>
             <button onclick="switchStudioTab('manage')" data-studio-tab="manage" class="studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">02 / MANAGE &amp; COVERS</button>
-            <button onclick="switchStudioTab('editphoto')" data-studio-tab="editphoto" class="studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">04 / EDIT PHOTOS</button>
-            <button onclick="switchStudioTab('settings')" data-studio-tab="settings" class="studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">03 / IDENTITY &amp; PIN</button>
+            <button onclick="switchStudioTab('editphoto')" data-studio-tab="editphoto" class="studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">03 / EDIT PHOTOS</button>
+            <button onclick="switchStudioTab('settings')" data-studio-tab="settings" class="studio-tab-btn pb-2 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">04 / IDENTITY &amp; PIN</button>
         </div>
 
         <!-- Studio Full-Screen Content Area -->
@@ -318,12 +318,12 @@
                 <div id="studio-manage-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
             </div>
 
-            <!-- TAB 3: 04 / EDIT PHOTOS (FULL-SCREEN EDITOR) -->
+            <!-- TAB 3: 03 / EDIT PHOTOS -->
             <div id="studio-pane-editphoto" class="hidden space-y-6">
                 <div class="bg-[#F7FBFE] border border-slate-300 p-6 sm:p-8 shadow-xl space-y-6">
                     <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-blueprint-border">
                         <div>
-                            <span class="text-[10px] tracking-[0.28em] text-sky-700 uppercase font-bold block mb-1">04 / EDIT PHOTOS</span>
+                            <span class="text-[10px] tracking-[0.28em] text-sky-700 uppercase font-bold block mb-1">03 / EDIT PHOTOS</span>
                             <h4 class="font-display font-bold text-sm uppercase tracking-[0.15em] text-slate-900">SELECT PHOTO TO EDIT</h4>
                         </div>
                         <select id="studio-edit-select" onchange="loadPhotoIntoStudioEditor()" class="px-4 py-2.5 bg-white border border-slate-300 text-xs font-bold uppercase tracking-[0.12em] focus:border-sky-600 focus:outline-none min-w-[265px]">
@@ -355,7 +355,7 @@
                 </div>
             </div>
 
-            <!-- TAB 4: IDENTITY & PIN -->
+            <!-- TAB 4: 04 / IDENTITY & PIN -->
             <div id="studio-pane-settings" class="hidden space-y-6">
                 <form onsubmit="saveArchiveIdentity(event)" class="space-y-5 bg-[#F7FBFE] p-6 sm:p-8 border border-slate-300 shadow-xl">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
