@@ -139,7 +139,7 @@
                     Builder of small machines. Collector of moments.
                 </p>
                 <p id="hero-description" class="font-mono text-xs sm:text-[14.5px] text-slate-600 leading-[1.85] tracking-[0.01em]">
-                    This is where I keep the things I make and the things I notice — robots, bricks, photographs, and everything that refuses a label.
+                    This is where I keep the things I make and the things I notice &mdash; robots, bricks, photographs, and everything that refuses a label.
                 </p>
             </div>
         </section>
@@ -210,7 +210,7 @@
                     <div class="flex items-center gap-3">
                         <span id="detail-cat-num" class="text-xs font-semibold tracking-[0.28em] text-sky-400 drop-shadow">01</span>
                         <span class="w-6 h-px bg-sky-400/70"></span>
-                        <span id="detail-cat-tags" class="text-[11px] tracking-[0.24em] text-slate-200 uppercase drop-shadow">MECHANISMS · CODE · ITERATION</span>
+                        <span id="detail-cat-tags" class="text-[11px] tracking-[0.24em] text-slate-200 uppercase drop-shadow">MECHANISMS &middot; CODE &middot; ITERATION</span>
                     </div>
                     <h1 id="detail-cat-title" class="font-display font-bold text-2xl sm:text-4xl tracking-[0.08em] uppercase text-white drop-shadow-md">
                         ROBOTICS
@@ -271,8 +271,9 @@
                     </label>
                     <input type="password" id="studio-pin-input" maxlength="12" required placeholder="••••"
                         class="w-full px-4 py-3 bg-white border border-slate-300 focus:border-sky-600 focus:outline-none text-center text-xl tracking-[0.5em] font-bold text-slate-900">
+                    <!-- PIN hint text updated: 1234 removed -->
                     <p class="text-[11px] text-slate-500 mt-2.5 leading-relaxed">
-                        First-time default PIN: <span class="font-bold text-sky-700">1234</span>. You can customize your private PIN once inside Studio.
+                        Enter your private access PIN to unlock administrative controls and update your settings.
                     </p>
                     <p id="pin-error-msg" class="hidden text-xs font-semibold text-rose-600 mt-2">
                         INVALID PIN. ACCESS DENIED.
@@ -497,407 +498,82 @@
                     <span id="lb-num" class="text-xs tracking-[0.25em] text-sky-400 font-semibold">01</span>
                     <span id="lb-cat" class="text-xs tracking-[0.25em] text-slate-300 uppercase">ROBOTICS</span>
                 </div>
-                <button onclick="closeModal('lightbox-modal')" class="p-2 border border-white/20 hover:bg-white/10 text-white">
-                    <i data-lucide="x" class="w-4 h-4"></i>
+                <button onclick="closeModal('lightbox-modal')" class="p-2 border border-white/20 hover:border-white text-white transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
-
-            <div class="w-full bg-slate-900/70 border border-white/10 flex items-center justify-center overflow-hidden">
-                <img id="lb-img" src="" alt="Archive Entry" class="max-h-[74vh] w-auto object-contain">
+            <div class="relative max-h-[75vh] w-full flex items-center justify-center bg-slate-900/50 border border-white/10 p-2">
+                <img id="lb-image" src="" alt="Enlarged Archive Photo" class="max-h-[72vh] max-w-full object-contain">
             </div>
-
-            <div class="w-full mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-white">
-                <div>
-                    <h4 id="lb-title" class="text-sm sm:text-base font-semibold tracking-[0.06em]"></h4>
-                    <p id="lb-caption" class="text-xs text-slate-400 mt-1"></p>
-                </div>
-                <span id="lb-date" class="text-[11px] tracking-[0.22em] text-slate-400 uppercase shrink-0"></span>
+            <div class="w-full mt-4 text-center space-y-1.5">
+                <h3 id="lb-title" class="font-display font-bold text-base tracking-[0.1em] text-white uppercase">ENTRY TITLE</h3>
+                <p id="lb-caption" class="text-xs text-slate-300 font-mono tracking-wide max-w-xl mx-auto"></p>
+                <p id="lb-date" class="text-[10px] text-slate-500 tracking-[0.2em] uppercase"></p>
             </div>
         </div>
     </div>
 
-    <!-- Toast Container -->
-    <div id="toast-box" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
-
-    <!-- ===================================================================== -->
-    <!-- JAVASCRIPT APPLICATION LOGIC                                          -->
-    <!-- ===================================================================== -->
+    <!-- MAIN SCRIPT LOGIC -->
     <script>
-        const STORAGE = {
-            PHOTOS: 'sheldon_blueprint_photos_v3',
-            COVERS: 'sheldon_blueprint_covers_v3',
-            CONFIG: 'sheldon_blueprint_config_v3',
-            PIN: 'sheldon_blueprint_pin_v3'
-        };
-
-        const DEFAULT_PIN = '1234';
-
-        const GATEWAYS = [
-            { id: 'robotics', num: '01', title: 'ROBOTICS', tags: 'MECHANISMS · CODE · ITERATION' },
-            { id: 'lego', num: '02', title: 'LEGO', tags: 'BRICKS · BUILDS · PATIENCE' },
-            { id: 'photography', num: '03', title: 'PHOTOGRAPHY', tags: 'LIGHT · FRAMES · STILLNESS' },
-            { id: 'others', num: '04', title: 'OTHERS', tags: 'EVERYTHING UNLABELLED' }
+        const DEFAULT_SEED_PHOTOS = [
+            { id: 'seed_1', category: 'robotics', title: '6-DOF Servo Arm Rig', caption: 'Initial kinematic calibration test using custom brackets.', dataUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80', date: '2026-10-12' },
+            { id: 'seed_2', category: 'robotics', title: 'PCB Sensor Mount', caption: 'Soldering proximity sensors and test wiring.', dataUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80', date: '2026-10-18' },
+            { id: 'seed_3', category: 'lego', title: 'Custom Gearbox Assembly', caption: 'Testing torque reduction ratios with Technic gears.', dataUrl: 'https://images.unsplash.com/photo-1581557991964-125469da3b8a?auto=format&fit=crop&w=1200&q=80', date: '2026-09-24' },
+            { id: 'seed_4', category: 'photography', title: 'Golden Hour Shadows', caption: 'Chasing natural evening light through vertical blinds.', dataUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80', date: '2026-10-05' },
+            { id: 'seed_5', category: 'others', title: 'MakerLab MDF Name Tag', caption: 'Custom 3-component interlocking slot assembly.', dataUrl: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80', date: '2026-10-20' }
         ];
 
-        const DEFAULT_CONFIG = {
-            name: 'SHELDON',
-            tagline: 'Builder of small machines. Collector of moments.',
-            description: 'This is where I keep the things I make and the things I notice — robots, bricks, photographs, and everything that refuses a label.',
-            descriptions: {
-                robotics: 'Servos, sensors and the stubborn gap between what I sketched and what actually moves.',
-                lego: 'Sets, MOCs and the quiet satisfaction of a build that finally comes together.',
-                photography: 'Whatever the light was doing when I happened to be looking the right way.',
-                others: 'Experiments, travels and side projects that never found a shelf of their own.'
-            }
+        const CATEGORIES_META = {
+            robotics: { num: '01', title: 'ROBOTICS', tags: 'MECHANISMS · CODE · ITERATION', desc: 'Servos, sensors and the stubborn gap between what I sketched and what actually moves.', cover: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1400&q=80' },
+            lego: { num: '02', title: 'LEGO', tags: 'GEARS · STRUCTURES · SYSTEM', desc: 'Building complex mechanical motions out of standard plastic bricks.', cover: 'https://images.unsplash.com/photo-1581557991964-125469da3b8a?auto=format&fit=crop&w=1400&q=80' },
+            photography: { num: '03', title: 'PHOTOGRAPHY', tags: 'LIGHT · SHADOWS · MOMENTS', desc: 'Chasing everyday angles, natural illumination and fleeting geometry.', cover: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1400&q=80' },
+            others: { num: '04', title: 'OTHERS', tags: 'MAKERLAB · EXPERIMENTS · UNLABELED', desc: 'Projects and artifacts that refuse to fit neatly into single categories.', cover: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1400&q=80' }
         };
 
         let state = {
+            brandName: localStorage.getItem('sheldon_brand') || 'SHELDON',
+            tagline: localStorage.getItem('sheldon_tagline') || 'Builder of small machines. Collector of moments.',
+            description: localStorage.getItem('sheldon_desc') || 'This is where I keep the things I make and the things I notice — robots, bricks, photographs, and everything that refuses a label.',
+            pin: localStorage.getItem('sheldon_pin') || '1234',
+            isStudioUnlocked: localStorage.getItem('sheldon_unlocked') === 'true',
             activeView: 'home',
             activeDetailCategory: 'robotics',
-            isUnlocked: false,
-            photos: [],
-            covers: {},
-            config: JSON.parse(JSON.stringify(DEFAULT_CONFIG)),
+            photos: JSON.parse(localStorage.getItem('sheldon_photos') || JSON.stringify(DEFAULT_SEED_PHOTOS)),
+            covers: JSON.parse(localStorage.getItem('sheldon_covers') || '{}'),
+            catDescriptions: JSON.parse(localStorage.getItem('sheldon_cat_desc') || JSON.stringify({
+                robotics: CATEGORIES_META.robotics.desc,
+                lego: CATEGORIES_META.lego.desc,
+                photography: CATEGORIES_META.photography.desc,
+                others: CATEGORIES_META.others.desc
+            })),
             pendingFiles: []
         };
 
-        // Exact 4 User-Provided Category Photographs
-        const DEFAULT_CATEGORY_IMAGES = {
-            robotics: {
-                src: 'Screenshot 2026-11-14 at 10.35.05 AM.jpg',
-                alt: 'Brushed metal robotic arm joint with exposed green circuit board and Torx screws',
-                position: 'object-center'
-            },
-            lego: {
-                src: 'Screenshot 2026-11-14 at 10.34.56 AM.jpg',
-                alt: 'Overhead flat-lay arrangement of black, red, blue, and grey LEGO bricks on dark surface',
-                position: 'object-center'
-            },
-            photography: {
-                src: 'sunset.jpeg',
-                alt: 'Vibrant red-orange sunset over dark forest treeline reflecting across rippling water',
-                position: 'object-center'
-            },
-            others: {
-                src: 'Screenshot 2026-11-14 at 10.35.13 AM.jpg',
-                alt: 'Vintage open leather sketchbook with technical drawings, brass gears, camera lens, and blue blueprints',
-                position: 'object-center'
-            }
-        };
-
-        const RENDERED_PHOTO_ASSETS = {};
-        function buildExactCategoryAsset(categoryId) {
-            if (RENDERED_PHOTO_ASSETS[categoryId]) return RENDERED_PHOTO_ASSETS[categoryId];
-            const canvas = document.createElement('canvas');
-            canvas.width = 900;
-            canvas.height = 1046;
-            const ctx = canvas.getContext('2d');
-
-            if (categoryId === 'robotics') {
-                const bg = ctx.createRadialGradient(620, 260, 40, 450, 520, 760);
-                bg.addColorStop(0, '#1e3448');
-                bg.addColorStop(0.5, '#0b131d');
-                bg.addColorStop(1, '#05080e');
-                ctx.fillStyle = bg;
-                ctx.fillRect(0, 0, 900, 1046);
-
-                ctx.save();
-                ctx.translate(555, 345);
-                ctx.rotate(-0.46);
-                ctx.fillStyle = '#0c291d';
-                ctx.fillRect(-155, -135, 310, 270);
-                ctx.strokeStyle = '#c48347';
-                ctx.lineWidth = 4.5;
-                for (let i = -95; i <= 95; i += 20) {
-                    ctx.beginPath();
-                    ctx.moveTo(-135, i);
-                    ctx.lineTo(35, i);
-                    ctx.lineTo(85, i - 32);
-                    ctx.stroke();
-                }
-                ctx.fillStyle = '#111827';
-                ctx.fillRect(-32, -45, 76, 76);
-                ctx.strokeStyle = '#94a3b8';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(-32, -45, 76, 76);
-                ctx.restore();
-
-                const armGrad = ctx.createLinearGradient(150, 240, 680, 860);
-                armGrad.addColorStop(0, '#f1f5f9');
-                armGrad.addColorStop(0.28, '#94a3b8');
-                armGrad.addColorStop(0.55, '#475569');
-                armGrad.addColorStop(0.8, '#cbd5e1');
-                armGrad.addColorStop(1, '#1e293b');
-                ctx.fillStyle = armGrad;
-                ctx.beginPath();
-                ctx.moveTo(210, 1046);
-                ctx.lineTo(285, 485);
-                ctx.lineTo(710, 115);
-                ctx.lineTo(900, 275);
-                ctx.lineTo(505, 635);
-                ctx.lineTo(455, 1046);
-                ctx.closePath();
-                ctx.fill();
-
-                ctx.beginPath();
-                ctx.arc(355, 490, 162, 0, Math.PI * 2);
-                const jointGrad = ctx.createLinearGradient(200, 340, 510, 640);
-                jointGrad.addColorStop(0, '#cbd5e1');
-                jointGrad.addColorStop(0.5, '#475569');
-                jointGrad.addColorStop(1, '#1e293b');
-                ctx.fillStyle = jointGrad;
-                ctx.fill();
-                ctx.lineWidth = 12;
-                ctx.strokeStyle = '#e2e8f0';
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.arc(355, 490, 74, 0, Math.PI * 2);
-                ctx.fillStyle = '#0f172a';
-                ctx.fill();
-                ctx.lineWidth = 5;
-                ctx.strokeStyle = '#94a3b8';
-                ctx.stroke();
-            } else if (categoryId === 'lego') {
-                ctx.fillStyle = '#0d131a';
-                ctx.fillRect(0, 0, 900, 1046);
-
-                const drawStudBrick = (x, y, w, h, color, cols, rows) => {
-                    ctx.save();
-                    ctx.shadowColor = 'rgba(0,0,0,0.65)';
-                    ctx.shadowBlur = 14;
-                    ctx.shadowOffsetY = 6;
-                    ctx.fillStyle = color;
-                    ctx.fillRect(x, y, w, h);
-                    ctx.restore();
-
-                    ctx.strokeStyle = 'rgba(255,255,255,0.14)';
-                    ctx.lineWidth = 1.5;
-                    ctx.strokeRect(x, y, w, h);
-
-                    const stepX = w / cols;
-                    const stepY = h / rows;
-                    for (let c = 0; c < cols; c++) {
-                        for (let r = 0; r < rows; r++) {
-                            const cx = x + stepX * (c + 0.5);
-                            const cy = y + stepY * (r + 0.5);
-                            const rad = Math.min(stepX, stepY) * 0.28;
-                            ctx.beginPath();
-                            ctx.arc(cx, cy, rad, 0, Math.PI * 2);
-                            ctx.fillStyle = 'rgba(255,255,255,0.13)';
-                            ctx.fill();
-                            ctx.strokeStyle = 'rgba(0,0,0,0.35)';
-                            ctx.lineWidth = 1;
-                            ctx.stroke();
-                        }
-                    }
-                };
-
-                drawStudBrick(105, 120, 104, 52, '#e11d1d', 4, 2);
-                drawStudBrick(691, 120, 104, 52, '#e11d1d', 4, 2);
-                drawStudBrick(332, 114, 236, 108, '#17202b', 8, 4);
-                drawStudBrick(100, 345, 242, 38, '#1d4ed8', 10, 1);
-                drawStudBrick(558, 345, 242, 38, '#1d4ed8', 10, 1);
-                drawStudBrick(332, 385, 58, 72, '#94a3b8', 2, 3);
-                drawStudBrick(510, 385, 58, 72, '#94a3b8', 2, 3);
-                drawStudBrick(400, 270, 100, 290, '#18212d', 3, 8);
-            } else if (categoryId === 'photography') {
-                const sky = ctx.createLinearGradient(0, 0, 0, 620);
-                sky.addColorStop(0, '#9a1b08');
-                sky.addColorStop(0.42, '#dc2626');
-                sky.addColorStop(0.75, '#f97316');
-                sky.addColorStop(1, '#fb923c');
-                ctx.fillStyle = sky;
-                ctx.fillRect(0, 0, 900, 620);
-
-                const halo = ctx.createRadialGradient(485, 295, 24, 485, 295, 230);
-                halo.addColorStop(0, '#ffffff');
-                halo.addColorStop(0.32, '#fef08a');
-                halo.addColorStop(0.65, 'rgba(251, 146, 60, 0.38)');
-                halo.addColorStop(1, 'rgba(220, 38, 38, 0)');
-                ctx.fillStyle = halo;
-                ctx.fillRect(0, 0, 900, 620);
-
-                ctx.beginPath();
-                ctx.arc(485, 295, 76, 0, Math.PI * 2);
-                ctx.fillStyle = '#fffbeb';
-                ctx.fill();
-
-                ctx.fillStyle = 'rgba(42, 18, 14, 0.78)';
-                ctx.fillRect(0, 262, 900, 26);
-
-                const water = ctx.createLinearGradient(0, 620, 0, 1046);
-                water.addColorStop(0, '#7c2d12');
-                water.addColorStop(0.45, '#9a3412');
-                water.addColorStop(1, '#431407');
-                ctx.fillStyle = water;
-                ctx.fillRect(0, 620, 900, 426);
-            } else {
-                const desk = ctx.createRadialGradient(360, 460, 60, 450, 520, 740);
-                desk.addColorStop(0, '#2c2219');
-                desk.addColorStop(0.6, '#141210');
-                desk.addColorStop(1, '#08090c');
-                ctx.fillStyle = desk;
-                ctx.fillRect(0, 0, 900, 1046);
-
-                ctx.beginPath();
-                ctx.arc(705, 220, 96, 0, Math.PI * 2);
-                ctx.fillStyle = '#0f172a';
-                ctx.fill();
-                ctx.lineWidth = 12;
-                ctx.strokeStyle = '#334155';
-                ctx.stroke();
-            }
-
-            RENDERED_PHOTO_ASSETS[categoryId] = canvas.toDataURL('image/jpeg', 0.9);
-            return RENDERED_PHOTO_ASSETS[categoryId];
+        function saveState() {
+            localStorage.setItem('sheldon_brand', state.brandName);
+            localStorage.setItem('sheldon_tagline', state.tagline);
+            localStorage.setItem('sheldon_desc', state.description);
+            localStorage.setItem('sheldon_pin', state.pin);
+            localStorage.setItem('sheldon_unlocked', state.isStudioUnlocked);
+            localStorage.setItem('sheldon_photos', JSON.stringify(state.photos));
+            localStorage.setItem('sheldon_covers', JSON.stringify(state.covers));
+            localStorage.setItem('sheldon_cat_desc', JSON.stringify(state.catDescriptions));
         }
 
-        function loadPersistedState() {
-            try {
-                const rawPhotos = localStorage.getItem(STORAGE.PHOTOS);
-                state.photos = rawPhotos ? JSON.parse(rawPhotos) : [];
-
-                const rawCovers = localStorage.getItem(STORAGE.COVERS);
-                state.covers = rawCovers ? JSON.parse(rawCovers) : {};
-
-                const rawConfig = localStorage.getItem(STORAGE.CONFIG);
-                if (rawConfig) {
-                    const parsed = JSON.parse(rawConfig);
-                    state.config = {
-                        ...DEFAULT_CONFIG,
-                        ...parsed,
-                        descriptions: {
-                            ...DEFAULT_CONFIG.descriptions,
-                            ...(parsed.descriptions || {})
-                        }
-                    };
-                }
-            } catch (err) {
-                console.error('Error loading saved archive:', err);
-            }
-        }
-
-        function savePersistedState() {
-            try {
-                localStorage.setItem(STORAGE.PHOTOS, JSON.stringify(state.photos));
-                localStorage.setItem(STORAGE.COVERS, JSON.stringify(state.covers));
-                localStorage.setItem(STORAGE.CONFIG, JSON.stringify(state.config));
-            } catch (err) {
-                console.error('Error saving archive:', err);
-                showToast('Storage quota exceeded. Try smaller images.', 'error');
-            }
-        }
-
-        function getStoredPin() {
-            return localStorage.getItem(STORAGE.PIN) || DEFAULT_PIN;
-        }
-
-        function initApp() {
-            loadPersistedState();
-            updateUIIdentity();
-            renderGatewaysGrid();
-            renderAboutArchiveList();
+        document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('footer-year').textContent = new Date().getFullYear();
-            if (window.lucide) {
-                lucide.createIcons();
-            }
-        }
+            applyBranding();
+            renderHomeArchive();
+            updateStudioAuthUI();
+            lucide.createIcons();
+        });
 
-        function updateUIIdentity() {
-            const name = state.config.name || 'SHELDON';
-            document.getElementById('nav-brand-name').textContent = name;
-            document.getElementById('hero-display-name').textContent = name;
-            document.getElementById('hero-tagline').textContent = state.config.tagline;
-            document.getElementById('hero-description').textContent = state.config.description;
-            document.getElementById('footer-brand-name').textContent = name;
-            document.title = `${name} — 04 / ARCHIVE`;
-        }
-
-        function renderGatewaysGrid() {
-            const grid = document.getElementById('gateways-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-
-            GATEWAYS.forEach(gw => {
-                const count = state.photos.filter(p => p.category === gw.id).length;
-                const countLabel = count === 1 ? '1 PHOTO' : `${count} PHOTOS`;
-                const customCover = state.covers[gw.id];
-                const defaultImg = DEFAULT_CATEGORY_IMAGES[gw.id];
-                const fallbackSrc = buildExactCategoryAsset(gw.id);
-
-                const card = document.createElement('article');
-                card.onclick = () => openCategoryDetail(gw.id);
-                card.className = 'gateway-card relative overflow-hidden bg-slate-950 border border-slate-300/80 cursor-pointer select-none group';
-
-                card.innerHTML = `
-                    <div class="gateway-visual absolute inset-0 w-full h-full">
-                        ${customCover
-                            ? `<img src="${customCover}" alt="${gw.title}" class="w-full h-full object-cover">`
-                            : `<img src="${defaultImg.src}" alt="${defaultImg.alt}" onerror="this.onerror=null;this.src='${fallbackSrc}';" class="w-full h-full object-cover ${defaultImg.position}">`
-                        }
-                    </div>
-                    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent pointer-events-none"></div>
-                    <div class="relative z-10 h-full p-5 sm:p-6 flex flex-col justify-between">
-                        <div class="flex items-center justify-between">
-                            <span class="px-2 py-0.5 bg-slate-950/45 backdrop-blur-[2px] text-xs font-semibold tracking-[0.26em] text-sky-400">
-                                ${gw.num}
-                            </span>
-                            <span class="w-7 h-7 flex items-center justify-center border border-white/20 bg-slate-950/45 backdrop-blur-[2px] text-white/85 group-hover:text-sky-300 group-hover:border-sky-400/70 transition-colors">
-                                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                            </span>
-                        </div>
-                        <div class="space-y-2">
-                            <h3 class="font-display font-bold text-lg sm:text-xl tracking-[0.08em] uppercase text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-                                ${gw.title}
-                            </h3>
-                            <p class="text-[11px] tracking-[0.22em] text-slate-200 uppercase leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
-                                ${gw.tags}
-                            </p>
-                            <div class="pt-2 flex items-center justify-between border-t border-white/20">
-                                <span class="text-[10px] tracking-[0.25em] text-slate-200 uppercase drop-shadow">
-                                    ${countLabel}
-                                </span>
-                                <span class="text-[10px] tracking-[0.22em] text-sky-400 uppercase opacity-90 group-hover:opacity-100 drop-shadow">
-                                    OPEN &rarr;
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-            if (window.lucide) lucide.createIcons();
-        }
-
-        function renderAboutArchiveList() {
-            const list = document.getElementById('about-archive-list');
-            if (!list) return;
-            list.innerHTML = '';
-
-            GATEWAYS.forEach(gw => {
-                const desc = state.config.descriptions[gw.id] || '';
-                const row = document.createElement('div');
-                row.onclick = () => openCategoryDetail(gw.id);
-                row.className = 'py-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 cursor-pointer group hover:bg-white/40 px-2 transition-colors';
-                row.innerHTML = `
-                    <div class="space-y-1.5 max-w-2xl">
-                        <div class="flex items-center gap-3">
-                            <span class="text-xs font-semibold tracking-[0.28em] text-sky-700">${gw.num}</span>
-                            <h3 class="font-display font-bold text-base sm:text-lg tracking-[0.08em] uppercase text-slate-900 group-hover:text-sky-700 transition-colors">
-                                ${gw.title}
-                            </h3>
-                        </div>
-                        <p class="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed">
-                            ${desc}
-                        </p>
-                    </div>
-                    <span class="text-[11px] tracking-[0.2em] text-slate-400 group-hover:text-slate-900 uppercase shrink-0 transition-colors">
-                        EXPLORE ARCHIVE &rarr;
-                    </span>
-                `;
-                list.appendChild(row);
-            });
+        function applyBranding() {
+            document.getElementById('nav-brand-name').textContent = state.brandName;
+            document.getElementById('footer-brand-name').textContent = state.brandName;
+            document.getElementById('hero-display-name').textContent = state.brandName;
+            document.getElementById('hero-tagline').textContent = state.tagline;
+            document.getElementById('hero-description').textContent = state.description;
         }
 
         function showHomeArchive() {
@@ -905,38 +581,93 @@
             document.getElementById('main-archive-view').classList.remove('hidden');
             document.getElementById('category-detail-view').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            renderGatewaysGrid();
-            renderAboutArchiveList();
+            renderHomeArchive();
         }
 
-        function openCategoryDetail(categoryId) {
+        function openCategoryDetail(catKey) {
             state.activeView = 'detail';
-            state.activeDetailCategory = categoryId;
+            state.activeDetailCategory = catKey;
             document.getElementById('main-archive-view').classList.add('hidden');
             document.getElementById('category-detail-view').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            renderCategoryDetail(categoryId);
+            renderCategoryDetailView();
         }
 
-        function renderCategoryDetail(categoryId) {
-            const gw = GATEWAYS.find(g => g.id === categoryId) || GATEWAYS[0];
-            const photos = state.photos.filter(p => p.category === gw.id);
-            const customCover = state.covers[gw.id];
-            const defaultImg = DEFAULT_CATEGORY_IMAGES[gw.id];
-            const fallbackSrc = buildExactCategoryAsset(gw.id);
+        function renderHomeArchive() {
+            const grid = document.getElementById('gateways-grid');
+            grid.innerHTML = '';
 
-            document.getElementById('detail-header-bg').innerHTML = customCover
-                ? `<img src="${customCover}" alt="${gw.title}" class="w-full h-full object-cover">`
-                : `<img src="${defaultImg.src}" alt="${defaultImg.alt}" onerror="this.onerror=null;this.src='${fallbackSrc}';" class="w-full h-full object-cover ${defaultImg.position}">`;
+            const keys = ['robotics', 'lego', 'photography', 'others'];
+            keys.forEach((key, index) => {
+                const meta = CATEGORIES_META[key];
+                const count = state.photos.filter(p => p.category === key).length;
+                const coverImg = state.covers[key] || (state.photos.find(p => p.category === key)?.dataUrl) || meta.cover;
+                const customDesc = state.catDescriptions[key] || meta.desc;
 
-            document.getElementById('detail-cat-num').textContent = gw.num;
-            document.getElementById('detail-cat-tags').textContent = gw.tags;
-            document.getElementById('detail-cat-title').textContent = gw.title;
-            document.getElementById('detail-cat-desc').textContent = state.config.descriptions[gw.id] || '';
-            document.getElementById('detail-photo-count').textContent = photos.length === 1 ? '1 PHOTO' : `${photos.length} PHOTOS`;
+                const card = document.createElement('div');
+                card.className = 'gateway-card cursor-pointer border border-blueprint-border bg-white flex flex-col justify-between overflow-hidden relative group';
+                card.onclick = () => openCategoryDetail(key);
+
+                card.innerHTML = `
+                    <div class="absolute inset-0 overflow-hidden bg-slate-900">
+                        <img src="${coverImg}" alt="${meta.title}" class="gateway-visual w-full h-full object-cover opacity-80 group-hover:opacity-95">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
+                    </div>
+                    <div class="relative z-10 p-5 sm:p-6 flex items-start justify-between text-white">
+                        <span class="text-xs font-semibold tracking-[0.28em] text-sky-400">0${index + 1}</span>
+                        <span class="text-[11px] tracking-[0.22em] uppercase text-slate-300 bg-slate-950/60 px-2 py-1 border border-white/10">
+                            ${count} ${count === 1 ? 'PHOTO' : 'PHOTOS'}
+                        </span>
+                    </div>
+                    <div class="relative z-10 p-5 sm:p-6 text-white space-y-2">
+                        <div class="text-[10px] tracking-[0.24em] text-sky-300 uppercase">${meta.tags}</div>
+                        <h3 class="font-display font-bold text-xl sm:text-2xl tracking-[0.08em] uppercase">${meta.title}</h3>
+                        <p class="font-mono text-xs text-slate-200 line-clamp-2 leading-relaxed">${customDesc}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            const aboutList = document.getElementById('about-archive-list');
+            aboutList.innerHTML = '';
+            keys.forEach((key, index) => {
+                const meta = CATEGORIES_META[key];
+                const count = state.photos.filter(p => p.category === key).length;
+                const row = document.createElement('div');
+                row.className = 'py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group cursor-pointer';
+                row.onclick = () => openCategoryDetail(key);
+                row.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <span class="text-xs font-semibold tracking-[0.2em] text-sky-700">0${index + 1}</span>
+                        <span class="font-display font-bold text-sm sm:text-base tracking-[0.1em] uppercase text-slate-900 group-hover:text-sky-700 transition-colors">${meta.title}</span>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 text-xs text-slate-600">
+                        <span class="hidden md:inline font-mono text-slate-500">${meta.tags}</span>
+                        <span class="tracking-[0.18em] uppercase">${count} ITEMS</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-1 group-hover:text-sky-700 transition-all"></i>
+                    </div>
+                `;
+                aboutList.appendChild(row);
+            });
+            lucide.createIcons();
+        }
+
+        function renderCategoryDetailView() {
+            const catKey = state.activeDetailCategory;
+            const meta = CATEGORIES_META[catKey];
+            const customDesc = state.catDescriptions[catKey] || meta.desc;
+            const coverImg = state.covers[catKey] || (state.photos.find(p => p.category === catKey)?.dataUrl) || meta.cover;
+            const catPhotos = state.photos.filter(p => p.category === catKey);
+
+            document.getElementById('detail-cat-num').textContent = meta.num;
+            document.getElementById('detail-cat-tags').textContent = meta.tags;
+            document.getElementById('detail-cat-title').textContent = meta.title;
+            document.getElementById('detail-cat-desc').textContent = customDesc;
+            document.getElementById('detail-header-bg').style.backgroundImage = `url('${coverImg}')`;
+            document.getElementById('detail-photo-count').textContent = `${catPhotos.length} ${catPhotos.length === 1 ? 'PHOTO' : 'PHOTOS'}`;
 
             const uploadBtn = document.getElementById('detail-upload-btn');
-            if (state.isUnlocked) {
+            if (state.isStudioUnlocked) {
                 uploadBtn.classList.remove('hidden');
                 uploadBtn.classList.add('inline-flex');
             } else {
@@ -945,55 +676,73 @@
             }
 
             document.querySelectorAll('.cat-switch-pill').forEach(pill => {
-                const cat = pill.getAttribute('data-cat-pill');
-                if (cat === gw.id) {
+                const pCat = pill.getAttribute('data-cat-pill');
+                if (pCat === catKey) {
                     pill.className = 'cat-switch-pill px-2.5 py-1 text-[11px] tracking-[0.18em] uppercase border border-sky-600 bg-sky-600 text-white font-semibold';
                 } else {
                     pill.className = 'cat-switch-pill px-2.5 py-1 text-[11px] tracking-[0.18em] uppercase border border-slate-300 bg-white text-slate-700 hover:border-slate-900';
                 }
             });
 
-            const pGrid = document.getElementById('detail-photos-grid');
-            pGrid.innerHTML = '';
+            const grid = document.getElementById('detail-photos-grid');
+            grid.innerHTML = '';
 
-            if (photos.length === 0) {
-                pGrid.innerHTML = `
-                    <div class="col-span-full py-16 text-center border border-dashed border-slate-300 bg-white/50">
+            if (catPhotos.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center border border-dashed border-blueprint-border bg-white/50">
                         <i data-lucide="image-off" class="w-8 h-8 text-slate-400 mx-auto mb-3"></i>
-                        <p class="text-xs uppercase tracking-[0.2em] text-slate-600 font-medium">NO PHOTOS IN THIS GATEWAY YET</p>
-                        <p class="text-[11px] text-slate-500 mt-1">Unlock Studio to insert photos into ${gw.title}.</p>
+                        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-slate-700">NO PHOTOS IN THIS GATEWAY YET</p>
+                        <p class="text-[11px] text-slate-500 mt-1">Unlock Studio in the header to insert owner-verified photos.</p>
                     </div>
                 `;
             } else {
-                photos.forEach((photo, idx) => {
+                catPhotos.forEach((photo, idx) => {
                     const card = document.createElement('div');
-                    card.className = 'group bg-white border border-slate-300 overflow-hidden shadow-sm hover:shadow-md transition-shadow';
+                    card.className = 'bg-white border border-blueprint-border overflow-hidden flex flex-col group';
                     card.innerHTML = `
-                        <div class="aspect-4/3 w-full bg-slate-100 overflow-hidden cursor-pointer" onclick="openLightbox('${photo.id}')">
-                            <img src="${photo.dataUrl}" alt="${photo.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <div class="p-4 flex items-start justify-between gap-3 border-t border-slate-200">
-                            <div class="space-y-1">
-                                <span class="text-[10px] tracking-[0.22em] text-sky-700 font-semibold uppercase">0${idx + 1} / ENTRY</span>
-                                <h4 class="font-semibold text-xs tracking-[0.05em] text-slate-900 uppercase">${photo.title}</h4>
-                                ${photo.caption ? `<p class="text-xs text-slate-600 leading-relaxed">${photo.caption}</p>` : ''}
+                        <div class="aspect-4/3 overflow-hidden bg-slate-900 relative cursor-pointer" onclick="openLightbox('${photo.id}')">
+                            <img src="${photo.dataUrl}" alt="${photo.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute top-2.5 right-2.5 bg-slate-950/70 text-white text-[10px] tracking-[0.2em] px-2 py-0.5 border border-white/10">
+                                #0${idx + 1}
                             </div>
-                            ${state.isUnlocked ? `
-                                <button onclick="deletePhoto('${photo.id}')" title="Delete Photo" class="p-1 text-slate-400 hover:text-rose-600">
-                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                </button>
-                            ` : ''}
+                        </div>
+                        <div class="p-4 flex flex-col justify-between flex-grow space-y-2">
+                            <div>
+                                <h4 class="font-display font-bold text-sm tracking-[0.08em] uppercase text-slate-900">${photo.title}</h4>
+                                <p class="text-xs text-slate-600 mt-1 leading-relaxed">${photo.caption || 'No technical caption specified.'}</p>
+                            </div>
+                            <div class="pt-3 border-t border-blueprint-border/60 flex items-center justify-between text-[10px] text-slate-500 tracking-[0.18em] uppercase">
+                                <span>${photo.date}</span>
+                                <button onclick="openLightbox('${photo.id}')" class="text-sky-700 hover:underline">VIEW FULL</button>
+                            </div>
                         </div>
                     `;
-                    pGrid.appendChild(card);
+                    grid.appendChild(card);
                 });
             }
-            if (window.lucide) lucide.createIcons();
+            lucide.createIcons();
+        }
+
+        function openLightbox(photoId) {
+            const photo = state.photos.find(p => p.id === photoId);
+            if (!photo) return;
+            const meta = CATEGORIES_META[photo.category];
+            const idx = state.photos.filter(p => p.category === photo.category).findIndex(p => p.id === photoId);
+
+            document.getElementById('lb-num').textContent = `#0${idx + 1}`;
+            document.getElementById('lb-cat').textContent = meta.title;
+            document.getElementById('lb-image').src = photo.dataUrl;
+            document.getElementById('lb-title').textContent = photo.title;
+            document.getElementById('lb-caption').textContent = photo.caption || '';
+            document.getElementById('lb-date').textContent = `CAPTURED: ${photo.date}`;
+
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+            document.getElementById('lightbox-modal').classList.add('flex');
         }
 
         function handleStudioButtonClick() {
-            if (state.isUnlocked) {
-                openStudioDrawer();
+            if (state.isStudioUnlocked) {
+                openStudioDrawer(state.activeView === 'detail' ? state.activeDetailCategory : 'robotics');
             } else {
                 openModal('pin-modal');
                 document.getElementById('studio-pin-input').value = '';
@@ -1002,139 +751,161 @@
             }
         }
 
-        function verifyPin(event) {
-            event.preventDefault();
-            const inputPin = document.getElementById('studio-pin-input').value.trim();
-            const correctPin = getStoredPin();
-
-            if (inputPin === correctPin) {
-                state.isUnlocked = true;
+        function verifyPin(e) {
+            e.preventDefault();
+            const inputVal = document.getElementById('studio-pin-input').value;
+            if (inputVal === state.pin) {
+                state.isStudioUnlocked = true;
+                saveState();
                 closeModal('pin-modal');
-                updateStudioAccessUI();
-                openStudioDrawer();
-                showToast('Studio unlocked successfully.', 'success');
+                updateStudioAuthUI();
+                openStudioDrawer(state.activeView === 'detail' ? state.activeDetailCategory : 'robotics');
             } else {
                 document.getElementById('pin-error-msg').classList.remove('hidden');
-            }
-        }
-
-        function updateStudioAccessUI() {
-            const dot = document.getElementById('studio-status-dot');
-            const label = document.getElementById('studio-btn-label');
-            const btn = document.getElementById('studio-header-btn');
-
-            if (state.isUnlocked) {
-                dot.classList.remove('hidden');
-                label.textContent = 'STUDIO (ACTIVE)';
-                btn.className = 'px-4 py-2 border border-emerald-600 bg-emerald-50 text-emerald-900 text-[11px] sm:text-xs font-semibold tracking-[0.28em] uppercase transition-all flex items-center gap-2';
-            } else {
-                dot.classList.add('hidden');
-                label.textContent = 'STUDIO';
-                btn.className = 'px-4 py-2 border border-slate-400/80 bg-white/80 hover:bg-slate-900 hover:text-white hover:border-slate-900 text-slate-800 text-[11px] sm:text-xs font-medium tracking-[0.28em] uppercase transition-all flex items-center gap-2';
+                document.getElementById('studio-pin-input').value = '';
+                document.getElementById('studio-pin-input').focus();
             }
         }
 
         function lockStudio() {
-            state.isUnlocked = false;
+            state.isStudioUnlocked = false;
+            saveState();
             closeModal('studio-modal');
-            updateStudioAccessUI();
+            updateStudioAuthUI();
             if (state.activeView === 'detail') {
-                renderCategoryDetail(state.activeDetailCategory);
+                renderCategoryDetailView();
             }
-            showToast('Studio locked.', 'info');
         }
 
-        function openStudioDrawer(preferredCategory = 'robotics') {
-            document.getElementById('upload-category-select').value = preferredCategory;
-            openModal('studio-modal');
+        function updateStudioAuthUI() {
+            const dot = document.getElementById('studio-status-dot');
+            const btnLabel = document.getElementById('studio-btn-label');
+            const btn = document.getElementById('studio-header-btn');
+
+            if (state.isStudioUnlocked) {
+                dot.classList.remove('hidden');
+                btnLabel.textContent = 'STUDIO (ACTIVE)';
+                btn.className = 'px-4 py-2 border border-emerald-600 bg-emerald-50 hover:bg-emerald-900 hover:text-white text-emerald-800 text-[11px] sm:text-xs font-medium tracking-[0.28em] uppercase transition-all flex items-center gap-2';
+            } else {
+                dot.classList.add('hidden');
+                btnLabel.textContent = 'STUDIO';
+                btn.className = 'px-4 py-2 border border-slate-400/80 bg-white/80 hover:bg-slate-900 hover:text-white hover:border-slate-900 text-slate-800 text-[11px] sm:text-xs font-medium tracking-[0.28em] uppercase transition-all flex items-center gap-2';
+            }
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.getElementById(modalId).classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.getElementById(modalId).classList.remove('flex');
+        }
+
+        function openStudioDrawer(defaultCat = 'robotics') {
+            document.getElementById('upload-category-select').value = defaultCat;
+            document.getElementById('setting-name-input').value = state.brandName;
+            document.getElementById('setting-tagline-input').value = state.tagline;
+            document.getElementById('setting-desc-input').value = state.description;
+            document.getElementById('setting-cat-robotics').value = state.catDescriptions.robotics;
+            document.getElementById('setting-cat-lego').value = state.catDescriptions.lego;
+            document.getElementById('setting-cat-photography').value = state.catDescriptions.photography;
+            document.getElementById('setting-cat-others').value = state.catDescriptions.others;
+
             switchStudioTab('upload');
+            openModal('studio-modal');
         }
 
         function switchStudioTab(tabName) {
-            document.querySelectorAll('.studio-tab-btn').forEach(btn => {
-                const tab = btn.getAttribute('data-studio-tab');
-                if (tab === tabName) {
-                    btn.className = 'studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap';
-                } else {
-                    btn.className = 'studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap';
-                }
-            });
-
             ['upload', 'manage', 'settings'].forEach(t => {
+                const btn = document.querySelector(`[data-studio-tab="${t}"]`);
                 const pane = document.getElementById(`studio-pane-${t}`);
                 if (t === tabName) {
+                    btn.className = 'studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap';
                     pane.classList.remove('hidden');
                 } else {
+                    btn.className = 'studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap';
                     pane.classList.add('hidden');
                 }
             });
 
             if (tabName === 'manage') {
                 renderStudioManageList();
-            } else if (tabName === 'settings') {
-                document.getElementById('setting-name-input').value = state.config.name;
-                document.getElementById('setting-tagline-input').value = state.config.tagline;
-                document.getElementById('setting-desc-input').value = state.config.description;
-                document.getElementById('setting-cat-robotics').value = state.config.descriptions.robotics;
-                document.getElementById('setting-cat-lego').value = state.config.descriptions.lego;
-                document.getElementById('setting-cat-photography').value = state.config.descriptions.photography;
-                document.getElementById('setting-cat-others').value = state.config.descriptions.others;
             }
         }
 
-        function handleFilesSelected(event) {
-            const files = Array.from(event.target.files);
-            if (!files.length) return;
+        function handleFilesSelected(e) {
+            const files = Array.from(e.target.files);
+            if (files.length === 0) return;
 
             let loadedCount = 0;
-            state.pendingFiles = [];
-
             files.forEach(file => {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    state.pendingFiles.push({
-                        name: file.name,
-                        dataUrl: e.target.result
+                reader.onload = function(uploadEvent) {
+                    compressImage(uploadEvent.target.result, 1200, 0.85, (compressedUrl) => {
+                        state.pendingFiles.push({
+                            fileObj: file,
+                            name: file.name,
+                            dataUrl: compressedUrl
+                        });
+                        loadedCount++;
+                        if (loadedCount === files.length) {
+                            renderPendingFilesPreview();
+                        }
                     });
-                    loadedCount++;
-                    if (loadedCount === files.length) {
-                        renderPendingFilesPreview();
-                    }
                 };
                 reader.readAsDataURL(file);
             });
         }
 
-        function renderPendingFilesPreview() {
-            const container = document.getElementById('selected-files-preview');
-            const thumbsGrid = document.getElementById('selected-thumbs-grid');
-            const countLabel = document.getElementById('selected-files-count');
-
-            if (state.pendingFiles.length === 0) {
-                container.classList.add('hidden');
-                return;
-            }
-
-            container.classList.remove('hidden');
-            countLabel.textContent = `${state.pendingFiles.length} FILES READY`;
-            thumbsGrid.innerHTML = '';
-
-            state.pendingFiles.forEach((fileObj, idx) => {
-                const thumb = document.createElement('div');
-                thumb.className = 'relative aspect-square bg-slate-200 border border-slate-300 overflow-hidden';
-                thumb.innerHTML = `
-                    <img src="${fileObj.dataUrl}" class="w-full h-full object-cover">
-                    <button type="button" onclick="removePendingFile(${idx})" class="absolute top-1 right-1 bg-slate-900/80 text-white p-1 hover:bg-rose-600">
-                        <i data-lucide="x" class="w-3 h-3"></i>
-                    </button>
-                `;
-                thumbsGrid.appendChild(thumb);
-            });
-            if (window.lucide) lucide.createIcons();
+        function compressImage(dataUrl, maxWidth, quality, callback) {
+            const img = new Image();
+            img.onload = function() {
+                let width = img.width;
+                let height = img.height;
+                if (width > maxWidth) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                callback(canvas.toDataURL('image/jpeg', quality));
+            };
+            img.src = dataUrl;
         }
 
-        function removePendingFile(index) {
-            state.pendingFiles.splice(index, 1);
+        function renderPendingFilesPreview() {
+            const container = document.getElementById('selected-thumbs-grid');
+            const previewWrap = document.getElementById('selected-files-preview');
+            container.innerHTML = '';
+
+            if (state.pendingFiles.length > 0) {
+                previewWrap.classList.remove('hidden');
+                document.getElementById('selected-files-count').textContent = `${state.pendingFiles.length} FILES READY`;
+                state.pendingFiles.forEach((pf, idx) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = 'relative aspect-square bg-slate-900 border border-slate-300 overflow-hidden group';
+                    thumb.innerHTML = `
+                        <img src="${pf.dataUrl}" class="w-full h-full object-cover">
+                        <button type="button" onclick="removePendingFile(${idx})" class="absolute top-1 right-1 bg-slate-950/80 text-white p-0.5 hover:bg-rose-600">
+                            <i data-lucide="x" class="w-3 h-3"></i>
+                        </button>
+                    `;
+                    container.appendChild(thumb);
+                });
+            } else {
+                previewWrap.classList.add('hidden');
+            }
+            lucide.createIcons();
+        }
+
+        function removePendingFile(idx) {
+            state.pendingFiles.splice(idx, 1);
             renderPendingFilesPreview();
         }
 
@@ -1144,206 +915,147 @@
             renderPendingFilesPreview();
         }
 
-        function handleBatchPhotoUpload(event) {
-            event.preventDefault();
+        function handleBatchPhotoUpload(e) {
+            e.preventDefault();
             if (state.pendingFiles.length === 0) {
-                showToast('Please select at least one photo.', 'error');
+                alert('Please select at least one photo to publish.');
                 return;
             }
 
-            const category = document.getElementById('upload-category-select').value;
+            const cat = document.getElementById('upload-category-select').value;
             const customTitle = document.getElementById('upload-title-input').value.trim();
             const caption = document.getElementById('upload-caption-input').value.trim();
             const setAsCover = document.getElementById('set-as-cover-checkbox').checked;
 
-            state.pendingFiles.forEach((fileObj, idx) => {
-                const photoId = 'photo_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
-                const title = customTitle ? (state.pendingFiles.length > 1 ? `${customTitle} (${idx + 1})` : customTitle) : (fileObj.name.replace(/\.[^/.]+$/, '') || 'Archive Entry');
+            const todayStr = new Date().toISOString().split('T')[0];
 
-                state.photos.unshift({
-                    id: photoId,
-                    category: category,
+            state.pendingFiles.forEach((pf, idx) => {
+                const title = customTitle || pf.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ").toUpperCase();
+                const newPhoto = {
+                    id: 'photo_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+                    category: cat,
                     title: title,
                     caption: caption,
-                    dataUrl: fileObj.dataUrl,
-                    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-                });
+                    dataUrl: pf.dataUrl,
+                    date: todayStr
+                };
+                state.photos.unshift(newPhoto);
 
                 if (idx === 0 && setAsCover) {
-                    state.covers[category] = fileObj.dataUrl;
+                    state.covers[cat] = pf.dataUrl;
                 }
             });
 
-            savePersistedState();
+            saveState();
             clearPendingFiles();
             document.getElementById('upload-title-input').value = '';
             document.getElementById('upload-caption-input').value = '';
             document.getElementById('set-as-cover-checkbox').checked = false;
 
-            showToast('Photos published successfully.', 'success');
-
-            if (state.activeView === 'detail') {
-                renderCategoryDetail(state.activeDetailCategory);
-            } else {
-                renderGatewaysGrid();
-            }
-
             closeModal('studio-modal');
+            renderHomeArchive();
+            if (state.activeView === 'detail') {
+                renderCategoryDetailView();
+            }
+            alert('Photos successfully published to archive!');
         }
 
         function renderStudioManageList() {
-            const filter = document.getElementById('manage-filter-select').value;
+            const filterCat = document.getElementById('manage-filter-select').value;
             const container = document.getElementById('studio-manage-list');
             container.innerHTML = '';
 
-            const filteredPhotos = filter === 'all' ? state.photos : state.photos.filter(p => p.category === filter);
+            const list = filterCat === 'all' ? state.photos : state.photos.filter(p => p.category === filterCat);
 
-            if (filteredPhotos.length === 0) {
-                container.innerHTML = '<div class="col-span-full py-10 text-center text-xs text-slate-500 uppercase">NO PHOTOS MATCHING FILTER</div>';
+            if (list.length === 0) {
+                container.innerHTML = '<p class="col-span-full text-xs text-slate-500 py-6 text-center">No photos found matching this filter.</p>';
                 return;
             }
 
-            filteredPhotos.forEach(photo => {
+            list.forEach(photo => {
                 const card = document.createElement('div');
-                card.className = 'flex items-center gap-3 p-3 bg-white border border-slate-300';
+                card.className = 'p-3 bg-white border border-slate-300 flex items-center gap-3';
                 card.innerHTML = `
-                    <img src="${photo.dataUrl}" class="w-14 h-14 object-cover shrink-0 border border-slate-200">
+                    <img src="${photo.dataUrl}" class="w-16 h-16 object-cover border border-slate-200 shrink-0">
                     <div class="flex-grow min-w-0">
-                        <span class="text-[9px] tracking-[0.2em] text-sky-700 uppercase block">${photo.category}</span>
-                        <h5 class="font-semibold text-xs text-slate-900 uppercase truncate">${photo.title}</h5>
-                        <span class="text-[10px] text-slate-400">${photo.date}</span>
+                        <span class="text-[9px] tracking-[0.2em] text-sky-700 uppercase font-bold block">${photo.category}</span>
+                        <h5 class="font-display font-bold text-xs uppercase truncate text-slate-900">${photo.title}</h5>
+                        <p class="text-[11px] text-slate-500 truncate">${photo.caption || 'No caption'}</p>
                     </div>
-                    <div class="flex items-center gap-1.5 shrink-0">
-                        <button onclick="setCoverFromPhoto('${photo.id}')" title="Set as Gateway Cover" class="p-1.5 border border-slate-300 hover:bg-slate-900 hover:text-white text-[10px] uppercase">
-                            COVER
-                        </button>
-                        <button onclick="deletePhoto('${photo.id}')" title="Delete" class="p-1.5 text-slate-400 hover:text-rose-600">
-                            <i data-lucide="trash-2" class="w-4 h-4"></i>
-                        </button>
+                    <div class="flex flex-col gap-1.5 shrink-0">
+                        <button type="button" onclick="setAsGatewayCover('${photo.category}', '${photo.dataUrl}')" class="px-2 py-1 bg-slate-100 hover:bg-sky-600 hover:text-white text-[10px] tracking-[0.14em] uppercase border border-slate-300 transition-colors">SET COVER</button>
+                        <button type="button" onclick="deletePhoto('${photo.id}')" class="px-2 py-1 bg-rose-50 hover:bg-rose-600 hover:text-white text-[10px] tracking-[0.14em] uppercase text-rose-700 border border-rose-300 transition-colors">DELETE</button>
                     </div>
                 `;
                 container.appendChild(card);
             });
-            if (window.lucide) lucide.createIcons();
         }
 
-        function setCoverFromPhoto(photoId) {
-            const photo = state.photos.find(p => p.id === photoId);
-            if (!photo) return;
-            state.covers[photo.category] = photo.dataUrl;
-            savePersistedState();
-            showToast(`Cover updated for 0${GATEWAYS.findIndex(g=>g.id===photo.category)+1} / ${photo.category.toUpperCase()}`, 'success');
-            renderGatewaysGrid();
-            if (state.activeView === 'detail') renderCategoryDetail(state.activeDetailCategory);
-        }
-
-        function handleDirectCoverFile(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const category = document.getElementById('direct-cover-cat').value;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                state.covers[category] = e.target.result;
-                savePersistedState();
-                showToast('Gateway cover updated.', 'success');
-                renderGatewaysGrid();
-                if (state.activeView === 'detail') renderCategoryDetail(state.activeDetailCategory);
-            };
-            reader.readAsDataURL(file);
+        function setAsGatewayCover(catKey, url) {
+            state.covers[catKey] = url;
+            saveState();
+            alert(`Gateway cover for ${catKey.toUpperCase()} updated successfully!`);
+            renderHomeArchive();
+            if (state.activeView === 'detail') renderCategoryDetailView();
         }
 
         function resetAllCovers() {
             state.covers = {};
-            savePersistedState();
-            showToast('Covers reset to default photographs.', 'info');
-            renderGatewaysGrid();
-            if (state.activeView === 'detail') renderCategoryDetail(state.activeDetailCategory);
+            saveState();
+            alert('Gateway covers reset to default photo covers.');
+            renderHomeArchive();
+            if (state.activeView === 'detail') renderCategoryDetailView();
+        }
+
+        function handleDirectCoverFile(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const cat = document.getElementById('direct-cover-cat').value;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                compressImage(evt.target.result, 1200, 0.85, (compressed) => {
+                    state.covers[cat] = compressed;
+                    saveState();
+                    alert(`Custom cover uploaded for ${cat.toUpperCase()}!`);
+                    renderHomeArchive();
+                    if (state.activeView === 'detail') renderCategoryDetailView();
+                });
+            };
+            reader.readAsDataURL(file);
         }
 
         function deletePhoto(photoId) {
+            if (!confirm('Are you sure you want to permanently delete this photo from the archive?')) return;
             state.photos = state.photos.filter(p => p.id !== photoId);
-            savePersistedState();
-            showToast('Photo removed.', 'info');
-            if (state.activeView === 'detail') {
-                renderCategoryDetail(state.activeDetailCategory);
-            }
-            renderGatewaysGrid();
+            saveState();
+            renderStudioManageList();
+            renderHomeArchive();
+            if (state.activeView === 'detail') renderCategoryDetailView();
         }
 
-        function saveArchiveIdentity(event) {
-            event.preventDefault();
-            state.config.name = document.getElementById('setting-name-input').value.trim() || 'SHELDON';
-            state.config.tagline = document.getElementById('setting-tagline-input').value.trim();
-            state.config.description = document.getElementById('setting-desc-input').value.trim();
-            state.config.descriptions.robotics = document.getElementById('setting-cat-robotics').value.trim();
-            state.config.descriptions.lego = document.getElementById('setting-cat-lego').value.trim();
-            state.config.descriptions.photography = document.getElementById('setting-cat-photography').value.trim();
-            state.config.descriptions.others = document.getElementById('setting-cat-others').value.trim();
+        function saveArchiveIdentity(e) {
+            e.preventDefault();
+            state.brandName = document.getElementById('setting-name-input').value.trim().toUpperCase() || 'SHELDON';
+            state.tagline = document.getElementById('setting-tagline-input').value.trim();
+            state.description = document.getElementById('setting-desc-input').value.trim();
 
             const newPin = document.getElementById('setting-pin-input').value.trim();
             if (newPin) {
-                if (newPin.length >= 4) {
-                    localStorage.setItem(STORAGE.PIN, newPin);
-                } else {
-                    showToast('PIN must be at least 4 characters.', 'error');
-                    return;
-                }
+                state.pin = newPin;
             }
 
-            savePersistedState();
-            updateUIIdentity();
-            renderAboutArchiveList();
+            state.catDescriptions.robotics = document.getElementById('setting-cat-robotics').value.trim();
+            state.catDescriptions.lego = document.getElementById('setting-cat-lego').value.trim();
+            state.catDescriptions.photography = document.getElementById('setting-cat-photography').value.trim();
+            state.catDescriptions.others = document.getElementById('setting-cat-others').value.trim();
+
+            saveState();
+            applyBranding();
             closeModal('studio-modal');
-            showToast('Archive configuration saved.', 'success');
+            renderHomeArchive();
+            if (state.activeView === 'detail') renderCategoryDetailView();
+            alert('Archive configuration and identity saved successfully!');
         }
-
-        function openLightbox(photoId) {
-            const photo = state.photos.find(p => p.id === photoId);
-            if (!photo) return;
-            const gw = GATEWAYS.find(g => g.id === photo.category);
-
-            document.getElementById('lb-num').textContent = gw ? gw.num : '01';
-            document.getElementById('lb-cat').textContent = gw ? gw.title : photo.category;
-            document.getElementById('lb-img').src = photo.dataUrl;
-            document.getElementById('lb-title').textContent = photo.title;
-            document.getElementById('lb-caption').textContent = photo.caption || '';
-            document.getElementById('lb-date').textContent = photo.date;
-
-            document.getElementById('lightbox-modal').classList.remove('hidden');
-            document.getElementById('lightbox-modal').classList.add('flex');
-        }
-
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.remove('hidden');
-            document.getElementById(modalId).classList.add('flex');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-            document.getElementById(modalId).classList.remove('flex');
-        }
-
-        function showToast(message, type = 'info') {
-            const box = document.getElementById('toast-box');
-            if (!box) return;
-
-            const toast = document.createElement('div');
-            toast.className = `px-4 py-3 border text-xs tracking-[0.15em] uppercase font-semibold shadow-lg transition-all animate-bounce ${
-                type === 'success' ? 'bg-slate-900 text-white border-slate-800' :
-                type === 'error' ? 'bg-rose-900 text-white border-rose-800' :
-                'bg-sky-900 text-white border-sky-800'
-            }`;
-            toast.textContent = message;
-            box.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        window.onload = initApp;
     </script>
 </body>
 </html>
