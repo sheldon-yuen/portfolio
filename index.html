@@ -369,6 +369,28 @@
                             <textarea id="setting-desc-input" rows="2" maxlength="260" required class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs leading-relaxed"></textarea>
                         </div>
 
+                        <div class="pt-3 border-t border-blueprint-border space-y-3">
+                            <span class="block text-[11px] tracking-[0.22em] text-sky-700 uppercase font-semibold">CATEGORY DESCRIPTIONS</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">01 / ROBOTICS</label>
+                                    <textarea id="setting-cat-robotics" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">02 / LEGO</label>
+                                    <textarea id="setting-cat-lego" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">03 / PHOTOGRAPHY</label>
+                                    <textarea id="setting-cat-photography" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">04 / OTHERS</label>
+                                    <textarea id="setting-cat-others" rows="2" class="w-full px-3 py-2 bg-white border border-slate-300 text-xs"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="flex justify-end pt-2">
                             <button type="submit" class="px-5 py-2.5 bg-slate-900 hover:bg-sky-700 text-white text-xs tracking-[0.22em] uppercase transition-colors">SAVE CONFIGURATION</button>
                         </div>
@@ -408,9 +430,9 @@
                 title: "ROBOTICS",
                 subtitle: "MECHANISMS · CODE · ITERATION",
                 description: "Servos, sensors and the stubborn gap between what I sketched and what actually moves.",
-                defaultCover: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80",
+                defaultCover: "./Robotics.png",
                 defaultItems: [
-                    { id: 'def-r1', title: "MECHANICAL ACTUATOR JOINT", caption: "High-precision metal joint with integrated circuit boards and fasteners.", url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80", date: "2026-11" }
+                    { id: 'def-r1', title: "MECHANICAL ACTUATOR JOINT", caption: "High-precision metal joint with integrated circuit boards and fasteners.", url: "./Robotics.png", date: "2026-11" }
                 ]
             },
             lego: {
@@ -418,9 +440,9 @@
                 title: "LEGO",
                 subtitle: "SYSTEMS · STRUCTURES · GEOMETRY",
                 description: "Interlocking ABS tolerances, gear ratios, and building massive structures out of tiny bricks.",
-                defaultCover: "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1200&q=80",
+                defaultCover: "./Lego.png",
                 defaultItems: [
-                    { id: 'def-l1', title: "MODULAR BRICK ASSEMBLY", caption: "Geometric layout of black, blue, and red elements.", url: "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1000&q=80", date: "2026-11" }
+                    { id: 'def-l1', title: "MODULAR BRICK ASSEMBLY", caption: "Geometric layout of black, blue, and red elements.", url: "./Lego.png", date: "2026-11" }
                 ]
             },
             photography: {
@@ -428,9 +450,9 @@
                 title: "PHOTOGRAPHY",
                 subtitle: "LIGHT · SHADOWS · MOMENTS",
                 description: "Chasing natural light, capturing unique everyday moments, and exploring shadows through the lens.",
-                defaultCover: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80",
+                defaultCover: "./sunset.jpeg",
                 defaultItems: [
-                    { id: 'def-p1', title: "GOLDEN HOUR WATERSIDE", caption: "Sun setting through cloud layers over calm waters.", url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=80", date: "2026-11" }
+                    { id: 'def-p1', title: "GOLDEN HOUR WATERSIDE", caption: "Sun setting through cloud layers over calm waters.", url: "./sunset.jpeg", date: "2026-11" }
                 ]
             },
             others: {
@@ -438,9 +460,9 @@
                 title: "OTHERS",
                 subtitle: "MAKERLAB · WOODWORK · EXPERIMENTS",
                 description: "Crafting custom slot-together name tags, woodworking projects, and miscellaneous maker experiments.",
-                defaultCover: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80",
+                defaultCover: "./Book.png",
                 defaultItems: [
-                    { id: 'def-o1', title: "MAKERLAB WORKSHOP DESK", caption: "Blueprints, mechanical notebooks, and brass gears.", url: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1000&q=80", date: "2026-11" }
+                    { id: 'def-o1', title: "MAKERLAB WORKSHOP DESK", caption: "Blueprints, mechanical notebooks, and brass gears.", url: "./Book.png", date: "2026-11" }
                 ]
             }
         };
@@ -992,6 +1014,11 @@
             document.getElementById('setting-pin-input').value = '';
             document.getElementById('setting-tagline-input').value = state.tagline;
             document.getElementById('setting-desc-input').value = state.description;
+
+            document.getElementById('setting-cat-robotics').value = state.categoryDescriptions.robotics;
+            document.getElementById('setting-cat-lego').value = state.categoryDescriptions.lego;
+            document.getElementById('setting-cat-photography').value = state.categoryDescriptions.photography;
+            document.getElementById('setting-cat-others').value = state.categoryDescriptions.others;
         }
 
         async function saveArchiveIdentity(event) {
@@ -1004,6 +1031,11 @@
             }
             state.tagline = document.getElementById('setting-tagline-input').value.trim();
             state.description = document.getElementById('setting-desc-input').value.trim();
+
+            state.categoryDescriptions.robotics = document.getElementById('setting-cat-robotics').value.trim();
+            state.categoryDescriptions.lego = document.getElementById('setting-cat-lego').value.trim();
+            state.categoryDescriptions.photography = document.getElementById('setting-cat-photography').value.trim();
+            state.categoryDescriptions.others = document.getElementById('setting-cat-others').value.trim();
 
             await saveState();
             renderUI();
