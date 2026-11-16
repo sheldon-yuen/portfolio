@@ -126,6 +126,17 @@
             </div>
         </section>
 
+        <!-- INSTAGRAM ACCOUNTS SECTION (ABOVE FOUR GATEWAYS) -->
+        <section class="py-6 sm:py-8 border-b border-blueprint-border bg-white/40">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] sm:text-[11px] font-medium tracking-[0.3em] text-slate-500 uppercase">
+                    INSTAGRAM CHANNELS &amp; FEEDS
+                </span>
+            </div>
+            <div id="instagram-links-bar" class="flex flex-wrap items-center gap-3"></div>
+        </section>
+
+        <!-- FOUR GATEWAYS SECTION -->
         <section class="py-10 sm:py-14 border-b border-blueprint-border">
             <div class="flex items-center justify-between pb-4 mb-7 border-b border-blueprint-border/80">
                 <h2 class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-slate-600 uppercase">
@@ -137,6 +148,24 @@
             </div>
 
             <div id="gateways-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6"></div>
+        </section>
+
+        <!-- MY PROJECTS SECTION (BELOW FOUR GATEWAYS) -->
+        <section class="py-10 sm:py-14 border-b border-blueprint-border">
+            <div class="flex items-center justify-between pb-4 mb-7 border-b border-blueprint-border/80">
+                <div class="flex items-center gap-3">
+                    <span class="w-6 h-[1.5px] bg-sky-600 inline-block"></span>
+                    <h2 class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-slate-600 uppercase">
+                        MY PROJECTS &amp; LINKS
+                    </h2>
+                </div>
+                <button onclick="openStudioDrawer('projects')" class="hidden studio-add-proj-btn text-[11px] tracking-[0.2em] uppercase text-sky-700 hover:underline font-semibold flex items-center gap-1.5">
+                    <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                    <span>ADD PROJECT</span>
+                </button>
+            </div>
+
+            <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
         </section>
 
         <section class="py-12 sm:py-16">
@@ -203,7 +232,7 @@
             <span>&copy; <span id="footer-year"></span> <span id="footer-brand-name">SHELDON</span> &mdash; PERSONAL ARCHIVE</span>
             <span class="flex items-center gap-2">
                 <i data-lucide="folder-tree" class="w-3.5 h-3.5 text-sky-600"></i>
-                SUB-FOLDER ARCHIVE ENGINE
+                5-TAB STUDIO ENGINE
             </span>
         </div>
     </footer>
@@ -245,7 +274,7 @@
         </div>
     </div>
 
-    <!-- STUDIO CONTROL PANEL (4 TABS) -->
+    <!-- STUDIO CONTROL PANEL (5 TABS) -->
     <div id="studio-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/65 backdrop-blur-sm overflow-y-auto">
         <div class="w-full max-w-4xl bg-[#F7FBFE] border border-slate-400 shadow-2xl my-auto max-h-[92vh] flex flex-col">
             <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between gap-4 shrink-0">
@@ -264,21 +293,22 @@
                 </div>
             </div>
 
-            <!-- 4 Studio Navigation Tabs -->
+            <!-- 5 Studio Navigation Tabs (Ordered as requested) -->
             <div class="px-6 pt-3 bg-[#EAF5FC] border-b border-blueprint-border flex items-center gap-4 overflow-x-auto shrink-0">
                 <button onclick="switchStudioTab('upload')" data-studio-tab="upload" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap">01 / INSERT PHOTOS</button>
-                <button onclick="switchStudioTab('manage')" data-studio-tab="manage" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">02 / MANAGE &amp; COVERS</button>
-                <button onclick="switchStudioTab('descriptions')" data-studio-tab="descriptions" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">03 / PHOTO DESCRIPTIONS</button>
-                <button onclick="switchStudioTab('settings')" data-studio-tab="settings" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">04 / IDENTITY &amp; PIN</button>
+                <button onclick="switchStudioTab('projects')" data-studio-tab="projects" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">02 / MY PROJECTS</button>
+                <button onclick="switchStudioTab('manage')" data-studio-tab="manage" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">03 / MANAGE &amp; COVERS</button>
+                <button onclick="switchStudioTab('descriptions')" data-studio-tab="descriptions" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">04 / PHOTO DESCRIPTIONS</button>
+                <button onclick="switchStudioTab('settings')" data-studio-tab="settings" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">05 / IDENTITY &amp; PINS</button>
             </div>
 
             <div class="p-6 overflow-y-auto space-y-6">
-                <!-- TAB 1: INSERT PHOTOS & SUB-FOLDERS -->
+                <!-- TAB 1: INSERT PHOTOS -->
                 <div id="studio-pane-upload" class="space-y-5">
                     <form onsubmit="handleBatchPhotoUpload(event)" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
-                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">GATEWAY TOPIC</label>
+                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">TARGET GATEWAY</label>
                                 <select id="upload-category-select" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs font-medium tracking-[0.12em] uppercase focus:border-sky-600 focus:outline-none">
                                     <option value="robotics">01 — ROBOTICS</option>
                                     <option value="lego">02 — LEGO</option>
@@ -287,17 +317,17 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">SUB-FOLDER (E.G. COMPETITION 1)</label>
-                                <input type="text" id="upload-subfolder-input" maxlength="40" placeholder="e.g. competition1" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs uppercase focus:border-sky-600 focus:outline-none">
+                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">SUB-FOLDER (E.G. COMPETITION1)</label>
+                                <input type="text" id="upload-subfolder-input" maxlength="40" value="general" placeholder="e.g. competition1" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs uppercase focus:border-sky-600 focus:outline-none">
                             </div>
                             <div>
-                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">ENTRY TITLE (OPTIONAL)</label>
-                                <input type="text" id="upload-title-input" maxlength="80" placeholder="Auto-uses filename" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
+                                <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">ENTRY TITLE</label>
+                                <input type="text" id="upload-title-input" maxlength="80" placeholder="Photo title" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">CAPTION / TECHNICAL NOTE (OPTIONAL)</label>
+                            <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">CAPTION / TECHNICAL NOTE</label>
                             <input type="text" id="upload-caption-input" maxlength="220" placeholder="e.g., Autonomous line-following sensor test" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs focus:border-sky-600 focus:outline-none">
                         </div>
 
@@ -326,7 +356,38 @@
                     </form>
                 </div>
 
-                <!-- TAB 2: MANAGE & COVERS -->
+                <!-- TAB 2: MY PROJECTS MANAGER -->
+                <div id="studio-pane-projects" class="hidden space-y-5">
+                    <div class="flex items-center justify-between pb-3 border-b border-blueprint-border">
+                        <span class="text-xs uppercase tracking-[0.2em] text-sky-700 font-semibold">ADD &amp; MANAGE PROJECTS / LINKS</span>
+                    </div>
+
+                    <form onsubmit="handleProjectUpload(event)" class="space-y-4 bg-white p-4 border border-slate-300">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">PROJECT TITLE</label>
+                                <input type="text" id="proj-title-input" required maxlength="60" placeholder="e.g., ROBOTIC ARM REPO" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 text-xs font-bold uppercase">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">EXTERNAL LINK (URL)</label>
+                                <input type="url" id="proj-link-input" required placeholder="https://github.com/..." class="w-full px-3 py-2 bg-slate-50 border border-slate-300 text-xs">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] tracking-[0.2em] text-slate-500 uppercase mb-1">PREVIEW IMAGE (OPTIONAL)</label>
+                            <input type="file" id="proj-file-input" accept="image/*" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-300 text-xs">
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button type="submit" class="px-4 py-2 bg-slate-900 hover:bg-sky-700 text-white text-xs uppercase tracking-[0.16em] transition-colors">ADD PROJECT</button>
+                        </div>
+                    </form>
+
+                    <div id="studio-projects-list" class="space-y-3 pt-2"></div>
+                </div>
+
+                <!-- TAB 3: MANAGE & COVERS -->
                 <div id="studio-pane-manage" class="hidden space-y-5">
                     <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-blueprint-border">
                         <div class="flex items-center gap-2">
@@ -354,7 +415,7 @@
                     <div id="studio-manage-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
                 </div>
 
-                <!-- TAB 3: PHOTO DESCRIPTIONS & SUB-FOLDERS -->
+                <!-- TAB 4: PHOTO DESCRIPTIONS -->
                 <div id="studio-pane-descriptions" class="hidden space-y-5">
                     <div class="flex items-center justify-between pb-3 border-b border-blueprint-border">
                         <span class="text-xs uppercase tracking-[0.2em] text-sky-700 font-semibold">EDIT CAPTIONS &amp; SUB-FOLDERS</span>
@@ -368,9 +429,9 @@
                     <div id="studio-descriptions-list" class="space-y-4"></div>
                 </div>
 
-                <!-- TAB 4: IDENTITY & PIN -->
+                <!-- TAB 5: IDENTITY, PINS & INSTAGRAM -->
                 <div id="studio-pane-settings" class="hidden space-y-6">
-                    <form onsubmit="saveArchiveIdentity(event)" class="space-y-4">
+                    <form onsubmit="saveArchiveIdentity(event)" class="space-y-5">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">ARCHIVE DISPLAY NAME</label>
@@ -390,6 +451,15 @@
                         <div>
                             <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">HERO INTRO PARAGRAPH</label>
                             <textarea id="setting-desc-input" rows="2" maxlength="260" required class="w-full px-3.5 py-2.5 bg-white border border-slate-300 text-xs leading-relaxed"></textarea>
+                        </div>
+
+                        <!-- INSTAGRAM ACCOUNTS MANAGER -->
+                        <div class="pt-3 border-t border-blueprint-border space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="block text-[11px] tracking-[0.22em] text-sky-700 uppercase font-semibold">INSTAGRAM ACCOUNT LINKS</span>
+                                <button type="button" onclick="addInstagramField()" class="px-2.5 py-1 bg-slate-900 text-white text-[10px] uppercase tracking-[0.16em]">ADD INSTAGRAM</button>
+                            </div>
+                            <div id="instagram-inputs-container" class="space-y-2"></div>
                         </div>
 
                         <div class="pt-3 border-t border-blueprint-border space-y-3">
@@ -499,6 +569,10 @@
             activeView: 'home',
             activeDetailCategory: "robotics",
             activeSubFolder: "ALL",
+            instagramAccounts: [
+                { name: "@sheldon.builds", url: "https://instagram.com" },
+                { name: "@sheldon.shots", url: "https://instagram.com" }
+            ],
             categoryDescriptions: {
                 robotics: CATEGORIES_META.robotics.description,
                 lego: CATEGORIES_META.lego.description,
@@ -517,6 +591,9 @@
                 photography: [...CATEGORIES_META.photography.defaultItems],
                 others: [...CATEGORIES_META.others.defaultItems]
             },
+            projects: [
+                { id: 'proj-1', title: "GITHUB PORTFOLIO", caption: "https://github.com/sheldon-yuen/portfolio", url: "./Book.png", date: "2026-11" }
+            ],
             pendingUploadFiles: []
         };
 
@@ -525,7 +602,7 @@
 
         function openArchiveDB() {
             return new Promise((resolve, reject) => {
-                const request = indexedDB.open(DB_NAME, 1);
+                const request = indexedDB.open(DB_NAME, 4);
                 request.onupgradeneeded = (e) => {
                     const db = e.target.result;
                     if (!db.objectStoreNames.contains(STORE_NAME)) {
@@ -551,11 +628,12 @@
                             state.tagline = parsed.tagline || state.tagline;
                             state.description = parsed.description || state.description;
                             state.pin = parsed.pin || state.pin;
+                            if (parsed.instagramAccounts) state.instagramAccounts = parsed.instagramAccounts;
                             if (parsed.covers) state.covers = {...state.covers, ...parsed.covers};
+                            if (parsed.projects) state.projects = parsed.projects;
                             if (parsed.items) {
                                 Object.keys(parsed.items).forEach(k => {
                                     if (parsed.items[k] && parsed.items[k].length > 0) {
-                                        // Ensure subfolder property exists on items
                                         state.items[k] = parsed.items[k].map(item => ({
                                             ...item,
                                             subfolder: item.subfolder || 'general'
@@ -585,8 +663,10 @@
                         tagline: state.tagline,
                         description: state.description,
                         pin: state.pin,
+                        instagramAccounts: state.instagramAccounts,
                         covers: state.covers,
                         items: state.items,
+                        projects: state.projects,
                         categoryDescriptions: state.categoryDescriptions
                     }, 'mainState');
                     tx.oncomplete = () => resolve();
@@ -655,15 +735,21 @@
 
             const dot = document.getElementById('studio-status-dot');
             const btnLabel = document.getElementById('studio-btn-label');
+            const addProjBtn = document.querySelector('.studio-add-proj-btn');
+
             if (state.isUnlocked) {
                 dot.classList.remove('hidden');
                 btnLabel.textContent = "STUDIO [UNLOCKED]";
+                if(addProjBtn) addProjBtn.classList.remove('hidden');
             } else {
                 dot.classList.add('hidden');
                 btnLabel.textContent = "STUDIO";
+                if(addProjBtn) addProjBtn.classList.add('hidden');
             }
 
+            renderInstagramBar();
             renderGatewaysGrid();
+            renderProjectsGrid();
             renderAboutArchiveList();
 
             if (state.activeView === 'detail') {
@@ -676,6 +762,23 @@
             }
 
             lucide.createIcons();
+        }
+
+        function renderInstagramBar() {
+            const bar = document.getElementById('instagram-links-bar');
+            const accounts = state.instagramAccounts || [];
+
+            if (accounts.length === 0) {
+                bar.innerHTML = `<span class="text-xs text-slate-400 italic">No Instagram channels linked yet. Unlock Studio to add them.</span>`;
+                return;
+            }
+
+            bar.innerHTML = accounts.map(acc => `
+                <a href="${acc.url}" target="_blank" class="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-300 hover:border-slate-900 text-xs font-medium text-slate-800 transition-colors shadow-2xs">
+                    <i data-lucide="instagram" class="w-3.5 h-3.5 text-sky-600"></i>
+                    <span>${acc.name}</span>
+                </a>
+            `).join('');
         }
 
         function renderGatewaysGrid() {
@@ -712,12 +815,44 @@
             }).join('');
         }
 
+        function renderProjectsGrid() {
+            const grid = document.getElementById('projects-grid');
+            const projects = state.projects || [];
+
+            if (projects.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-8 text-center text-xs text-slate-500 uppercase tracking-[0.2em] border border-dashed border-blueprint-border">No projects added yet. Unlock Studio to add links and files.</div>`;
+                return;
+            }
+
+            grid.innerHTML = projects.map(proj => {
+                const isUrl = proj.caption && (proj.caption.startsWith('http://') || proj.caption.startsWith('https://'));
+                return `
+                    <div class="bg-white border border-blueprint-border overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                        <div class="relative aspect-video bg-slate-900 overflow-hidden">
+                            <img src="${proj.url}" alt="${proj.title}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 sm:p-5 space-y-3 flex flex-col flex-grow justify-between">
+                            <div>
+                                <span class="text-[10px] tracking-[0.2em] uppercase text-sky-700 font-semibold">${proj.date || '2026'}</span>
+                                <h3 class="font-display font-bold text-xs sm:text-sm tracking-[0.08em] uppercase text-slate-900 mt-1">${proj.title}</h3>
+                                <p class="text-xs text-slate-600 mt-1 line-clamp-2 font-mono">${isUrl ? proj.caption : (proj.caption || 'No description provided.')}</p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                                ${isUrl ? `<a href="${proj.caption}" target="_blank" class="inline-flex items-center gap-1 text-sky-700 font-semibold hover:underline uppercase tracking-[0.14em]"><span>VISIT LINK</span> <i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>` : `<span></span>`}
+                                ${state.isUnlocked ? `<button onclick="deleteProject('${proj.id}')" class="text-rose-600 hover:underline uppercase tracking-[0.14em]">DELETE</button>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
         function renderAboutArchiveList() {
             const list = document.getElementById('about-archive-list');
             const items = [
                 { num: "01", title: "PURPOSE", desc: "A private, owner-managed digital archive and workshop repository built for speed and long-term permanence." },
                 { num: "02", title: "VERIFICATION", desc: "All published artifacts are authenticated via owner PIN control to ensure direct attribution and curation." },
-                { num: "03", title: "CAPACITY", desc: "Organized into custom sub-folders and backed by high-capacity browser storage." },
+                { num: "03", title: "PROJECTS", desc: "Customizable showcase area for external links, repositories, and downloadable workshop files." },
                 { num: "04", title: "MAKER ETHOS", desc: "Embracing raw iteration, custom fabrication, and continuous documentation across physical and digital mediums." }
             ];
 
@@ -767,10 +902,8 @@
             document.getElementById('detail-cat-desc').textContent = state.categoryDescriptions[key] || meta.description;
             document.getElementById('detail-header-bg').style.backgroundImage = `url('${cover}')`;
 
-            // Extract unique sub-folders for this category
             const subfolders = ["ALL", ...new Set(allItems.map(i => (i.subfolder || 'general').toLowerCase()))];
             
-            // Render sub-folder tabs bar
             const tabsBar = document.getElementById('subfolder-tabs-bar');
             tabsBar.innerHTML = subfolders.map(folder => {
                 const isActive = state.activeSubFolder.toLowerCase() === folder.toLowerCase();
@@ -782,7 +915,6 @@
                 `;
             }).join('');
 
-            // Filter items by active sub-folder
             const filteredItems = state.activeSubFolder.toLowerCase() === 'all' 
                 ? allItems 
                 : allItems.filter(i => (i.subfolder || 'general').toLowerCase() === state.activeSubFolder.toLowerCase());
@@ -877,17 +1009,21 @@
             modal.classList.remove('flex');
         }
 
-        function openStudioDrawer(defaultCategory = 'robotics') {
+        function openStudioDrawer(defaultTab = 'upload') {
             document.getElementById('studio-modal').classList.remove('hidden');
             document.getElementById('studio-modal').classList.add('flex');
-            document.getElementById('upload-category-select').value = defaultCategory;
-            document.getElementById('upload-subfolder-input').value = 'competition1';
-            switchStudioTab('upload');
+            if (defaultTab === 'projects') {
+                switchStudioTab('projects');
+            } else {
+                document.getElementById('upload-category-select').value = defaultTab;
+                document.getElementById('upload-subfolder-input').value = 'general';
+                switchStudioTab('upload');
+            }
             populateSettingsForm();
         }
 
         function switchStudioTab(tabName) {
-            ['upload', 'manage', 'descriptions', 'settings'].forEach(t => {
+            ['upload', 'projects', 'manage', 'descriptions', 'settings'].forEach(t => {
                 const pane = document.getElementById(`studio-pane-${t}`);
                 const btn = document.querySelector(`[data-studio-tab="${t}"]`);
                 if (t === tabName) {
@@ -898,6 +1034,7 @@
                     btn.className = "studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap";
                 }
             });
+            if (tabName === 'projects') renderStudioProjectsList();
             if (tabName === 'manage') renderStudioManageList();
             if (tabName === 'descriptions') renderStudioDescriptionsList();
         }
@@ -964,7 +1101,7 @@
             btn.textContent = "SAVING...";
             btn.disabled = true;
 
-            const cat = document.getElementById('upload-category-select').value;
+            const target = document.getElementById('upload-category-select').value;
             const subfolder = document.getElementById('upload-subfolder-input').value.trim().toLowerCase() || 'general';
             const customTitle = document.getElementById('upload-title-input').value.trim();
             const caption = document.getElementById('upload-caption-input').value.trim();
@@ -980,8 +1117,8 @@
                     url: fileObj.url,
                     date: new Date().toISOString().split('T')[0].substring(0, 7)
                 };
-                state.items[cat].unshift(newItem);
-                if (idx === 0 && setAsCover) state.covers[cat] = fileObj.url;
+                state.items[target].unshift(newItem);
+                if (idx === 0 && setAsCover) state.covers[target] = fileObj.url;
             });
 
             await saveState();
@@ -994,7 +1131,57 @@
             btn.disabled = false;
 
             closeModal('studio-modal');
-            openCategoryDetail(cat);
+            openCategoryDetail(target);
+        }
+
+        async function handleProjectUpload(event) {
+            event.preventDefault();
+            const title = document.getElementById('proj-title-input').value.trim();
+            const link = document.getElementById('proj-link-input').value.trim();
+            const fileInput = document.getElementById('proj-file-input');
+            
+            let imageUrl = "./Book.png";
+            if (fileInput.files && fileInput.files[0]) {
+                imageUrl = await compressImageFile(fileInput.files[0]);
+            }
+
+            const newProj = {
+                id: 'proj-' + Date.now(),
+                title: title.toUpperCase(),
+                caption: link,
+                url: imageUrl,
+                date: new Date().toISOString().split('T')[0].substring(0, 7)
+            };
+
+            state.projects.unshift(newProj);
+            await saveState();
+            document.getElementById('proj-title-input').value = '';
+            document.getElementById('proj-link-input').value = '';
+            fileInput.value = '';
+            renderUI();
+            renderStudioProjectsList();
+            alert("Project added successfully!");
+        }
+
+        function renderStudioProjectsList() {
+            const container = document.getElementById('studio-projects-list');
+            const projects = state.projects || [];
+
+            if (projects.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 py-4 text-center uppercase tracking-[0.18em]">No projects found.</p>`;
+                return;
+            }
+
+            container.innerHTML = projects.map(proj => `
+                <div class="bg-white border border-slate-300 p-3 flex items-center gap-4">
+                    <img src="${proj.url}" class="w-12 h-12 object-cover border border-slate-200 shrink-0">
+                    <div class="flex-grow min-w-0">
+                        <h4 class="font-display font-bold text-xs uppercase text-slate-900 truncate">${proj.title}</h4>
+                        <p class="text-[11px] text-slate-600 truncate mt-0.5">${proj.caption}</p>
+                    </div>
+                    <button type="button" onclick="deleteProject('${proj.id}')" class="px-2.5 py-1 bg-rose-50 hover:bg-rose-600 hover:text-white text-rose-600 text-[10px] uppercase tracking-[0.12em] transition-colors shrink-0">DELETE</button>
+                </div>
+            `).join('');
         }
 
         function renderStudioManageList() {
@@ -1032,7 +1219,6 @@
             `).join('');
         }
 
-        // Tab 3: Photo Descriptions & Sub-Folders Editor
         function renderStudioDescriptionsList() {
             const catKey = document.getElementById('desc-filter-select').value;
             const container = document.getElementById('studio-descriptions-list');
@@ -1097,6 +1283,15 @@
             }
         }
 
+        async function deleteProject(projId) {
+            if (confirm("Delete this project?")) {
+                state.projects = state.projects.filter(p => p.id !== projId);
+                await saveState();
+                renderUI();
+                renderStudioProjectsList();
+            }
+        }
+
         async function setCoverFromItem(catKey, itemId) {
             const item = state.items[catKey].find(i => i.id === itemId);
             if (!item) return;
@@ -1137,6 +1332,35 @@
             document.getElementById('setting-cat-lego').value = state.categoryDescriptions.lego;
             document.getElementById('setting-cat-photography').value = state.categoryDescriptions.photography;
             document.getElementById('setting-cat-others').value = state.categoryDescriptions.others;
+
+            renderInstagramInputs();
+        }
+
+        function renderInstagramInputs() {
+            const container = document.getElementById('instagram-inputs-container');
+            const accounts = state.instagramAccounts || [];
+
+            container.innerHTML = accounts.map((acc, idx) => `
+                <div class="flex items-center gap-2">
+                    <input type="text" id="insta-name-${idx}" value="${acc.name}" placeholder="@handle" class="w-1/3 px-3 py-1.5 bg-white border border-slate-300 text-xs">
+                    <input type="url" id="insta-url-${idx}" value="${acc.url}" placeholder="https://instagram.com/..." class="w-full px-3 py-1.5 bg-white border border-slate-300 text-xs">
+                    <button type="button" onclick="removeInstagramField(${idx})" class="p-1.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white border border-rose-200">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function addInstagramField() {
+            if (!state.instagramAccounts) state.instagramAccounts = [];
+            state.instagramAccounts.push({ name: "@new.account", url: "https://instagram.com" });
+            renderInstagramInputs();
+        }
+
+        function removeInstagramField(idx) {
+            state.instagramAccounts.splice(idx, 1);
+            renderInstagramInputs();
         }
 
         async function saveArchiveIdentity(event) {
@@ -1149,6 +1373,21 @@
             }
             state.tagline = document.getElementById('setting-tagline-input').value.trim();
             state.description = document.getElementById('setting-desc-input').value.trim();
+
+            const updatedInsta = [];
+            const container = document.getElementById('instagram-inputs-container');
+            const rows = container.children;
+            for (let i = 0; i < rows.length; i++) {
+                const nameInput = document.getElementById(`insta-name-${i}`);
+                const urlInput = document.getElementById(`insta-url-${i}`);
+                if (nameInput && urlInput) {
+                    updatedInsta.push({
+                        name: nameInput.value.trim() || "@instagram",
+                        url: urlInput.value.trim() || "https://instagram.com"
+                    });
+                }
+            }
+            state.instagramAccounts = updatedInsta;
 
             state.categoryDescriptions.robotics = document.getElementById('setting-cat-robotics').value.trim();
             state.categoryDescriptions.lego = document.getElementById('setting-cat-lego').value.trim();
