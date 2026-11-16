@@ -126,14 +126,15 @@
             </div>
         </section>
 
-        <!-- INSTAGRAM ACCOUNTS SECTION (ABOVE FOUR GATEWAYS) -->
-        <section class="py-6 sm:py-8 border-b border-blueprint-border bg-white/40">
-            <div class="flex items-center justify-between mb-3">
-                <span class="text-[10px] sm:text-[11px] font-medium tracking-[0.3em] text-slate-500 uppercase">
-                    INSTAGRAM CHANNELS &amp; FEEDS
-                </span>
+        <!-- MY INSTAGRAM SECTION (ABOVE FOUR GATEWAYS) -->
+        <section class="py-8 sm:py-10 border-b border-blueprint-border">
+            <div class="flex items-center gap-3 pb-4 mb-5 border-b border-blueprint-border/80">
+                <span class="w-6 h-[1.5px] bg-sky-600 inline-block"></span>
+                <h2 class="text-[11px] sm:text-xs font-medium tracking-[0.32em] text-slate-600 uppercase">
+                    MY INSTAGRAM
+                </h2>
             </div>
-            <div id="instagram-links-bar" class="flex flex-wrap items-center gap-3"></div>
+            <div id="instagram-links-bar" class="flex flex-col gap-2.5 max-w-md"></div>
         </section>
 
         <!-- FOUR GATEWAYS SECTION -->
@@ -232,7 +233,7 @@
             <span>&copy; <span id="footer-year"></span> <span id="footer-brand-name">SHELDON</span> &mdash; PERSONAL ARCHIVE</span>
             <span class="flex items-center gap-2">
                 <i data-lucide="folder-tree" class="w-3.5 h-3.5 text-sky-600"></i>
-                5-TAB STUDIO ENGINE
+                INSTAGRAM &amp; PROJECTS ENGINE
             </span>
         </div>
     </footer>
@@ -293,7 +294,7 @@
                 </div>
             </div>
 
-            <!-- 5 Studio Navigation Tabs (Ordered as requested) -->
+            <!-- 5 Studio Navigation Tabs -->
             <div class="px-6 pt-3 bg-[#EAF5FC] border-b border-blueprint-border flex items-center gap-4 overflow-x-auto shrink-0">
                 <button onclick="switchStudioTab('upload')" data-studio-tab="upload" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-semibold border-b-2 border-sky-600 text-sky-700 whitespace-nowrap">01 / INSERT PHOTOS</button>
                 <button onclick="switchStudioTab('projects')" data-studio-tab="projects" class="studio-tab-btn pb-3 text-xs tracking-[0.2em] uppercase font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-900 whitespace-nowrap">02 / MY PROJECTS</button>
@@ -602,7 +603,7 @@
 
         function openArchiveDB() {
             return new Promise((resolve, reject) => {
-                const request = indexedDB.open(DB_NAME, 4);
+                const request = indexedDB.open(DB_NAME, 5);
                 request.onupgradeneeded = (e) => {
                     const db = e.target.result;
                     if (!db.objectStoreNames.contains(STORE_NAME)) {
@@ -774,9 +775,9 @@
             }
 
             bar.innerHTML = accounts.map(acc => `
-                <a href="${acc.url}" target="_blank" class="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-300 hover:border-slate-900 text-xs font-medium text-slate-800 transition-colors shadow-2xs">
-                    <i data-lucide="instagram" class="w-3.5 h-3.5 text-sky-600"></i>
-                    <span>${acc.name}</span>
+                <a href="${acc.url}" target="_blank" class="flex items-center gap-3 px-4 py-2.5 bg-white border border-blueprint-border hover:border-sky-600 text-xs font-medium text-slate-800 transition-colors shadow-2xs group">
+                    <i data-lucide="instagram" class="w-4 h-4 text-sky-600 shrink-0"></i>
+                    <span class="truncate font-mono">${acc.name}</span>
                 </a>
             `).join('');
         }
