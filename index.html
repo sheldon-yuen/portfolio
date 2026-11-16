@@ -628,7 +628,7 @@
 
         function openArchiveDB() {
             return new Promise((resolve, reject) => {
-                const request = indexedDB.open(DB_NAME, 9);
+                const request = indexedDB.open(DB_NAME, 10);
                 request.onupgradeneeded = (e) => {
                     const db = e.target.result;
                     if (!db.objectStoreNames.contains(STORE_NAME)) {
@@ -870,7 +870,6 @@
                         bottomContent = `<div class="pt-3 border-t border-slate-100 flex items-center justify-end text-[11px]"><button onclick="deleteProject('${proj.id}')" class="text-rose-600 hover:underline uppercase tracking-[0.14em]">DELETE</button></div>`;
                     }
                 } else {
-                    // No description: URL/Link sits right under the title
                     if (hasLink) {
                         middleContent = `<div class="mt-1"><a href="${proj.link}" target="_blank" class="inline-flex items-center gap-1 text-xs text-sky-700 font-semibold hover:underline uppercase tracking-[0.14em] truncate max-w-full"><span>${proj.link}</span> <i data-lucide="external-link" class="w-3 h-3"></i></a></div>`;
                     }
