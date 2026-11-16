@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <!-- Load Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Load Google Identity Services (Sign-In) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <script>
         tailwind.config = {
@@ -91,11 +93,19 @@
                     04 / ARCHIVE
                 </span>
 
-                <button id="studio-header-btn" onclick="handleStudioButtonClick()"
-                    class="px-4 py-2 border border-slate-400/80 bg-white/80 hover:bg-slate-900 hover:text-white hover:border-slate-900 text-slate-800 text-[11px] sm:text-xs font-medium tracking-[0.28em] uppercase transition-all active:scale-95 flex items-center gap-2">
-                    <span id="studio-status-dot" class="hidden w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    <span id="studio-btn-label">STUDIO</span>
-                </button>
+                <!-- OWNER AUTH CONTAINER: Hidden for everyone until shellyjelly.aura@gmail.com logs in -->
+                <div id="owner-auth-container" class="flex items-center gap-2">
+                    <button id="google-signin-trigger" onclick="triggerGoogleLogin()"
+                        class="px-3 py-1.5 border border-dashed border-slate-400 bg-white/50 hover:bg-white text-slate-600 text-[10px] tracking-[0.2em] uppercase transition-all">
+                        OWNER LOGIN
+                    </button>
+
+                    <button id="studio-header-btn" onclick="handleStudioButtonClick()"
+                        class="hidden px-4 py-2 border border-slate-400/80 bg-white/80 hover:bg-slate-900 hover:text-white hover:border-slate-900 text-slate-800 text-[11px] sm:text-xs font-medium tracking-[0.28em] uppercase transition-all active:scale-95 items-center gap-2">
+                        <span id="studio-status-dot" class="hidden w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                        <span id="studio-btn-label">STUDIO</span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -233,7 +243,7 @@
             <span>&copy; <span id="footer-year"></span> <span id="footer-brand-name">SHELDON</span> &mdash; PERSONAL ARCHIVE</span>
             <span class="flex items-center gap-2">
                 <i data-lucide="folder-tree" class="w-3.5 h-3.5 text-sky-600"></i>
-                INSTAGRAM &amp; PROJECTS ENGINE
+                SECURE STUDIO ENGINE
             </span>
         </div>
     </footer>
@@ -433,6 +443,11 @@
                 <!-- TAB 5: IDENTITY, PINS & INSTAGRAM -->
                 <div id="studio-pane-settings" class="hidden space-y-6">
                     <form onsubmit="saveArchiveIdentity(event)" class="space-y-5">
+                        <div class="flex items-center justify-between pb-3 border-b border-blueprint-border">
+                            <span class="text-xs uppercase tracking-[0.2em] text-emerald-700 font-semibold">AUTHENTICATED: shellyjelly.aura@gmail.com</span>
+                            <button type="button" onclick="logoutGoogle()" class="px-2.5 py-1 bg-rose-50 text-rose-600 text-[10px] uppercase tracking-[0.16em] hover:bg-rose-600 hover:text-white transition-colors">LOGOUT</button>
+                        </div>
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[11px] tracking-[0.22em] text-slate-600 uppercase mb-1.5">ARCHIVE DISPLAY NAME</label>
@@ -567,6 +582,7 @@
             description: "This is where I keep the things I make and the things I notice — robots, bricks, photographs, and everything that refuses a label.",
             pin: "1234",
             isUnlocked: false,
+            isOwnerAuthenticated: false,
             activeView: 'home',
             activeDetailCategory: "robotics",
             activeSubFolder: "ALL",
@@ -603,7 +619,7 @@
 
         function openArchiveDB() {
             return new Promise((resolve, reject) => {
-                const request = indexedDB.open(DB_NAME, 5);
+                const request = indexedDB.open(DB_NAME, 6);
                 request.onupgradeneeded = (e) => {
                     const db = e.target.result;
                     if (!db.objectStoreNames.contains(STORE_NAME)) {
@@ -629,6 +645,7 @@
                             state.tagline = parsed.tagline || state.tagline;
                             state.description = parsed.description || state.description;
                             state.pin = parsed.pin || state.pin;
+                            if (parsed.isOwnerAuthenticated) state.isOwnerAuthenticated = parsed.isOwnerAuthenticated;
                             if (parsed.instagramAccounts) state.instagramAccounts = parsed.instagramAccounts;
                             if (parsed.covers) state.covers = {...state.covers, ...parsed.covers};
                             if (parsed.projects) state.projects = parsed.projects;
@@ -664,6 +681,7 @@
                         tagline: state.tagline,
                         description: state.description,
                         pin: state.pin,
+                        isOwnerAuthenticated: state.isOwnerAuthenticated,
                         instagramAccounts: state.instagramAccounts,
                         covers: state.covers,
                         items: state.items,
@@ -706,10 +724,57 @@
 
         window.addEventListener('DOMContentLoaded', async () => {
             await loadState();
+            initGoogleAuth();
             renderUI();
             lucide.createIcons();
             setupAutoLockModals();
         });
+
+        function initGoogleAuth() {
+            // Replace with your Google Cloud Console OAuth Client ID if needed
+            google.accounts.id.initialize({
+                client_id: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+        }
+
+        function triggerGoogleLogin() {
+            google.accounts.id.prompt();
+        }
+
+        function parseJwt(token) {
+            try {
+                var base64Url = token.split('.')[1];
+                var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                return JSON.parse(jsonPayload);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        async function handleCredentialResponse(response) {
+            const payload = parseJwt(response.credential);
+            if (payload && payload.email === "shellyjelly.aura@gmail.com") {
+                state.isOwnerAuthenticated = true;
+                await saveState();
+                renderUI();
+                alert("Verified as shellyjelly.aura@gmail.com! Studio button is now unlocked.");
+            } else {
+                alert("Access denied. Authorized email only.");
+            }
+        }
+
+        async function logoutGoogle() {
+            state.isOwnerAuthenticated = false;
+            state.isUnlocked = false;
+            await saveState();
+            renderUI();
+            closeModal('studio-modal');
+            alert("Logged out of owner email.");
+        }
 
         function setupAutoLockModals() {
             const pinModal = document.getElementById('pin-modal');
@@ -734,17 +799,30 @@
             document.getElementById('hero-description').textContent = state.description;
             document.getElementById('footer-year').textContent = new Date().getFullYear();
 
+            const signinBtn = document.getElementById('google-signin-trigger');
+            const studioBtn = document.getElementById('studio-header-btn');
             const dot = document.getElementById('studio-status-dot');
             const btnLabel = document.getElementById('studio-btn-label');
             const addProjBtn = document.querySelector('.studio-add-proj-btn');
 
-            if (state.isUnlocked) {
-                dot.classList.remove('hidden');
-                btnLabel.textContent = "STUDIO [UNLOCKED]";
-                if(addProjBtn) addProjBtn.classList.remove('hidden');
+            if (state.isOwnerAuthenticated) {
+                signinBtn.classList.add('hidden');
+                studioBtn.classList.remove('hidden');
+                studioBtn.classList.add('flex');
+
+                if (state.isUnlocked) {
+                    dot.classList.remove('hidden');
+                    btnLabel.textContent = "STUDIO [UNLOCKED]";
+                    if(addProjBtn) addProjBtn.classList.remove('hidden');
+                } else {
+                    dot.classList.add('hidden');
+                    btnLabel.textContent = "STUDIO";
+                    if(addProjBtn) addProjBtn.classList.add('hidden');
+                }
             } else {
-                dot.classList.add('hidden');
-                btnLabel.textContent = "STUDIO";
+                signinBtn.classList.remove('hidden');
+                studioBtn.classList.add('hidden');
+                studioBtn.classList.remove('flex');
                 if(addProjBtn) addProjBtn.classList.add('hidden');
             }
 
@@ -770,7 +848,7 @@
             const accounts = state.instagramAccounts || [];
 
             if (accounts.length === 0) {
-                bar.innerHTML = `<span class="text-xs text-slate-400 italic">No Instagram channels linked yet. Unlock Studio to add them.</span>`;
+                bar.innerHTML = `<span class="text-xs text-slate-400 italic">No Instagram channels linked yet.</span>`;
                 return;
             }
 
@@ -821,7 +899,7 @@
             const projects = state.projects || [];
 
             if (projects.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-8 text-center text-xs text-slate-500 uppercase tracking-[0.2em] border border-dashed border-blueprint-border">No projects added yet. Unlock Studio to add links and files.</div>`;
+                grid.innerHTML = `<div class="col-span-full py-8 text-center text-xs text-slate-500 uppercase tracking-[0.2em] border border-dashed border-blueprint-border">No projects added yet.</div>`;
                 return;
             }
 
